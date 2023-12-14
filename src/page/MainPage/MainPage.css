@@ -1,0 +1,70 @@
+#main_container {
+    display: flex;
+    align-items: flex-start;
+}
+
+#map_div {
+    flex: 1;
+    order: 2;
+}
+#sidebar {
+    width: 130px;
+    height: 808px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    user-select: none;
+}
+#sidebar_menu {
+    display: none;
+}
+#sidebar_menu.open {
+    display: flex; /* 열릴 때 보이도록 */
+    width: 250px;
+    flex-direction: row; /* 가로로 나열 */
+    padding: 20px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+#cardList {
+    user-select: none;
+    cursor: pointer;
+    max-height: 725px;
+    overflow-y: auto;
+}
+
+#cctvCard {
+    width: 228px;
+    height: 130px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #EBF3FF;
+    margin-top: 10px;
+}
+.card_layout {
+    width: 228px;
+    height: 110px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #EBF3FF;
+    margin-top: 10px;
+}
+.card_nm {
+    padding-top: 5px;
+    margin-bottom: 10px;
+    color: #0068C8;
+    font-weight: bold;
+    font-size: 18px;
+}
+.card_addr, .card_cnt, .card_telno {
+    margin-bottom: 10px;
+    margin-right:10px;
+}
+
