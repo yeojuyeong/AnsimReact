@@ -9,6 +9,8 @@ const Main = () => {
     return (
         <DataProvider>
             <Layout>
+                <Sidebar1 />
+                <InfoFacility />
                 <Sidebar />
                 <InfoFacility />
                 <Map />
