@@ -6,12 +6,8 @@ import FacilityPage from '../FacilityPage/FacilityPage';
 // import TestMap from '../../components/TestMap';
 const Main = () => {
     return (
-        <DataProvider>
-            <Layout>
-                <Sidebar />
-                <FacilityPage />
-            </Layout>
-        </DataProvider>
+        <>
+        </>
     )
 }
 export default Main;
