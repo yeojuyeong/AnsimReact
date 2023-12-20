@@ -4,14 +4,14 @@ import Layout from '../../components/Layout';
 import Sidebar from "../../components/Sidebar";
 import InfoFacility from "../../components/InfoFacility";
 import Map from '../../components/Map';
+import GuideBar from "../../components/GuideBar";
 
 const Main = () => {
     return (
         <DataProvider>
             <Layout>
-                <Sidebar1 />
-                <InfoFacility />
                 <Sidebar />
+                <GuideBar />
                 <InfoFacility />
                 <Map />
             </Layout>

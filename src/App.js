@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes>
-          <Route path="/" element={<Main />}>
+          <Route path="/map" element={<Main />}>
               {/*<Route path="/quide" element={<SafeGuide />} />*/}
               <Route path="/info" element={<InfoFacility />} />
               {/*<Route path="/board" element={<SafeCommunity />} />*/}

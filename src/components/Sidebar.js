@@ -11,8 +11,8 @@ const Sidebar = () => {
         <div id="sidebar">
             <h2>사이드바</h2>
             <ul>
-                <li>
-                    안심 길찾기
+                <li onClick={() => handleMenuClick('안심 길찾기')}>
+                    <Link to="/info" style={{ textDecoration: "none" }}>안심 길찾기</Link>
                 </li>
                 <li onClick={() => handleMenuClick('안심 시설물')}>
                     <Link to="/info" style={{ textDecoration: "none" }}>안심 시설물</Link>
