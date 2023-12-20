@@ -41,16 +41,6 @@ const Map = () => {
                         map: initialMap,
                         icon: locationIcon,
                     });
-                    //
-                    // var iwContent = '<div style="padding:5px;">Hello World!</div>';
-                    // // 인포윈도우를 생성
-                    // var infowindow = new Tmapv2.InfoWindow({
-                    //     position : currentLocation,
-                    //     content : iwContent
-                    // });
-                    //
-                    // // 마커 위에 인포윈도우를 표시
-                    // infowindow.draw(map);
 
                     // 처음에 1회만 axios 요청
                     fn_getAnsimOjbectInBound(initialMap);

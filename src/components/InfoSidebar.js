@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import {DataContext} from "./DataProvider";
 import InfoCard from '../components/InfoCard';
 
-const InfoFacility = () => {
+const InfoSidebar = () => {
     const { cctvData } = useContext(DataContext);
     const { selectedOption, handleOptionChange, currentPage, handleCCTVClick, menuVisible, selectedMenu} = useContext(DataContext);
     const [visibleCCTVData, setVisibleCCTVData] = useState([]); // 현재 보이는 CCTV 데이터 상태
@@ -60,4 +60,4 @@ const InfoFacility = () => {
     )}
 
 
-export default InfoFacility;
+export default InfoSidebar;

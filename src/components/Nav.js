@@ -6,7 +6,7 @@ import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 
-const Sidebar = () => {
+const Nav = () => {
     const { handleMenuClick } = useContext(DataContext);
 
     return (
@@ -29,4 +29,4 @@ const Sidebar = () => {
         </div>
     );
 }
-export default Sidebar;
+export default Nav;

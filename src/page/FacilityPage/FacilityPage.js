@@ -1,10 +1,10 @@
-import InfoFacility from "../../components/InfoFacility";
+import InfoSidebar from "../../components/InfoSidebar";
 import Map from '../../components/Map';
 
 const FacilityPage = () => {
     return (
         <>
-            <InfoFacility />
+            <InfoSidebar />
             <Map />
         </>
     )
