@@ -6,7 +6,7 @@ const InfoFacility = () => {
     const { cctvData } = useContext(DataContext);
     const { selectedOption, handleOptionChange, currentPage, handleCCTVClick, menuVisible, selectedMenu} = useContext(DataContext);
     const [visibleCCTVData, setVisibleCCTVData] = useState([]); // 현재 보이는 CCTV 데이터 상태
-    // const [filteredCCTVData, setFilteredCCTVData] = useState([]); // 필터링된 CCTV 데이터 상태
+    const [filteredCCTVData, setFilteredCCTVData] = useState([]); // 필터링된 CCTV 데이터 상태
     const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 상태
     const itemsPerPage = 10; // 한 번에 보여줄 항목 수
 
@@ -15,14 +15,12 @@ const InfoFacility = () => {
         switch (selectedOption) {
             case 'cctv':
                 data = cctvData;
+                // console.log(data)
                 break;
-            // case 'emrgbell':
-            //     data = emergData;
-            //     break;
-            // ... 다른 옵션에 따른 데이터 처리 로직 추가
         }
         setFilteredData(data);
-    }, [selectedOption, cctvData, /* ... 다른 데이터들 */]);
+        // console.log(filteredData)
+    }, [selectedOption, cctvData]);
 
     useEffect(() => {
         // visibleCCTVData 업데이트
@@ -53,7 +51,7 @@ const InfoFacility = () => {
                     </select>
                     <div id="cardList">
                         {visibleCCTVData.map((data, index) => (
-                            <InfoCard data={data} key={index} handleCCTVClick={handleCCTVClick} selectedOption={selectedOption}/>
+                            <InfoCard data={data} key={index} handleCCTVClick={handleCCTVClick} selectedOption={selectedOption} />
                         ))}
                     </div>
                 </div>

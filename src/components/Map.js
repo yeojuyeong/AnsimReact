@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { DataContext } from "./DataProvider";
 import locationIcon from "../images/location.png";
 import cctvIcon from "../images/cctv.png";
+import emergbellIcon from "../images/emergbell.png";
 import axios from "axios";
 
 const Map = () => {
@@ -9,10 +10,12 @@ const Map = () => {
     const [map, setMap] = useState(null);
     const currentMarker = useRef(null);
     const markers = useRef([]);
-    const {cctvData, selectedOption, cctvIndex} = useContext(DataContext);
+    const {cctvData, setCctvData, emergbellData, setEmergbellData, selectedOption, cctvIndex} = useContext(DataContext);
+    var infoWindow = new Tmapv2.InfoWindow();
+    const minZoom = 17;
+    const maxZoom = 18;
     // 최초 맵 생성
     useEffect(() => {
-        //const initTmap = () => {
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(position => {
                     const currentLat = position.coords.latitude;
@@ -26,22 +29,36 @@ const Map = () => {
                         center: currentLocation,
                         width: "1750px",
                         height: "89vh",
-                        zoom: 18
-                    });
+                        zoom: 19,
+                        zoomControl : true,
+                        scrollwheel : true,
+                    })
+                    initialMap.setZoomLimit(minZoom, maxZoom);
 
                     // 현재 위치에 마커 생성
-                    // const initialMarker = new Tmapv2.Marker({
-                    //     position: currentLocation,
-                    //     map: initialMap,
-                    //     icon: locationIcon,
+                    const initialMarker = new Tmapv2.Marker({
+                        position: currentLocation,
+                        map: initialMap,
+                        icon: locationIcon,
+                    });
+                    //
+                    // var iwContent = '<div style="padding:5px;">Hello World!</div>';
+                    // // 인포윈도우를 생성
+                    // var infowindow = new Tmapv2.InfoWindow({
+                    //     position : currentLocation,
+                    //     content : iwContent
                     // });
+                    //
+                    // // 마커 위에 인포윈도우를 표시
+                    // infowindow.draw(map);
 
-                    // fn_getAnsimOjbectInBound(map);
+                    // 처음에 1회만 axios 요청
+                    fn_getAnsimOjbectInBound(initialMap);
+
                     // 드래그 이벤트 등록
                     initialMap.addListener("dragend", (e) => {
                         const dragLocation = e.latLng;
                         console.log('드래그가 끝난 위치의 중앙좌표는 ' + dragLocation + '입니다.');
-                        fn_getAnsimOjbectInBound(map);
 
                         if (currentMarker.current) {
                             currentMarker.current.setPosition(dragLocation);
@@ -52,73 +69,38 @@ const Map = () => {
                                 map: initialMap,
                                 icon: locationIcon,
                             });
-
                             currentMarker.current = newMarker;
                         }
                     })
-
-                    // currentMarker.current = initialMarker;
+                    currentMarker.current = initialMarker;
                     setMap(initialMap);
 
-                    // const data2 = {
-                    //     "bottomLeftLat": "37.537397342400425",
-                    //     "bottomLeftLng":"126.83655738830606",
-                    //     "bottomRightLat":"37.56461635030337",
-                    //     "bottomRightLng":"126.83655738830606",
-                    //     "topRightLat":"37.56461635030337",
-                    //     "topRightLng":"126.86187744140662",
-                    //     "topLeftLat": "37.537397342400425",
-                    //     "topLeftLng":"126.86187744140662"
-                    // };
-                    //
-                    // axios
-                    //     .post('http://localhost:8080/guide/postAnsimFacListInBoundary', data2) //파일 전송시나 개인정보
-                    //     .then((res) => {
-                    //         console.log('rrrrrfggrrrrrrrrrrrrr');
-                    //         console.log(res.data);
-                    //         drawMarkers(res.data);
-                    //     });
                 }, (error) => {
                     console.error("Geolocation 오류 : " + error.message);
                 });
             } else {
                 console.error("Geolocation을 지원하지 않는 브라우저입니다.");
             }
-            //}, [Tmapv2.LatLng, Tmapv2.Map, Tmapv2.Marker, cctvData, selectedOption, map]);
     }, []);
-       // }; useEffect END
 
         // 기존 마커 삭제 함수
         const removeMarkers = () => {
             if (markers.current && markers.current.length > 0) {
-                markers.current.forEach(element => {
-                    element.setMap(null);
-                });
+                for (let i = 0; i < markers.current.length; i++) {
+                    const marker = markers.current[i];
+                    // console.log(marker);
+                    if (marker) {
+                        marker.setMap(null);
+                    }
+                }
                 markers.current = [];
             }
         }
 
-        // const drawMarkers = () => {
-        //     const newMarkers = [];
-        //     if (selectedOption === "cctv") {
-        //         // cctv 마커 그리기
-        //         cctvData.forEach(element => {
-        //             const position = new Tmapv2.LatLng(element.latitude, element.longitude);
-        //             const marker = new Tmapv2.Marker({
-        //                 position: position,
-        //                 map: map,
-        //                 icon: cctvIcon
-        //             });
-        //
-        //             newMarkers.push(marker);
-        //             console.log(newMarkers)
-        //         });
-        //
-        //         markers.current = newMarkers;
-
         const drawMarkers = (facList) => {
-            const newMarkers = [];
+
             if (selectedOption === "cctv") {
+                const newMarkers = [];
                 // cctv 마커
                 for (let i = 0; i < facList.length; i++) {
                     const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
@@ -128,16 +110,27 @@ const Map = () => {
                         map: map
                     });
                     newMarkers.push(marker);
-                    console.log(newMarkers)
                 }
-
+                removeMarkers();
                 markers.current = newMarkers;
-                fn_getAnsimOjbectInBound(map);
-                console.log("asdasdad",map);
 
             } else if (selectedOption === "emrgbell") {
                 // 안심 비상벨
                 removeMarkers();
+                const newMarkers = [];
+                // emrgbell 마커
+                for (let i = 0; i < facList.length; i++) {
+                    const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: emergbellIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
+                removeMarkers();
+                markers.current = newMarkers;
+
             } else if (selectedOption === "delibox") {
                 // 안심 택배함
                 removeMarkers();
@@ -150,71 +143,57 @@ const Map = () => {
             }
         }
 
-    // map에서 bound가져와서 해당 bound안에있는 안심객체 불러오기
-    const fn_getAnsimOjbectInBound = async (map) => {
-        console.log("asdasdad",map);
-        // 지도의 영역을 가져오는 함수 bound(bottomLeft, topRight)
-        var bound = map.getBounds();
-        const arr = bound.toString().split(':');
-        const bottomLeft = arr[0].split(',');
-        const topRight = arr[1].split(',');
+        // map에서 bound가져와서 해당 bound안에있는 안심객체 불러오기
+        const fn_getAnsimOjbectInBound = async (map) => {
+            // 지도의 영역을 가져오는 함수 bound(bottomLeft, topRight)
+            const bound = map.getBounds();
+            const arr = bound.toString().split(':');
+            const bottomLeft = arr[0].split(',');
+            const topRight = arr[1].split(',');
 
-        //Map의 bound(bottomLeft, topRight)를 가지고 bottomRight, topLeft 좌표 구하는 함수
-        function fn_findingDifferentPoint(bottomLeft, topRight) {
-            const topLeft = {lat: bottomLeft.lat, lng: topRight.lng};
-            const bottomRight = {lat: topRight.lat, lng: bottomLeft.lng};
-            return {topLeft, bottomRight};
+            const queryString = {
+                bottomLeftLat: bottomLeft[0], //최소위도
+                bottomLeftLng: bottomLeft[1], //최소경도
+                topRightLat: topRight[0], //최대위도
+                topRightLng: topRight[1] //최대경도
+            }
+            // 해당 영역 내 cctv 데이터 요청
+            axios
+                .post('http://localhost:8080/info/cctvList', queryString) //파일 전송시나 개인정보
+                .then((cctvRes) => {
+                    drawMarkers(cctvRes.data);
+                    //console.log(cctvRes.data)
+                    setCctvData(cctvRes.data);
+                });
+
+            // // 해당 영역 내 cctv 데이터 요청
+            // axios
+            //     .post('http://localhost:8080/guide/postAnsimFacListInBoundary', queryString) //파일 전송시나 개인정보
+            //     .then((emergRes) => {
+            //         drawMarkers(emergRes.data);
+            //         //console.log(emergRes.data);
+            //         setEmergbellData(emergRes.data);
+            //     });
         }
 
-        const topLeftBottomRight = fn_findingDifferentPoint(
-            {lat: bottomLeft[0], lng: bottomLeft[1]},
-            {lat: topRight[0], lng: topRight[1]}
-        )
-
-        const queryString = {
-            bottomLeftLat: bottomLeft[0],
-            bottomLeftLng: bottomLeft[1],
-            bottomRightLat: topLeftBottomRight.bottomRight.lat,
-            bottomRightLng: topLeftBottomRight.bottomRight.lng,
-            topRightLat: topRight[0],
-            topRightLng: topRight[1],
-            topLeftLat: topLeftBottomRight.topLeft.lat,
-            topLeftLng: topLeftBottomRight.topLeft.lng
-        }
-
-        axios
-            .post('http://localhost:8080/guide/postAnsimFacListInBoundary', queryString) //파일 전송시나 개인정보
-            .then((res) => {
-                console.log('axios :', res.data);
-                drawMarkers(res.data);
-            });
-    }
-        
-        if(selectedOption!== '00'){
+        if(selectedOption === 'cctv'){
             fn_getAnsimOjbectInBound(map);
-
+            // console.log(cctvData2);
+        }
+        if(selectedOption === 'emergbell'){
+            removeMarkers();
+            fn_getAnsimOjbectInBound(map);
         }
 
-        // if (map === null) {
-        //     console.log("mpa is null?",map);
-        //     initTmap();
-        //
-        // } else {
-        //     drawMarkers();
-        // }
+        // CCTV 위치로 지도 중심 이동
+        if (cctvIndex > -1) {
+            const cctv = cctvData[cctvIndex];
+            // console.log(cctv)
+            const position = new Tmapv2.LatLng(cctv.latitude, cctv.longitude);
 
+            map.setCenter(position);
+        }
 
-
-    // CCTV 위치로 지도 중심 이동
-    // if (cctvIndex > -1 && map !== null) {
-    //     const cctv = cctvData[cctvIndex];
-    //     const position = new Tmapv2.LatLng(cctv.latitude, cctv.longitude);
-    //
-    //     map.setCenter(position);
-    // }
-
-
-    
     return (
         <div id="map_container">
             <div id="map_div"></div>
