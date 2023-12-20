@@ -12,14 +12,6 @@ const InfoCard = ({ data, index, handleCCTVClick, selectedOption }) => {
                     style={{ fontSize: '12px', marginLeft: '10px' }}>
                     {data.addr}</span>
             </div>
-            <div className="card_cnt">
-                <span
-                    style={{ color: '#817C7C', backgroundColor: '#fff', borderRadius: '10px', padding: ' 5px', fontSize: '9px' }}>
-                    갯수</span>
-                <span
-                    style={{ fontSize: '12px', marginLeft: '10px' }}>
-                    {data.quantity}</span>
-            </div>
             {data.telno && (
                 <div className="card_telno">
                 <span

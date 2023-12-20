@@ -2,6 +2,9 @@ import React, {useContext} from "react";
 import {DataContext} from "./DataProvider";
 import '../page/MainPage/MainPage.css';
 import { Link } from "react-router-dom";
+import { TbMapSearch } from "react-icons/tb";
+import { PiMapPinLineBold } from "react-icons/pi";
+import { LiaUserFriendsSolid } from "react-icons/lia";
 
 const Sidebar = () => {
     const { handleMenuClick } = useContext(DataContext);
@@ -9,16 +12,18 @@ const Sidebar = () => {
     return (
         
         <div id="sidebar">
-            <h2>사이드바</h2>
+            <h2>Ansim</h2>
             <ul>
-                <li onClick={() => handleMenuClick('안심 길찾기')}>
-                    <Link to="/info" style={{ textDecoration: "none" }}>안심 길찾기</Link>
+                <li className="direction_icon">
+                    <TbMapSearch />
                 </li>
-                <li onClick={() => handleMenuClick('안심 시설물')}>
-                    <Link to="/info" style={{ textDecoration: "none" }}>안심 시설물</Link>
+                <li onClick={() => handleMenuClick('안심 시설물')} className="facility_icon">
+                    <Link to="/info" style={{ textDecoration: "none" }}>
+                        <PiMapPinLineBold />
+                    </Link>
                 </li>
-                <li>
-                    안심 동행
+                <li className="board_icon">
+                    <LiaUserFriendsSolid />
                 </li>
             </ul>
         </div>
