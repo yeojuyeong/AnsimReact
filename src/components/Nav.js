@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
+import { BiEdit } from "react-icons/bi";
+import { FiUser } from "react-icons/fi";
 
 const Nav = () => {
     const { handleMenuClick } = useContext(DataContext);
@@ -23,7 +25,12 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li className="board_icon">
-                    <LiaUserFriendsSolid />
+                    <BiEdit />
+                </li>
+                <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
+                    <Link to="/mypage" style={{ textDecoration: "none" }}>
+                        <FiUser />
+                    </Link>
                 </li>
             </ul>
         </div>

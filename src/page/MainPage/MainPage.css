@@ -50,7 +50,7 @@
 }
 .card_layout {
     width: 228px;
-    height: 110px;
+    height: 115px;
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #EBF3FF;
@@ -65,9 +65,9 @@
 }
 .card_addr, .card_telno {
     margin-bottom: 10px;
-    margin-right:10px;
+    /*margin-right:10px;*/
 }
-.direction_icon, .facility_icon, .board_icon {
+.direction_icon, .facility_icon, .board_icon , .mypage_icon{
     font-size: 30px;
     padding-left: 15px;
 }

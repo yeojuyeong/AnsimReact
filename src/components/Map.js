@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { DataContext } from "./DataProvider";
 import locationIcon from "../images/location.png";
-import cctvIcon from "../images/cctv.png";
-import emergbellIcon from "../images/emergbell.png";
+import cctvIcon from "../images/cctv_c_icon.png";
+import emergbellIcon from "../images/emergbell_c_icon.png";
+import deliboxIcon from "../images/delivery_c_icon.png";
+import policeIcon from "../images/police_c_icon.png";
+import storeIcon from "../images/store_c_icon.png";
 import axios from "axios";
 
 const Map = () => {
@@ -10,9 +13,8 @@ const Map = () => {
     const [map, setMap] = useState(null);
     const currentMarker = useRef(null);
     const markers = useRef([]);
-    const {cctvData, setCctvData, emergbellData, setEmergbellData, selectedOption, cctvIndex} = useContext(DataContext);
-    var infoWindow = new Tmapv2.InfoWindow();
-    const minZoom = 17;
+    const {cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, cctvIndex} = useContext(DataContext);
+    const minZoom = 16;
     const maxZoom = 18;
     // 최초 맵 생성
     useEffect(() => {
@@ -29,7 +31,7 @@ const Map = () => {
                         center: currentLocation,
                         width: "1750px",
                         height: "89vh",
-                        zoom: 19,
+                        zoom: 18,
                         zoomControl : true,
                         scrollwheel : true,
                     })
@@ -41,9 +43,6 @@ const Map = () => {
                         map: initialMap,
                         icon: locationIcon,
                     });
-
-                    // 처음에 1회만 axios 요청
-                    fn_getAnsimOjbectInBound(initialMap);
 
                     // 드래그 이벤트 등록
                     initialMap.addListener("dragend", (e) => {
@@ -64,7 +63,6 @@ const Map = () => {
                     })
                     currentMarker.current = initialMarker;
                     setMap(initialMap);
-
                 }, (error) => {
                     console.error("Geolocation 오류 : " + error.message);
                 });
@@ -78,7 +76,6 @@ const Map = () => {
             if (markers.current && markers.current.length > 0) {
                 for (let i = 0; i < markers.current.length; i++) {
                     const marker = markers.current[i];
-                    // console.log(marker);
                     if (marker) {
                         marker.setMap(null);
                     }
@@ -87,10 +84,12 @@ const Map = () => {
             }
         }
 
+        // 안심객체 마커 생성
         const drawMarkers = (facList) => {
+            removeMarkers();
+            const newMarkers = [];
 
             if (selectedOption === "cctv") {
-                const newMarkers = [];
                 // cctv 마커
                 for (let i = 0; i < facList.length; i++) {
                     const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
@@ -101,14 +100,8 @@ const Map = () => {
                     });
                     newMarkers.push(marker);
                 }
-                removeMarkers();
-                markers.current = newMarkers;
-
-            } else if (selectedOption === "emrgbell") {
-                // 안심 비상벨
-                removeMarkers();
-                const newMarkers = [];
-                // emrgbell 마커
+            } else if (selectedOption === "emergbell") {
+                // 안심 비상벨 마커
                 for (let i = 0; i < facList.length; i++) {
                     const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
                     const marker = new Tmapv2.Marker({
@@ -118,65 +111,136 @@ const Map = () => {
                     });
                     newMarkers.push(marker);
                 }
-                removeMarkers();
-                markers.current = newMarkers;
 
             } else if (selectedOption === "delibox") {
-                // 안심 택배함
-                removeMarkers();
+                // 안심 택배함 마커
+                for (let i = 0; i < facList.length; i++) {
+                    const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: deliboxIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
+
             } else if (selectedOption === "police") {
-                // 경찰서
-                removeMarkers();
-            } else if (selectedOption === "safeStore") {
-                // 안심 편의점
-                removeMarkers();
+                // 경찰서 마커
+                for (let i = 0; i < facList.length; i++) {
+                    const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: policeIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
+            } else if (selectedOption === "store") {
+                // 안심 편의점 마커
+                for (let i = 0; i < facList.length; i++) {
+                    const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: storeIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
             }
+            markers.current = newMarkers;
         }
 
-        // map에서 bound가져와서 해당 bound안에있는 안심객체 불러오기
-        const fn_getAnsimOjbectInBound = async (map) => {
-            // 지도의 영역을 가져오는 함수 bound(bottomLeft, topRight)
-            const bound = map.getBounds();
-            const arr = bound.toString().split(':');
-            const bottomLeft = arr[0].split(',');
-            const topRight = arr[1].split(',');
+    // 경계 좌표 문자열을 파싱하여 쿼리 문자열을 생성하는 함수
+    const createQueryStringFromBounds = (bounds) => {
+        const arr = bounds.toString().split(':');
+        const bottomLeft = arr[0].split(',');
+        const topRight = arr[1].split(',');
 
-            const queryString = {
-                bottomLeftLat: bottomLeft[0], //최소위도
-                bottomLeftLng: bottomLeft[1], //최소경도
-                topRightLat: topRight[0], //최대위도
-                topRightLng: topRight[1] //최대경도
-            }
-            // 해당 영역 내 cctv 데이터 요청
-            axios
-                .post('http://localhost:8080/info/cctvList', queryString) //파일 전송시나 개인정보
-                .then((cctvRes) => {
-                    drawMarkers(cctvRes.data);
-                    //console.log(cctvRes.data)
-                    setCctvData(cctvRes.data);
-                });
+        return {
+            bottomLeftLat: bottomLeft[0], // 최소 위도
+            bottomLeftLng: bottomLeft[1], // 최소 경도
+            topRightLat: topRight[0],     // 최대 위도
+            topRightLng: topRight[1]      // 최대 경도
+        };
+    };
+    // cctv 데이터 요청
+    const fn_getCCTVInBound = async (map) => {
+        const bounds = map.getBounds();
+        const queryString = createQueryStringFromBounds(bounds);
 
-            // // 해당 영역 내 cctv 데이터 요청
-            // axios
-            //     .post('http://localhost:8080/guide/postAnsimFacListInBoundary', queryString) //파일 전송시나 개인정보
-            //     .then((emergRes) => {
-            //         drawMarkers(emergRes.data);
-            //         //console.log(emergRes.data);
-            //         setEmergbellData(emergRes.data);
-            //     });
-        }
+        axios
+            .post('http://localhost:8080/info/cctvList', queryString)
+            .then((cctvRes) => {
+                drawMarkers(cctvRes.data);
+                setCctvData(cctvRes.data);
+            });
+    }
+    // emergbell 데이터 요청
+    const fn_getEmergbellInBound = async (map) => {
+        const bounds = map.getBounds();
+        const queryString = createQueryStringFromBounds(bounds);
 
+        axios
+            .post('http://localhost:8080/info/emergbellList', queryString)
+            .then((emergRes) => {
+                drawMarkers(emergRes.data);
+                setEmergbellData(emergRes.data);
+            });
+    }
+    // delibox 데이터 요청
+    const fn_getDeliboxInBound = async (map) => {
+        const bounds = map.getBounds();
+        const queryString = createQueryStringFromBounds(bounds);
+
+        axios
+            .post('http://localhost:8080/info/deliboxList', queryString)
+            .then((deliboxRes) => {
+                drawMarkers(deliboxRes.data);
+                setDeliboxData(deliboxRes.data);
+            });
+    }
+    // police 데이터 요청
+    const fn_getPoliceInBound = async (map) => {
+        const bounds = map.getBounds();
+        const queryString = createQueryStringFromBounds(bounds);
+
+        axios
+            .post('http://localhost:8080/info/policeList', queryString)
+            .then((policeRes) => {
+                drawMarkers(policeRes.data);
+                setPoliceData(policeRes.data);
+            });
+    }
+    // store 데이터 요청
+    const fn_getStoreInBound = async (map) => {
+        const bounds = map.getBounds();
+        const queryString = createQueryStringFromBounds(bounds);
+
+        axios
+            .post('http://localhost:8080/info/storeList', queryString)
+            .then((storeRes) => {
+                drawMarkers(storeRes.data);
+                setStoreData(storeRes.data);
+            });
+    }
+
+    // useEffect(() => {
         if(selectedOption === 'cctv'){
-            fn_getAnsimOjbectInBound(map);
-            // console.log(cctvData2);
+            fn_getCCTVInBound(map);
+        } else if(selectedOption === 'emergbell'){
+            fn_getEmergbellInBound(map);
+        } else if(selectedOption === 'delibox'){
+            fn_getDeliboxInBound(map);
+        } else if(selectedOption === 'police'){
+            fn_getPoliceInBound(map);
+        } else if(selectedOption === 'store'){
+            fn_getStoreInBound(map);
         }
-        if(selectedOption === 'emergbell'){
-            removeMarkers();
-            fn_getAnsimOjbectInBound(map);
-        }
+    // }, [selectedOption]);
 
         // CCTV 위치로 지도 중심 이동
         if (cctvIndex > -1) {
+
             const cctv = cctvData[cctvIndex];
             // console.log(cctv)
             const position = new Tmapv2.LatLng(cctv.latitude, cctv.longitude);
