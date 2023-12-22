@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import {DataContext} from "./DataProvider";
 import InfoCard from '../components/InfoCard';
 
-const InfoSidebar = () => {
+const InfoSidebar = ({selectedMenu, menuVisible}) => {
     const { cctvData, emergbellData, deliboxData, policeData, storeData } = useContext(DataContext);
-    const { selectedOption, handleOptionChange, currentPage, handleCardClick, menuVisible, selectedMenu} = useContext(DataContext);
+    const { selectedOption, handleOptionChange, currentPage, handleCardClick} = useContext(DataContext);
     const [visibleData, setVisibleData] = useState([]); // 현재 보이는 CCTV 데이터 상태
     const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 상태
     const itemsPerPage = 10; // 한 번에 보여줄 항목 수

@@ -3,9 +3,6 @@ import axios from 'axios';
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-    const [selectedMenu, setSelectedMenu] = useState(null);
-    const [menuVisible, setMenuVisible] = useState(false);
-    
     const [selectedOption, setSelectedOption] = useState("00");
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const [cctvIndex, setCctvIndex] = useState(-1);
@@ -28,21 +25,11 @@ const DataProvider = ({ children }) => {
         setCctvIndex(index);
     }
 
-    const handleMenuClick = (menu) => {
-        // 현재 선택한 메뉴와 클릭한 메뉴가 같은 경우 닫기.
-        if (selectedMenu === menu && menuVisible) {
-            setSelectedMenu(null);
-            setMenuVisible(false);
-        } else {
-            setSelectedMenu(menu);
-            setMenuVisible(true);
-        }
-    };
 
     return (
         <DataContext.Provider
-            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedMenu, menuVisible, selectedOption, currentPage, cctvIndex
-                , handleOptionChange, handleCardClick, handleMenuClick}}>
+            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, currentPage, cctvIndex
+                , handleOptionChange, handleCardClick}}>
             {children}
         </DataContext.Provider>
     )

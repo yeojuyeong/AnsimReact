@@ -8,8 +8,7 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
 import { FiUser } from "react-icons/fi";
 
-const Nav = () => {
-    const { handleMenuClick } = useContext(DataContext);
+const Nav = ({handleMenuClick}) => {
 
     return (
         
