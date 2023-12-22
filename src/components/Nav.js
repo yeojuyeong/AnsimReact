@@ -24,8 +24,10 @@ const Nav = () => {
                         <PiMapPinLineBold />
                     </Link>
                 </li>
-                <li className="board_icon">
-                    <BiEdit />
+                <li onClick={() => handleMenuClick('동행 게시판')} className="board_icon">
+                    <Link to="/board" style={{ textDecoration: "none" }}>
+                        <BiEdit />
+                    </Link>
                 </li>
                 <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
                     <Link to="/mypage" style={{ textDecoration: "none" }}>
