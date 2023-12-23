@@ -5,7 +5,7 @@ export const DataContext = createContext();
 const DataProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState("00");
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-    const [cctvIndex, setCctvIndex] = useState(-1);
+    const [dataIndex, setDataIndex] = useState(-1);
 
     const [cctvData, setCctvData] = useState([]);
     const [emergbellData, setEmergbellData] = useState([]);
@@ -22,13 +22,12 @@ const DataProvider = ({ children }) => {
 
     // Card 클릭 이벤트
     const handleCardClick = (index) => {
-        setCctvIndex(index);
+        setDataIndex(index);
     }
-
 
     return (
         <DataContext.Provider
-            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, currentPage, cctvIndex
+            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, currentPage, dataIndex
                 , handleOptionChange, handleCardClick}}>
             {children}
         </DataContext.Provider>
