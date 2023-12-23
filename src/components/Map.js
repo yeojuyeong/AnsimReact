@@ -34,14 +34,6 @@ const Map = () => {
     const maxZoom = 18;
    // console.log(map);
 
-    // var obj = markers
-    //
-    // const markersArray = Array.from(markers);
-    // for (const obj of markersArray) {
-    //     if (cctvIndex === obj.id) {
-    //         obj.marker.animate(Tmapv2.MarkerOptions.ANIMATE_BOUNCE);
-    //     }
-    // }
     // 최초 맵 생성
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -86,12 +78,10 @@ const Map = () => {
                             icon: locationIcon,
                         });
                         currentMarker.current = newMarker;
-
                     }
                 })
                 currentMarker.current = initialMarker;
                 setMap(initialMap);
-
             }, (error) => {
                 console.error("Geolocation 오류 : " + error.message);
             });
@@ -117,70 +107,163 @@ const Map = () => {
     const drawMarkers = (facList) => {
         removeMarkers();
         const newMarkers = [];
-        const selectMarkers = [];
 
         if (selectedOption === "cctv") {
             // cctv 마커
-            console.log("dataposition"selectDataPosition)
+           // console.log("selectDataPosition : ",selectDataPosition)
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
-                const marker = new Tmapv2.Marker({
-                    position: position,
-                    icon: cctvIcon,
-                    map: map
-                });
-                newMarkers.push(marker);
-                if(position === selectDataPosition){
-                    selectMarkers.push(marker);
-                    console.log("selected")
+                if(selectDataPosition){
+                    if(position.lat() === selectDataPosition.lat() &&
+                    position.lng() === selectDataPosition.lng()) {
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: cctvIcon,
+                            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }else{
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: cctvIcon,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }
+                }else{
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: cctvIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
                 }
             }
-
         } else if (selectedOption === "emergbell") {
             // 안심 비상벨 마커
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
-                const marker = new Tmapv2.Marker({
-                    position: position,
-                    icon: emergbellIcon,
-                    map: map
-                });
-                newMarkers.push(marker);
+                if(selectDataPosition){
+                    if(position.lat() === selectDataPosition.lat() &&
+                        position.lng() === selectDataPosition.lng()) {
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: emergbellIcon,
+                            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }else{
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: emergbellIcon,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }
+                }else{
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: emergbellIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
             }
 
         } else if (selectedOption === "delibox") {
             // 안심 택배함 마커
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
-                const marker = new Tmapv2.Marker({
-                    position: position,
-                    icon: deliboxIcon,
-                    map: map
-                });
-                newMarkers.push(marker);
+                if(selectDataPosition){
+                    if(position.lat() === selectDataPosition.lat() &&
+                        position.lng() === selectDataPosition.lng()) {
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: deliboxIcon,
+                            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }else{
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: deliboxIcon,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }
+                }else{
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: deliboxIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
             }
-
         } else if (selectedOption === "police") {
             // 경찰서 마커
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
-                const marker = new Tmapv2.Marker({
-                    position: position,
-                    icon: policeIcon,
-                    map: map
-                });
-                newMarkers.push(marker);
+                if(selectDataPosition){
+                    if(position.lat() === selectDataPosition.lat() &&
+                        position.lng() === selectDataPosition.lng()) {
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: policeIcon,
+                            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }else{
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: policeIcon,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }
+                }else{
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: policeIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
             }
         } else if (selectedOption === "store") {
             // 안심 편의점 마커
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
-                const marker = new Tmapv2.Marker({
-                    position: position,
-                    icon: storeIcon,
-                    map: map
-                });
-                newMarkers.push(marker);
+                if(selectDataPosition){
+                    if(position.lat() === selectDataPosition.lat() &&
+                        position.lng() === selectDataPosition.lng()) {
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: storeIcon,
+                            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }else{
+                        const marker = new Tmapv2.Marker({
+                            position: position,
+                            icon: storeIcon,
+                            map: map
+                        });
+                        newMarkers.push(marker);
+                    }
+                }else{
+                    const marker = new Tmapv2.Marker({
+                        position: position,
+                        icon: storeIcon,
+                        map: map
+                    });
+                    newMarkers.push(marker);
+                }
             }
         }
         markers.current = newMarkers;
@@ -261,56 +344,20 @@ const Map = () => {
     }
 
      useEffect(() => {
-    if (selectedOption === 'cctv') {
-        fn_getCCTVInBound(map);
-    } else if (selectedOption === 'emergbell') {
-        fn_getEmergbellInBound(map);
-    } else if (selectedOption === 'delibox') {
-        fn_getDeliboxInBound(map);
-    } else if (selectedOption === 'police') {
-        fn_getPoliceInBound(map);
-    } else if (selectedOption === 'store') {
-        fn_getStoreInBound(map);
-    }
+        if (selectedOption === 'cctv') {
+            fn_getCCTVInBound(map);
+        } else if (selectedOption === 'emergbell') {
+            fn_getEmergbellInBound(map);
+        } else if (selectedOption === 'delibox') {
+            fn_getDeliboxInBound(map);
+        } else if (selectedOption === 'police') {
+            fn_getPoliceInBound(map);
+        } else if (selectedOption === 'store') {
+            fn_getStoreInBound(map);
+        }
      }, [selectedOption, saveLocation, selectDataPosition]);
 
-    // Card 위치로 지도 중심 이동
-    // if (dataIndex > -1) {
-    //     let data;
-    //     switch (selectedOption) {
-    //         case 'cctv':
-    //             data = cctvData[dataIndex];
-    //             break;
-    //         case 'emergbell':
-    //             data = emergbellData[dataIndex];
-    //             break;
-    //         case 'delibox':
-    //             data = deliboxData[dataIndex];
-    //             break;
-    //         case 'police':
-    //             data = policeData[dataIndex];
-    //             break;
-    //         case 'store':
-    //             data = storeData[dataIndex];
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     console.log("cctv", dataIndex)
-    //     console.log("emerg", dataIndex)
-    //
-    //     if (data) {
-    //         const dataPosition = new Tmapv2.LatLng(data.latitude, data.longitude);
-    //         map.setCenter(dataPosition);
-    //         // console.log(dataPosition);
-    //         // // 해당 마커에 애니메이션 추가
-    //         // const marker = markers.current[dataIndex];
-    //         // if (marker) {
-    //         //     marker.animate(Tmapv2.MarkerOptions.ANIMATE_BOUNCE);
-    //         // }
-    //     }
-    // }
-
+    //카드 위치로 이동
     let data;
     if (selectedOption === 'cctv') {
         data = cctvData[dataIndex];
@@ -324,7 +371,6 @@ const Map = () => {
     } else if (selectedOption === 'store') {
         data = storeData[dataIndex];
     }
-
     //console.log(selectedOption, dataIndex);
 
     if (data) {
@@ -337,9 +383,7 @@ const Map = () => {
         }
        // console.log("ggdsg",selectDataPosition)
     }
-
-
-
+    
         return (
             <div id="map_container">
                 <div id="map_div"></div>
