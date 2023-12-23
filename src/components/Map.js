@@ -11,6 +11,8 @@ import axios from "axios";
 const Map = () => {
     const {Tmapv2} = window;
     const [map, setMap] = useState(null);
+    const [saveLocation, setSaveLocation] = useState(null);
+    const [selectDataPosition, setSelectDataPosition] = useState(null);
     const currentMarker = useRef(null);
     const markers = useRef([]);
     const {
@@ -30,6 +32,7 @@ const Map = () => {
     } = useContext(DataContext);
     const minZoom = 16;
     const maxZoom = 18;
+   // console.log(map);
 
     // var obj = markers
     //
@@ -71,9 +74,10 @@ const Map = () => {
                 initialMap.addListener("dragend", (e) => {
                     const dragLocation = e.latLng;
                     console.log('드래그가 끝난 위치의 중앙좌표는 ' + dragLocation + '입니다.');
-
+                    setSaveLocation(dragLocation);
                     if (currentMarker.current) {
                         currentMarker.current.setPosition(dragLocation);
+
                     } else {
                         // 마커가 없으면 새로운 마커를 생성
                         const newMarker = new Tmapv2.Marker({
@@ -82,10 +86,12 @@ const Map = () => {
                             icon: locationIcon,
                         });
                         currentMarker.current = newMarker;
+
                     }
                 })
                 currentMarker.current = initialMarker;
                 setMap(initialMap);
+
             }, (error) => {
                 console.error("Geolocation 오류 : " + error.message);
             });
@@ -247,7 +253,7 @@ const Map = () => {
             });
     }
 
-    // useEffect(() => {
+     useEffect(() => {
     if (selectedOption === 'cctv') {
         fn_getCCTVInBound(map);
     } else if (selectedOption === 'emergbell') {
@@ -259,7 +265,7 @@ const Map = () => {
     } else if (selectedOption === 'store') {
         fn_getStoreInBound(map);
     }
-    // }, [selectedOption]);
+     }, [selectedOption, saveLocation]);
 
     // Card 위치로 지도 중심 이동
     // if (dataIndex > -1) {
@@ -311,11 +317,13 @@ const Map = () => {
         data = storeData[dataIndex];
     }
 
-    console.log(selectedOption, dataIndex);
+    //console.log(selectedOption, dataIndex);
 
     if (data) {
         const dataPosition = new Tmapv2.LatLng(data.latitude, data.longitude);
         map.setCenter(dataPosition);
+        //setSelectDataPosition(dataPosition)
+        console.log(dataPosition)
     }
         return (
             <div id="map_container">
