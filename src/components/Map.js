@@ -117,9 +117,11 @@ const Map = () => {
     const drawMarkers = (facList) => {
         removeMarkers();
         const newMarkers = [];
+        const selectMarkers = [];
 
         if (selectedOption === "cctv") {
             // cctv 마커
+            console.log("dataposition"selectDataPosition)
             for (let i = 0; i < facList.length; i++) {
                 const position = new Tmapv2.LatLng(facList[i].latitude, facList[i].longitude);
                 const marker = new Tmapv2.Marker({
@@ -128,7 +130,12 @@ const Map = () => {
                     map: map
                 });
                 newMarkers.push(marker);
+                if(position === selectDataPosition){
+                    selectMarkers.push(marker);
+                    console.log("selected")
+                }
             }
+
         } else if (selectedOption === "emergbell") {
             // 안심 비상벨 마커
             for (let i = 0; i < facList.length; i++) {
@@ -265,7 +272,7 @@ const Map = () => {
     } else if (selectedOption === 'store') {
         fn_getStoreInBound(map);
     }
-     }, [selectedOption, saveLocation]);
+     }, [selectedOption, saveLocation, selectDataPosition]);
 
     // Card 위치로 지도 중심 이동
     // if (dataIndex > -1) {
@@ -307,6 +314,7 @@ const Map = () => {
     let data;
     if (selectedOption === 'cctv') {
         data = cctvData[dataIndex];
+        //setSelectDataPosition(data)
     } else if (selectedOption === 'emergbell') {
         data = emergbellData[dataIndex];
     } else if (selectedOption === 'delibox') {
@@ -322,9 +330,16 @@ const Map = () => {
     if (data) {
         const dataPosition = new Tmapv2.LatLng(data.latitude, data.longitude);
         map.setCenter(dataPosition);
-        //setSelectDataPosition(dataPosition)
-        console.log(dataPosition)
+        if (!selectDataPosition ||
+            selectDataPosition.lat() !== dataPosition.lat() ||
+            selectDataPosition.lng() !== dataPosition.lng()) {
+            setSelectDataPosition(dataPosition);
+        }
+       // console.log("ggdsg",selectDataPosition)
     }
+
+
+
         return (
             <div id="map_container">
                 <div id="map_div"></div>
