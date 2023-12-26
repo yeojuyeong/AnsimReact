@@ -28,8 +28,8 @@ const Nav = ({handleMenuClick}) => {
                         <BiEdit />
                     </Link>
                 </li>
-                <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
-                    <Link to="/mypage" style={{ textDecoration: "none" }}>
+                <li className="mypage_icon">
+                    <Link to="/mypage">
                         <FiUser />
                     </Link>
                 </li>
