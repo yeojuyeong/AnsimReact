@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
-import ChatContainer from '../../components/ChatContainer';
 
 const MyPage = () => {
     
