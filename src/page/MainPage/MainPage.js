@@ -1,10 +1,10 @@
 import './MainPage.css';
 import FacilityPage from '../FacilityPage/FacilityPage';
 
-const Main = () => {
+const MainPage = () => {
     return (
         <>
         </>
     )
 }
-export default Main;
+export default MainPage;
