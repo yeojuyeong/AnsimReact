@@ -113,13 +113,13 @@ const LoginPage = () =>{
                 <Link to="/signup" className="signupBtn">Sign Up</Link><br/>
                 {/* 로그인 버튼 */}
                 <input type="button" className="login_btn" value="로그인" onClick={loginCheck}/>
-                <Link to="/oauth2/authorization/google" className="linkBtn">
+                <Link to="http://localhost:8080/oauth2/authorization/google" className="linkBtn">
                     <img src="/images/google.png" alt="google Login" style={{width: '100%', cursor: 'pointer'}}/>
                 </Link>
-                <Link to="/oauth2/authorization/kakao" className="linkBtn">
+                <Link to="http://localhost:8080/oauth2/authorization/kakao" className="linkBtn">
                     <img src="/images/kakao1.png" alt="Kakao Login" style={{width: '100%', cursor: 'pointer',}}/>
                 </Link>
-                <Link to="/oauth2/authorization/naver" className="linkBtn">
+                <Link to="http://localhost:8080/oauth2/authorization/naver" className="linkBtn">
                     <img src="/images/naver.png" alt="Naver Login" style={{width: '100%', cursor: 'pointer'}}/>
                 </Link>
 
