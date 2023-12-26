@@ -20,8 +20,6 @@ function App() {
         } else {
             setSelectedMenu(menu);
             setMenuVisible(true);
-
-
         }
     };
 
