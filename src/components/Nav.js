@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
+import { BiEdit } from "react-icons/bi";
+import { FiUser } from "react-icons/fi";
 
-const Nav = () => {
-    const { handleMenuClick } = useContext(DataContext);
+const Nav = ({handleMenuClick}) => {
 
     return (
         
@@ -24,8 +25,15 @@ const Nav = () => {
                         <PiMapPinLineBold />
                     </Link>
                 </li>
-                <li className="board_icon">
-                    <LiaUserFriendsSolid />
+                <li onClick={() => handleMenuClick('동행 게시판')} className="board_icon">
+                    <Link to="/board" style={{ textDecoration: "none" }}>
+                        <BiEdit />
+                    </Link>
+                </li>
+                <li className="mypage_icon">
+                    <Link to="/mypage">
+                        <FiUser />
+                    </Link>
                 </li>
             </ul>
         </div>

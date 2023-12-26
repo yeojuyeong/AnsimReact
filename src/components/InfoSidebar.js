@@ -2,11 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import {DataContext} from "./DataProvider";
 import InfoCard from '../components/InfoCard';
 
-const InfoFacility = () => {
-    const { cctvData } = useContext(DataContext);
-    const { selectedOption, handleOptionChange, currentPage, handleCCTVClick, menuVisible, selectedMenu} = useContext(DataContext);
-    const [visibleCCTVData, setVisibleCCTVData] = useState([]); // 현재 보이는 CCTV 데이터 상태
-    const [filteredCCTVData, setFilteredCCTVData] = useState([]); // 필터링된 CCTV 데이터 상태
+const InfoSidebar = ({selectedMenu, menuVisible}) => {
+    const { cctvData, emergbellData, deliboxData, policeData, storeData } = useContext(DataContext);
+    const { selectedOption, handleOptionChange, currentPage, handleCardClick} = useContext(DataContext);
+    const [visibleData, setVisibleData] = useState([]); // 현재 보이는 CCTV 데이터 상태
     const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 상태
     const itemsPerPage = 10; // 한 번에 보여줄 항목 수
 
@@ -15,18 +14,28 @@ const InfoFacility = () => {
         switch (selectedOption) {
             case 'cctv':
                 data = cctvData;
-                // console.log(data)
+                break;
+            case 'emergbell':
+                data = emergbellData;
+                break;
+            case 'delibox':
+                data = deliboxData;
+                break;
+            case 'police':
+                data = policeData;
+                break;
+            case 'store':
+                data = storeData;
                 break;
         }
         setFilteredData(data);
-        // console.log(filteredData)
-    }, [selectedOption, cctvData]);
+    }, [selectedOption, cctvData, emergbellData, deliboxData, policeData, storeData]);
 
     useEffect(() => {
-        // visibleCCTVData 업데이트
+        // visibleData 업데이트
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        setVisibleCCTVData(filteredData.slice(startIndex, endIndex));
+        setVisibleData(filteredData.slice(startIndex, endIndex));
     }, [currentPage, filteredData]);
 
     return (
@@ -44,14 +53,14 @@ const InfoFacility = () => {
                     >
                         <option value="00" disabled>선택</option>
                         <option value="cctv">안심 CCTV</option>
-                        <option value="emrgbell">안심 비상벨</option>
+                        <option value="emergbell">안심 비상벨</option>
                         <option value="delibox">안심 택배함</option>
                         <option value="police">경찰서</option>
-                        <option value="safeStore">안심 편의점</option>
+                        <option value="store">안심 편의점</option>
                     </select>
                     <div id="cardList">
-                        {visibleCCTVData.map((data, index) => (
-                            <InfoCard data={data} key={index} handleCCTVClick={handleCCTVClick} selectedOption={selectedOption} />
+                        {visibleData.map((data, index) => (
+                            <InfoCard data={data} key={data.id} index={index} handleCardClick={handleCardClick} selectedOption={selectedOption} />
                         ))}
                     </div>
                 </div>
@@ -60,4 +69,4 @@ const InfoFacility = () => {
     )}
 
 
-export default InfoFacility;
+export default InfoSidebar;

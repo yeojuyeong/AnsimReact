@@ -1,12 +1,14 @@
-import InfoFacility from "../../components/InfoFacility";
+import InfoSidebar from "../../components/InfoSidebar";
 import Map from '../../components/Map';
+import DataProvider from '../../components/DataProvider';
 
-const FacilityPage = () => {
+const FacilityPage = ({selectedMenu, menuVisible}) => {
+    
     return (
-        <>
-            <InfoFacility />
+        <DataProvider>
+            <InfoSidebar selectedMenu={selectedMenu} menuVisible={menuVisible}/>
             <Map />
-        </>
+        </DataProvider>
     )
 }
 export default FacilityPage;
