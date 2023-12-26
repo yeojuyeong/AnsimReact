@@ -2,17 +2,19 @@ import './App.css';
 import {Route, Routes} from "react-router-dom";
 import DataProvider from './components/DataProvider';
 import Layout from './components/Layout';
-import Sidebar from './components/Sidebar';
-import Main from "./page/MainPage/Main";
+import Nav from './components/Nav';
+import GuidePage from "./page/GuidePage/GuidePage";
 import FacilityPage from "./page/FacilityPage/FacilityPage";
 
 function App() {
+
+
   return (
       <DataProvider>
           <Layout>
-              <Sidebar />
+              <Nav />
               <Routes>
-                  <Route path="/" element={<Main />} />
+                  <Route path="/guide" element={<GuidePage />} />
                   <Route path="/info" element={<FacilityPage />} />
               </Routes>
           </Layout>

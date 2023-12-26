@@ -6,7 +6,7 @@ import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 
-const Sidebar = () => {
+const Nav = () => {
     const { handleMenuClick } = useContext(DataContext);
 
     return (
@@ -14,8 +14,10 @@ const Sidebar = () => {
         <div id="sidebar">
             <h2>Ansim</h2>
             <ul>
-                <li className="direction_icon">
-                    <TbMapSearch />
+                <li onClick={() => handleMenuClick('안심 귀갓길')}  className="direction_icon">
+                    <Link to="/guide" style={{ textDecoration: "none" }}>
+                        <TbMapSearch />
+                    </Link>
                 </li>
                 <li onClick={() => handleMenuClick('안심 시설물')} className="facility_icon">
                     <Link to="/info" style={{ textDecoration: "none" }}>
@@ -29,4 +31,4 @@ const Sidebar = () => {
         </div>
     );
 }
-export default Sidebar;
+export default Nav;

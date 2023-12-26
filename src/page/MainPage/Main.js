@@ -1,7 +1,7 @@
 import './MainPage.css';
 import DataProvider from "../../components/DataProvider";
 import Layout from '../../components/Layout';
-import Sidebar from "../../components/Sidebar";
+import Nav from "../../components/Nav";
 import FacilityPage from '../FacilityPage/FacilityPage';
 // import TestMap from '../../components/TestMap';
 const Main = () => {
