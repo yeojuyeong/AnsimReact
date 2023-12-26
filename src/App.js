@@ -5,8 +5,10 @@ import Nav from './components/Nav';
 import MainPage from "./page/MainPage/MainPage";
 import FacilityPage from "./page/FacilityPage/FacilityPage";
 import BoardPage from "./page/BoardPage/BoardPage";
-import MyPage from "./page/MyPage/MyPage";
 import GuidePage from "./page/GuidePage/GuidePage";
+import MyPage from "./page/MyPage/MyPage";
+import Login from "./page/LoginPage/LoginPage";
+import Signup from "./page/SignupPage/Signup";
 import React, { createContext, useState, useEffect } from 'react';
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
                   <Route path="/info" element={<FacilityPage selectedMenu={selectedMenu} menuVisible={menuVisible} />} />
                   <Route path="/board" element={<BoardPage />} />
                   <Route path="/mypage" element={<MyPage />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
               </Routes>
           </Layout>
         </>
