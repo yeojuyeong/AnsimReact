@@ -6,8 +6,6 @@ import Main from "./page/MainPage/Main";
 import FacilityPage from "./page/FacilityPage/FacilityPage";
 import Board from "./page/BoardPage/Board";
 import MyPage from "./page/MyPage/MyPage";
-import Room from "./components/Room";
-import Rooms from "./components/Rooms";
 import React, { createContext, useState, useEffect } from 'react';
 
 function App() {
@@ -34,8 +32,6 @@ function App() {
                   <Route path="/info" element={<FacilityPage selectedMenu={selectedMenu} menuVisible={menuVisible} />} />
                   <Route path="/board" element={<Board />} />
                   <Route path="/mypage" element={<MyPage />} />
-                  <Route path="/chat/rooms" element={<Rooms />} /> {/* Rooms 컴포넌트 라우팅 */}
-                  <Route path="/chat/room" element={<Room />} />  {/* Room 컴포넌트 라우팅 */}
               </Routes>
           </Layout>
         </>
