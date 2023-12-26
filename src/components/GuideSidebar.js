@@ -4,8 +4,11 @@ import pinIcon from "../images/pin_icon.png";
 
 const GuideSidebar =(props)=> {
 
-    const {menuVisible} = useContext(DataContext); //사이드바 visible 조절
+    //const {menuVisible} = useContext(DataContext); //사이드바 visible 조절
     const [selectedFacOptions, setSelectedFacOptions] = useState([]); // 선택된 안심객체 옵션들을 저장할 상태
+
+    const selectedMenu = props.param.selectedMenu;
+    const menuVisible = props.param.menuVisible;
 
     const guideMap = props.param.guideMap;
     const setGuideBasePoint = props.param.setGuideBasePoint;
@@ -17,7 +20,6 @@ const GuideSidebar =(props)=> {
 
     //안심객체
     const facOptions = [
-        //{ label: 'ALL', value: 'all' },
         { label: 'CCTV', value: 'C' },
         { label: '안심택배', value: 'D' },
         { label: '비상벨', value: 'E' },
@@ -174,83 +176,84 @@ const GuideSidebar =(props)=> {
     };
 
     return (
-        <>
             <div id="sidebar_menu" className={menuVisible ? 'open' : 'closed'}>
+                {selectedMenu === '안심 귀갓길' && (
 
-                <h2>안심 귀갓길 찾기</h2>
+                    <div>
+                        <h2>안심 귀갓길 찾기</h2>
 
-                <div id="div1">
-                    <input type="text" className="text_custom" id="searchStartKeyword" value={startKeyword}
-                           placeholder="출발지"
-                           onBlur={(e) => setStartKeyword(e.target.value)}/>
-                    <br/>
-                    <input type="text" className="text_custom" id="searchEndKeyword" value={endKeyword}
-                           placeholder="목적지"
-                           onBlur={(e) => setEndKeyword(e.target.value)}/>
-                </div>
+                        <div id="div1">
+                            <input type="text" className="text_custom" id="searchStartKeyword" value={startKeyword}
+                                   placeholder="출발지"
+                                   onBlur={(e) => setStartKeyword(e.target.value)}/>
+                            <br/>
+                            <input type="text" className="text_custom" id="searchEndKeyword" value={endKeyword}
+                                   placeholder="목적지"
+                                   onBlur={(e) => setEndKeyword(e.target.value)}/>
+                        </div>
 
-                <div>
-                    <button className="searchBtn" onClick={() => doMapGuide()}>안심시설보기</button>
-                    <button className="searchBtn" onClick={() => callPedestrianAPI('Y')}>안심길찾기</button>
-                </div>
+                        <div>
+                            <button className="searchBtn" onClick={() => doMapGuide()}>안심시설보기</button>
+                            <button className="searchBtn" onClick={() => callPedestrianAPI('Y')}>안심길찾기</button>
+                        </div>
 
-                <div style={{float: 'left', height: '500px'}}>
-                <div className="title"><strong>Search</strong>Results</div>
-                    <div className="rst_wrap" style={{position: "relative", zIndex: 999}}>
-                        <div className="rst mCustomScrollbar">
-                            <ul>
-                                {resultPoisObj && resultPoisObj.map((value, index) => {
+                        <div style={{float: 'left', height: '500px'}}>
+                        <div className="title"><strong>Search</strong>Results</div>
+                            <div className="rst_wrap" style={{position: "relative", zIndex: 1999}}>
+                                <div className="rst mCustomScrollbar">
+                                    <ul>
+                                        {resultPoisObj && resultPoisObj.map((value, index) => {
 
-                                    return <li key={index}>
-                                        <div>
-                                            <div>
-                                                <span style={{fontWeight: 'bold'}}>{value.name}</span>
-                                                <span>{value.upperBizName}</span>
-                                                <span>{value.middleBizName}</span>
-                                                <span>{value.lowerBizName}</span>
-                                            </div>
-                                            <div>
-                                                <span>{value.upperAddrName}</span>
-                                                <span>{value.middleAddrName}</span>
-                                                <span>{value.lowerAddrName}</span>
-                                                <span>{value.detailAddrName}</span>
-                                            </div>
-                                            <button type="button" name="sendBtn"
-                                                    onClick={() => selectPoi(value.id, value.arg, value.lat, value.lon)}>
-                                                선택
-                                            </button>
-                                        </div>
+                                            return <li key={index}>
+                                                <div>
+                                                    <div>
+                                                        <span style={{fontWeight: 'bold'}}>{value.name}</span>
+                                                        <span>{value.upperBizName}</span>
+                                                        <span>{value.middleBizName}</span>
+                                                        <span>{value.lowerBizName}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{value.upperAddrName}</span>
+                                                        <span>{value.middleAddrName}</span>
+                                                        <span>{value.lowerAddrName}</span>
+                                                        <span>{value.detailAddrName}</span>
+                                                    </div>
+                                                    <button type="button" name="sendBtn"
+                                                            onClick={() => selectPoi(value.id, value.arg, value.lat, value.lon)}>
+                                                        선택
+                                                    </button>
+                                                </div>
 
-                                    </li>
+                                            </li>
 
-                                })}
-                            </ul>
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{position: "relative", zIndex: 999}}>
+                            <label>
+                                <input type="checkbox" id="all" name="all" checked={selectedFacOptions.length === facOptions.length}
+                                       onChange={(e) => selectAll(e)}/>
+                                ALL
+                            </label>
+                            {facOptions.map(option => (
+                                <label key={option.value}>
+                                    <input
+                                        type="checkbox"
+                                        name="ansimFacOption"
+                                        value={option.value}
+                                        checked={selectedFacOptions.includes(option.value)}
+                                        onChange={() => handleOptionChange(option.value)}
+                                    />
+                                    {option.label}
+                                </label>
+                            ))}
                         </div>
                     </div>
-                </div>
-
-                <div style={{position: "relative", zIndex: 999}}>
-                    <label>
-                        <input type="checkbox" id="all" name="all" checked={selectedFacOptions.length === facOptions.length}
-                               onChange={(e) => selectAll(e)}/>
-                        ALL
-                    </label>
-                    {facOptions.map(option => (
-                        <label key={option.value}>
-                            <input
-                                type="checkbox"
-                                name="ansimFacOption"
-                                value={option.value}
-                                checked={selectedFacOptions.includes(option.value)}
-                                onChange={() => handleOptionChange(option.value)}
-                            />
-                            {option.label}
-                        </label>
-                    ))}
-                </div>
-
+                )}
             </div>
-        </>
     );
 }
 export default GuideSidebar;
