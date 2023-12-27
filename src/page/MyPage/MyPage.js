@@ -43,7 +43,7 @@ const MyPage = () => {
                         <div className="field">이메일(아이디) : {member.user_id}</div>
                         <div className="field">이름 : {member.user_nm}</div>
                         <div className="field">성별 : {member.gender}</div>
-                        <div className="field">전화번호 : {member.telno}</div>
+                        <div className="field">전화번호 : {member.tel_no}</div>
                     </div>
 
                     <br/>
