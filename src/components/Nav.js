@@ -7,8 +7,11 @@ import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
 import {FiLogIn, FiUser} from "react-icons/fi";
+import getCookie from './GetCookie';
 
 const Nav = ({handleMenuClick}) => {
+
+    const accessTokenCookie = getCookie('accessToken');
 
     return (
         
@@ -30,16 +33,19 @@ const Nav = ({handleMenuClick}) => {
                         <BiEdit/>
                     </Link>
                 </li>
-                <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
-                    <Link to="/mypage" style={{textDecoration: "none"}}>
-                        <FiUser/>
-                    </Link>
-                </li>
-                <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">
-                    <Link to="/Login" style={{textDecoration: "none"}}>
-                        <FiLogIn/>
-                    </Link>
-                </li>
+                {accessTokenCookie ? (
+                    <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
+                        <Link to="/mypage" style={{textDecoration: "none"}}>
+                            <FiUser/>
+                        </Link>
+                    </li>
+                ) : (
+                    <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">
+                        <Link to="/Login" style={{textDecoration: "none"}}>
+                            <FiLogIn/>
+                        </Link>
+                    </li>
+                )}
             </ul>
         </div>
     );
