@@ -10,7 +10,6 @@ const MyPage = () => {
     //사용자 정보
     const [member, setMember] = useState({});
 
-
     useEffect(()=> {
 
         const fetchData = async () => {
@@ -55,14 +54,10 @@ const MyPage = () => {
                         <Link>회원탈퇴</Link> &nbsp;&nbsp;
                     </div>
                     <br/><br/>
-
+                   
                 </div>
             </div>
-            <div>
-                <Link to="/mychat">
-                    <button>채팅방 목록</button>
-                </Link>
-            </div>
+
         </>
     )
 }
