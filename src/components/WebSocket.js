@@ -38,7 +38,6 @@ const WebSocket = () => {
     });
     console.log('Payload.user_id:', payload.user_id);
     console.log('Payload2.user_id:', receiverpayload.user_id);
-
     const connect =()=>{
         let Sock = new SockJS('http://localhost:8080/ws');
         stompClient = over(Sock);
