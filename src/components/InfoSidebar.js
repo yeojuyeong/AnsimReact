@@ -1,8 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import {DataContext} from "./DataProvider";
 import InfoCard from '../components/InfoCard';
+import { TbFileInfo } from "react-icons/tb";
 
-const InfoSidebar = ({selectedMenu, menuVisible}) => {
+const InfoSidebar = () => {
     const { cctvData, emergbellData, deliboxData, policeData, storeData } = useContext(DataContext);
     const { selectedOption, handleOptionChange, currentPage, handleCardClick} = useContext(DataContext);
     const [visibleData, setVisibleData] = useState([]); // 현재 보이는 CCTV 데이터 상태
@@ -39,15 +40,12 @@ const InfoSidebar = ({selectedMenu, menuVisible}) => {
     }, [currentPage, filteredData]);
 
     return (
-        <div id="sidebar_menu" className={menuVisible ? 'open' : 'closed'}>
-            {selectedMenu === '안심 시설물' && (
-                <div
-                    id="info"
-                >
-                    <h2>안심 시설물</h2>
+        <div id="sidebar_menu" className='open'>
+                <div id="info">
+                    <h2><TbFileInfo/>&nbsp;안심 시설물</h2>
                     <select
                         id="dropdownMenu"
-                        style={{ width: '250px', height: '25px' }}
+                        style={{ width: '230px', height: '25px' }}
                         value={selectedOption} // 선택된 옵션을 표시
                         onChange={handleOptionChange} // 옵션 변경 시 핸들러 호출
                     >
@@ -64,7 +62,6 @@ const InfoSidebar = ({selectedMenu, menuVisible}) => {
                         ))}
                     </div>
                 </div>
-            )}
         </div>
     )}
 

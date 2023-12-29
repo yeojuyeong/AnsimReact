@@ -11,7 +11,6 @@ const MyPage = () => {
     const [member, setMember] = useState({});
     console.log(userCookie);
 
-
     useEffect(()=> {
 
         const fetchData = async () => {
@@ -59,14 +58,10 @@ const MyPage = () => {
                             <Link to="/passwordModify">패스워드 변경</Link>}&nbsp;&nbsp;
                     </div>
                     <br/><br/>
-
+                   
                 </div>
             </div>
-            <div>
-                <Link to="/mychat">
-                    <button>채팅방 목록</button>
-                </Link>
-            </div>
+
         </>
     )
 }
