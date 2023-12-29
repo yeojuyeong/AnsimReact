@@ -33,32 +33,16 @@ const Nav = () => {
                         <BiEdit/>
                     </Link>
                 </li>
-                {/*{ifCookie ? (*/}
-                {/*    <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">*/}
-                {/*        <Link to="/mypage" style={{textDecoration: "none"}}>*/}
-                {/*            <FiUser/>*/}
-                {/*        </Link>*/}
-                {/*    </li>*/}
-                {/*) : (*/}
-                {/*    <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">*/}
-                {/*        <Link to="/Login" style={{textDecoration: "none"}}>*/}
-                {/*            <FiLogIn/>*/}
-                {/*        </Link>*/}
-                {/*    </li>*/}
-                {/*)}*/}
+
                 {ifCookie &&
-                    <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
-                {accessTokenCookie ? (
                     <li className="mypage_icon">
                         <Link to="/mypage" style={{textDecoration: "none"}}>
                             <FiUser/>
                         </Link>
                     </li>
-                ) : (
-                    <li className="mypage_icon">
                 }
                 {!ifCookie &&
-                    <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">
+                    <li className="mypage_icon">
                         <Link to="/Login" style={{textDecoration: "none"}}>
                             <FiLogIn/>
                         </Link>
