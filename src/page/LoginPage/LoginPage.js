@@ -18,17 +18,26 @@ const LoginPage = () =>{
 
 
     const cookieManage = (accessToken, refreshToken, user_nm, role) => {
+
+        // 현재 시간에 24시간 후의 값을 더한 시간을 계산합니다.
+        const expirationTime = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+// 만료 시간을 GMT 문자열로 변환합니다.
+        const expiresGMT = expirationTime.toUTCString();
+
         //user_id 쿠키 등록
         // document.cookie = 'user_id=' + user_id + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'userid=' + user_id + ';path=/; max-age=3600';
+        // document.cookie = 'userid=' + user_id + 'path=/; expires=${expiresGMT};';
+        document.cookie = `userid=${user_id}; path=/; expires=${expiresGMT};`;
 
-        //password 쿠키 등록
-        // document.cookie = 'password=' + password + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
+
 
         //JWT 쿠키 등록
         // if(jwtRef.current.checked) {
         // document.cookie = 'accessToken=' + accessToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'accessToken=' + accessToken + ';path=/; max-age=3600';
+        // document.cookie = 'jwt=' + accessToken + ';path=/; max-age=3600';
+        document.cookie = `jwt=${accessToken}; path=/; expires=${expiresGMT};`;
+
         // document.cookie = 'refreshToken=' + refreshToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
         // document.cookie = 'refreshToken=' + refreshToken + ';path=/; max-age=18000';
         // } else {
@@ -37,9 +46,9 @@ const LoginPage = () =>{
         // }
 
         // document.cookie = 'userName=' + decodeURIComponent(userName) + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'username=' + decodeURIComponent(user_nm) + ';path=/; max-age=3600';
+        // document.cookie = 'username=' + decodeURIComponent(user_nm) + ';path=/; max-age=3600';
         // document.cookie = 'role=' + role + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'role=' + role + ';path=/; max-age=3600';
+        // document.cookie = 'role=' + role + ';path=/; max-age=3600';
     }
 
     //REST API 서버와의 비동기 통신으로 아이디/패스워드 검증
@@ -70,12 +79,13 @@ const LoginPage = () =>{
             .then((data) => {
                 console.log('서버 응답 데이터:', data);
                 console.log('jwt컨트롤러로 보낸다')
-                document.cookie = 'accessToken=' + data.accessToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
+                // document.cookie = 'accessToken=' + data.accessToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
                 if(data.message === 'JWT'){
                     console.log('컨트롤러에서 jwt 받았다')
                     console.log('user_nm: ' + decodeURIComponent(data.user_nm));
                     cookieManage(data.accessToken, data.refreshToken, data.user_nm, data.role);
-                    document.location.href='/guide/route';
+                    // cookieManage(data.accessToken);
+                    document.location.href='/guide';
                 } else if(data.message === 'ID_NOT_FOUND') {
                     setMessage('존재하지 않는 아이디입니다.');
                 } else if(data.message === 'PASSWORD_NOT_FOUND') {

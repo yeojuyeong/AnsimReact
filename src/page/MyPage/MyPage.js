@@ -21,8 +21,8 @@ const MyPage = () => {
 
     },[userCookie]);
 
-    if (userCookie == null) {
-        <Link to="http://localhost:3000/Login" />
+    if (!userCookie) {
+        document.location.href='/guide';
     }
 
     return (
