@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
-import { Cookies } from "react-cookie";
+import GetCookie from "./GetCookie";
 
 var stompClient =null;
 
@@ -9,82 +9,99 @@ const WebSocket = () => {
     const [privateChats, setPrivateChats] = useState(new Map());
     const [publicChats, setPublicChats] = useState([]);
     const [tab,setTab] =useState("CHATROOM");
+    /////////////////////////////////////////////////////////////////////////////////
+    const [apply, setApply] = useState(false);
+    const boardData =
+        {
+            userId: "jd8606",
+            boardTitle: "동행구해요",
+        };
+
+    const [notification, setNotification] = useState(null);
+
+    // 알림 메시지를 받았을 때 처리하는 함수
+    const handleNotification = (message) => {
+        setNotification(message);
+    };
+
+    var onlineUsers = [];
+
+    const addNewUser = (recieverNm) => {
+        if (!onlineUsers.some((user) => user.receivername === recieverNm)) {
+            onlineUsers.push({ receiverName: recieverNm });
+        }
+    }
+    const removeUser = (recieverNm) => {
+        onlineUsers = onlineUsers.filter((user) => user.receivername !== recieverNm);
+    };
+    const getUser = (recieverNm) => {
+        return onlineUsers.find((user) => user.receivername === recieverNm);
+    };
+    /////////////////////////////////////////////////////////////////////////////////////
+
     useEffect(() => {
         connect();
     }, []);
 
-    const cookies = new Cookies();
-    function setRefreshTokenToCookie(refresh_token) {
-        cookies.set('refresh_token', refresh_token, { sameSite: 'strict' });
-    }
-    console.log(cookies);
-
-    const jwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEyMzRxd2VyIiwidXNlcl9pZCI6InVuaXZlcnNlIiwiaWF0IjoxNzAzNzQ0MDYyLCJleHAiOjE3MDM4MzA0NjJ9.HfNt-ZzLCvKji5PP_JEke1q9lm6V3tOPDSxCbzXPyQI';
-    const receiverjwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEyMzRxd2VyIiwidXNlcl9pZCI6Imp1ZGl0aCIsImlhdCI6MTcwMzc0NjE5NCwiZXhwIjoxNzAzODMyNTk0fQ.QvMtCXj97VTx9BoU-vPoqgaCdqpaFptDPiJBy0aR1Sw'
-    // JWT 토큰을 "." 문자로 분리
-    const tokenParts = jwtToken.split('.');
-    const tokenParts2 = receiverjwtToken.split('.');
-
-    // 각 부분을 Base64 디코딩
-    const header = JSON.parse(atob(tokenParts[0]));
-    const payload = JSON.parse(atob(tokenParts[1]));
-    const receiverpayload = JSON.parse(atob(tokenParts2[1]));
+    const userIdCookie = GetCookie("userid").split('@')[0];
+    //console.log('userid 쿠키 값 (@ 앞 부분):', userIdCookie);
 
     const [userData, setUserData] = useState({
-        username: payload.user_id,
-        receivername: receiverpayload.user_id,
+        username: userIdCookie,
+        receivername: boardData.userId,
         connected: false,
         message: ''
     });
-    console.log('Payload.user_id:', payload.user_id);
-    console.log('Payload2.user_id:', receiverpayload.user_id);
+
     const connect =()=>{
         let Sock = new SockJS('http://localhost:8080/ws');
-        stompClient = over(Sock);
+        stompClient = over(Sock); //SockJS 연결을 STOMP 클라이언트로 래핑
         stompClient.connect({},onConnected, onError);
     }
 
-    const onConnected = () => {
+    const onConnected = (recieverNm) => {
         setUserData({...userData,"connected": true});
-        stompClient.subscribe('/chatroom/public', onMessageReceived);
+        stompClient.subscribe('/apply/public', onMessageReceived);
         stompClient.subscribe('/user/'+userData.username+'/private', onPrivateMessage);
         userJoin();
+
+        addNewUser(recieverNm);
     }
 
     const userJoin=()=>{
-        var chatMessage = {
-            senderName: userData.username,
+        var Message = {
+            senderName: userIdCookie,
             status:"JOIN"
         };
-        stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/message", {}, JSON.stringify(Message));
     }
 
     const onMessageReceived = (payload)=>{
-        var payloadData = JSON.parse(payload.body);
-        switch(payloadData.status){
+        //var payloadData = JSON.parse(payload.body);
+        switch(userIdCookie.status){
             case "JOIN":
-                if(!privateChats.get(payloadData.senderName)){
-                    privateChats.set(payloadData.senderName,[]);
+                if(!privateChats.get(userIdCookie.senderName)){
+                    privateChats.set(userIdCookie.senderName,[]);
                     setPrivateChats(new Map(privateChats));
                 }
                 break;
             case "MESSAGE":
-                publicChats.push(payloadData);
+                publicChats.push(userIdCookie);
                 setPublicChats([...publicChats]);
                 break;
         }
     }
 
-    const onPrivateMessage = (payload)=>{
-        console.log(payload);
-        var payloadData = JSON.parse(payload.body);
-        if(privateChats.get(payloadData.senderName)){
-            privateChats.get(payloadData.senderName).push(payloadData);
+    const onPrivateMessage = (userIdCookie)=>{
+        //console.log(userIdCookie);
+        //var userIdCookie = JSON.parse(userIdCookie.body);
+        if(privateChats.get(userIdCookie.senderName)){
+            privateChats.get(userIdCookie.senderName).push(userIdCookie);
             setPrivateChats(new Map(privateChats));
         }else{
             let list =[];
-            list.push(payloadData);
-            privateChats.set(payloadData.senderName,list);
+            list.push(userIdCookie);
+            privateChats.set(userIdCookie.senderName,list);
             setPrivateChats(new Map(privateChats));
         }
     }
@@ -99,59 +116,70 @@ const WebSocket = () => {
     }
     const sendValue=()=>{
         if (stompClient) {
-            var chatMessage = {
-                senderName: userData.username,
-                message: userData.message,
+            var Message = {
+                senderName: userIdCookie,
+                receiverName: boardData.userId,
+                message: '',
                 status:"MESSAGE"
             };
-            console.log(chatMessage);
-            stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
+            console.log(Message);
+            stompClient.send("/app/message", {}, JSON.stringify(Message));
             setUserData({...userData,"message": ""});
         }
     }
 
     const sendPrivateValue=()=>{
         if (stompClient) {
-            var chatMessage = {
-                senderName: userData.username,
-                receiverName: receiverpayload.user_id,
-                message: userData.message,
+            var Message = {
+                senderName: userIdCookie,
+                receiverName:boardData.userId,
+                message: '',
                 status:"MESSAGE"
             };
 
             if(userData.username !== tab){
-                privateChats.get(tab).push(chatMessage);
+                privateChats.get(tab).push(Message);
                 setPrivateChats(new Map(privateChats));
             }
-            stompClient.send("/app/private-message", {}, JSON.stringify(chatMessage));
-            setUserData({...userData,"message": ""});
+            // stompClient.send("/app/private-message", {}, JSON.stringify(Message));
+            // setUserData({...userData,"message": ""});
+            stompClient.send(`/app/${boardData.userId}/private-message`, {}, JSON.stringify(Message));
+            setUserData({ ...userData, "message": "" });
         }
     }
-
     const registerUser=()=>{
         if (stompClient) {
-            var chatMessage = {
-                senderName: userData.username,
-                receiverName: userData.receivername,
+            var Message = {
+                senderName: userIdCookie,
+                receiverName: boardData.userId,
                 message: '동행 신청하였습니다!',
                 status: 'MESSAGE'
             };
-            console.log(chatMessage);
-            stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
+            console.log(Message);
+            stompClient.send("/app/message", {}, JSON.stringify(Message));
+            // 알림 메시지를 처리하는 함수 호출
+            handleNotification(Message);
         }
     }
     return (
-        <div className="container">
+        <div className="socket_container">
                 <div className="register">
                     <div
                         id="user-name"
                         placeholder="Enter your name"
                         name="userName"
                         margin="normal"
-                    > 유저ID: {payload.user_id} </div>
-                    <button type="button" onClick={registerUser}>
-                        동행 신청
-                    </button>
+                    > 유저ID: {userIdCookie} </div>
+                    <div className="apply_btn" onClick={registerUser}>
+                        동행 신청😊
+                    </div>
+
+                    {notification && (
+                        <div className="notification">
+                            {notification.senderName}님이 {notification.message}
+                        </div>
+                    )}
+
                 </div>
         </div>
     );
