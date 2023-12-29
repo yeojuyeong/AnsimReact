@@ -1,0 +1,12 @@
+.main {
+    width: 100%;
+    height: 850px;
+}
+
+.main-content {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}

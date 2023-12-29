@@ -1,11 +1,13 @@
 #main_container {
     display: flex;
+    flex-direction: row;
     align-items: flex-start;
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    position: relative; /* 상대 위치 설정 */
 }
-
 #map_div {
     flex: 1;
-    order: 2;
 }
 #sidebar {
     width: 80px;
@@ -23,7 +25,6 @@
     flex-direction: row; /* 가로로 나열 */
     padding: 20px;
 }
-
 #sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -32,6 +33,12 @@
 #sidebar li {
     margin-bottom: 10px;
     cursor: pointer;
+}
+#footer {
+    width: 100%;
+    height: 105px;
+    background-color: #f0f0f0;
+    user-select: none;
 }
 #cardList {
     user-select: none;
@@ -71,4 +78,9 @@
 .direction_icon, .facility_icon, .board_icon , .mypage_icon {
     font-size: 30px;
     padding-left: 15px;
+}
+.alert {
+    font-size: 30px;
+    padding-left: 20px;
+    margin-top: 350px;
 }
