@@ -74,8 +74,7 @@ display: none;
 }
 .notification_icon {
     font-size: 40px;
-    padding-left: 20px;
-    margin-top: 400px;
+    margin-top: 500px;
 }
 .counter {
     width: 18px;
@@ -89,7 +88,7 @@ display: none;
     color: white;
     position: absolute;
     bottom: 45px;
-    left: 55px;
+    left: 75px;
 }
 .notification_div {
     position: relative;
