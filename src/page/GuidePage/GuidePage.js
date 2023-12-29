@@ -1,7 +1,7 @@
 import GuideSidebar from "../../components/GuideSidebar";
 import GuideMap from '../../components/GuideMap';
 import './GuidePage.css';
-import {useState, useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 import cctv_c_icon from "../../images/cctv_c_icon.png";
 import delivery_c_icon from "../../images/delivery_c_icon.png";
 import emergbell_c_icon from "../../images/emergbell_c_icon.png";
@@ -15,13 +15,17 @@ import store_b_icon from "../../images/store_b_icon.png";
 
 const GuidePage = (props) => {
 
+    //console.log("GuidePage 랜더링");
+
     //Map 사용 변수
     const { Tmapv2 } = window;
     var drawInfoArr = [];
     var resultdrawArr = [];
 
+    console.log("resultdrawArr",resultdrawArr);
+
     const [guideMap, setGuideMap] = useState(null);
-    const selectedMarkerInMap = {};
+    const [selectedMarkerInMap, setSelectedMarkerInMap] = useState([]);
 
     const [guideBasePoint, setGuideBasePoint] = useState({
          'startPointLat': null
@@ -35,7 +39,7 @@ const GuidePage = (props) => {
     // --------------------------------funtion--------------------------------
 
     const drawMarker=(lat, lon, size1, size2, icon, obj)=>{
-        console.log("drawMarker: ",lat, lon, size1, size2, icon, obj);
+        //console.log("drawMarker: ",lat, lon, size1, size2, icon, obj);
         const marker = new Tmapv2.Marker( //생성과 동시에 화면에 찍어짐
             {
                 position : new Tmapv2.LatLng(lat, lon),
@@ -56,12 +60,23 @@ const GuidePage = (props) => {
     function clickMarker(marker, fac){
 
         const key = `${fac.type}_${fac.id}`;
+        const coordinates = `${fac.latitude} ${fac.longitude}`;
+        const type = fac.type;
+        const addr = fac.addr;
 
-        selectedMarkerInMap[key]
-            ? delete selectedMarkerInMap[key]
-            : selectedMarkerInMap[key] = `${fac.latitude} ${fac.longitude}`;
+        setSelectedMarkerInMap((prevMarkers) => {
+            const index = prevMarkers.findIndex((item) => item.key === key);
 
-        console.log(selectedMarkerInMap);
+            if (index !== -1) {
+                // key 값이 존재하면 배열에서 제거
+                const updatedMarkers = [...prevMarkers];
+                updatedMarkers.splice(index, 1);
+                return updatedMarkers;
+            } else {
+                // key 값이 존재하지 않으면 배열에 추가
+                return [...prevMarkers, { key, coordinates, type, addr }];
+            }
+        });
 
         if (fac.type === 'C') {
             marker.setIcon(marker.getIcon() === cctv_b_icon
@@ -85,12 +100,13 @@ const GuidePage = (props) => {
         }
     }
 
-    function drawLine(arrPoint) {
+    function drawLine(arrPoint,stopover) {
         var polyline_;
+        const lineColor = stopover ==='Y'? '#DD0000':'#0000FF';
 
         polyline_ = new Tmapv2.Polyline({
             path : arrPoint,
-            strokeColor : "#DD0000",
+            strokeColor : lineColor,
             strokeWeight : 6,
             map : guideMap
         });
@@ -118,13 +134,14 @@ const GuidePage = (props) => {
 
         if(stopover === 'Y'){
             let passListStr='';
-            for (const key in selectedMarkerInMap) {
-                let coordinates = selectedMarkerInMap[key].split(' ');
+
+            for (const stopover of selectedMarkerInMap) {
+                let coordinates = stopover.coordinates.split(" ");
                 passListStr += `${coordinates[1]},${coordinates[0]}`;
-                if (key !== Object.keys(selectedMarkerInMap).slice(-1)[0]) { //마지막에만 _ 포함하기
-                    passListStr += '_';
-                }
+                passListStr += '_';
             }
+            passListStr = passListStr.slice(0, -1);
+
             console.log('passListStr',passListStr);
             data.passList = passListStr;
         }
@@ -221,7 +238,7 @@ const GuidePage = (props) => {
                         });
                     }
                 }//for문 [E]
-                drawLine(drawInfoArr);
+                drawLine(drawInfoArr,stopover);
             }).catch((error)=> {
                 console.log("error = " + error);
             });
@@ -232,7 +249,8 @@ const GuidePage = (props) => {
 
         console.log('midLat, midLon', guideBasePoint.midLat, guideBasePoint.midLon);
 
-        guideMap.panTo(new Tmapv2.LatLng(guideBasePoint.midLat, guideBasePoint.midLon));
+        //await guideMap.panTo(new Tmapv2.LatLng(guideBasePoint.midLat, guideBasePoint.midLon));
+        guideMap.setCenter(new Tmapv2.LatLng(guideBasePoint.midLat, guideBasePoint.midLon));
         guideMap.zoomOut();
 
     } //callPedestrianAPI() END
@@ -288,6 +306,7 @@ const GuidePage = (props) => {
         ,'callOrderListFacInBoundary' : callOrderListFacInBoundary
         , 'selectedMenu' : props.selectedMenu
         , 'menuVisible' : props.menuVisible
+        , 'selectedMarkerInMap' : selectedMarkerInMap
     }
 
     return (

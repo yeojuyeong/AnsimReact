@@ -8,14 +8,19 @@ const GuideMap =(props)=>{
     const setGuideMap = props.param.setGuideMap;
     const Tmapv2 = props.param.Tmapv2;
 
-    //const { Tmapv2 } = window;
-    //const [map, setMap] = useState(null);
-
-    const minZoom = 17;
-    const maxZoom = 18;
-
     // 최초 맵 생성
     useEffect(() => {
+
+        var mapContainer = document.getElementById('map_container');
+        var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        var mapWidth = screenWidth * 1; // 화면 너비의 80%
+        var mapHeight = screenHeight * 0.7; // 화면 높이의 70%
+
+        mapContainer.style.width = mapWidth + 'px';
+        mapContainer.style.height = mapHeight + 'px';
+
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(position => {
                 const currentLat = position.coords.latitude;
@@ -27,8 +32,10 @@ const GuideMap =(props)=>{
                 // 현재 위치로 지도를 생성.
                 const map = new Tmapv2.Map("map_div", {
                     center: currentLocation,
-                    width: "1750px",
+                    //width: "1750px",
+                    width: mapWidth,
                     height: "89vh",
+                    //height: mapHeight+'px',
                     zoom: 16,
                     zoomControl : true,
                     scrollwheel : true
