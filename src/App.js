@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import Layout from './components/Layout';
 import Nav from './components/Nav';
 import MainPage from "./page/MainPage/MainPage";
-import FacilityPage from "./page/FacilityPage/FacilityPage";
+import InfoPage from "./page/InfoPage/InfoPage";
 import Board from "./page/BoardPage/Board";
 import GuidePage from "./page/GuidePage/GuidePage";
 import MyPage from "./page/MyPage/MyPage";
@@ -14,27 +14,15 @@ import WebSocket from "./components/WebSocket";
 import React, { createContext, useState, useEffect } from 'react';
 
 function App() {
-    const [selectedMenu, setSelectedMenu] = useState(null);
-    const [menuVisible, setMenuVisible] = useState(false);
-    const handleMenuClick = (menu) => {
-        // 현재 선택한 메뉴와 클릭한 메뉴가 같은 경우 닫기.
-        if (selectedMenu === menu && menuVisible) {
-            setSelectedMenu(null);
-            setMenuVisible(false);
-        } else {
-            setSelectedMenu(menu);
-            setMenuVisible(true);
-        }
-    };
 
   return (
         <>
           <Layout>
-              <Nav handleMenuClick={handleMenuClick}/>
+              <Nav />
               <Routes>
                   <Route path="/" element={<MainPage />} />
-                  <Route path="/guide" element={<GuidePage selectedMenu={selectedMenu} menuVisible={menuVisible}/>} />
-                  <Route path="/info" element={<FacilityPage selectedMenu={selectedMenu} menuVisible={menuVisible} />} />
+                  <Route path="/guide" element={<GuidePage />} />
+                  <Route path="/info" element={<InfoPage />} />
                   <Route path="/board/*" element={<Board />} />
                   <Route path="/mypage" element={<MyPage />} />
                   <Route path="/login" element={<Login />} />
@@ -42,7 +30,6 @@ function App() {
                   <Route path="/ws" element={<WebSocket />} />
               </Routes>
           </Layout>
-            <Footer />
         </>
   );
 }

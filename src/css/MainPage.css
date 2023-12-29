@@ -3,33 +3,34 @@
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
-    min-height: calc(100vh - 150px);
+    max-height: 100vh; /* calc(100vh - 150px) */
     position: relative; /* 상대 위치 설정 */
 }
 #map_div {
     flex: 1;
 }
-#sidebar {
-    width: 130px;
-    height: 808px;
-    background-color: #f0f0f0;
-    padding: 20px;
+#sidebar { /*Nav.js*/
+    width: 150px;
+    height: 100vh;
+     background-color: #f0f0f0;
+    /*padding: 20px;*/
     user-select: none;
+    text-align: center;
 }
 #sidebar_menu {
-    display: none;
+display: none;
 }
 #sidebar_menu.open {
-    display: flex; /* 열릴 때 보이도록 */
-    width: 250px;
+  display: flex; /* 열릴 때 보이도록 */
+    width: 350px;
+    max-height: 100vh;
     flex-direction: row; /* 가로로 나열 */
-    padding: 20px;
+    padding: 0 0 0 30px;
 }
 #sidebar ul {
     list-style-type: none;
     padding: 0;
 }
-
 #sidebar li {
     margin-bottom: 10px;
     cursor: pointer;
@@ -43,20 +44,13 @@
 #cardList {
     user-select: none;
     cursor: pointer;
-    max-height: 725px;
     overflow-y: auto;
-}
-
-#cctvCard {
-    width: 228px;
-    height: 130px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #EBF3FF;
-    margin-top: 10px;
+    flex: 1;
+    max-height: 85vh; /* max-height: 725px;*/
+    width: 230px;
 }
 .card_layout {
-    width: 228px;
+    width: auto;
     height: 115px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -74,7 +68,6 @@
     margin-bottom: 3px;
     /*margin-right:10px;*/
 }
-
 .direction_icon, .facility_icon, .board_icon , .mypage_icon {
     font-size: 30px;
     padding-left: 15px;

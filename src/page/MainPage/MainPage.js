@@ -1,5 +1,5 @@
-import './MainPage.css';
-import FacilityPage from '../FacilityPage/FacilityPage';
+import '../../css/MainPage.css';
+import InfoPage from '../InfoPage/InfoPage';
 
 const MainPage = () => {
     return (
