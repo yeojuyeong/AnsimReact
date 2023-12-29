@@ -8,6 +8,7 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
 import {FiLogIn, FiUser} from "react-icons/fi";
 import getCookie from './GetCookie';
+import { IoNotificationsCircle } from "react-icons/io5";
 
 const Nav = () => {
 
@@ -46,6 +47,11 @@ const Nav = () => {
                         </Link>
                     </li>
                 )}
+                <li className="notification_div">
+                    <div className="notification_icon">
+                    <IoNotificationsCircle /> </div>
+                    <div className="counter">2</div>
+                </li>
             </ul>
         </div>
     );

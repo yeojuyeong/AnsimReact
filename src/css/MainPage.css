@@ -72,8 +72,39 @@ display: none;
     font-size: 30px;
     padding-left: 15px;
 }
-.alert {
-    font-size: 30px;
-    padding-left: 20px;
-    margin-top: 350px;
+.notification_icon {
+    font-size: 40px;
+    margin-top: 500px;
+}
+.counter {
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    bottom: 45px;
+    left: 75px;
+}
+.notification_div {
+    position: relative;
+}
+.apply_btn {
+    width: 100px;
+    height: 30px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: bisque;
+    user-select: none;
+    cursor: pointer;
+}
+.notification {
+
 }
