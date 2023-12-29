@@ -26,13 +26,13 @@ const Signup = () => {
     // }
 
     //회원 등록 정보 - state 등록
-    const [user_id, setUser_id] = useState('');
-    const user_idRef = useRef();
+    const [userId, setUserId] = useState('');
+    const userIdRef = useRef();
     const [message, setMessage] = useState('');
-    const user_idChange = async (e) =>{
-        setUser_id(e.target.value);
+    const userIdChange = async (e) =>{
+        setUserId(e.target.value);
         let formData = new FormData();
-        formData.append("user_id",user_idRef.current.value);
+        formData.append("userId",userIdRef.current.value);
         await fetch('http://localhost:8080/member/idCheck',{method : 'POST', body: formData})
             .then((response) => response.json())
             .then((data) => {
@@ -122,7 +122,7 @@ const Signup = () => {
 
         //유효성 검사
         if(imgCheck === 'N') { alert("프로필 이미지를 등록하세요"); return false; }
-        if(user_idRef.current.value === '') { alert("아이디을 입력하세요."); user_idRef.current.focus();  return false; }
+        if(userIdRef.current.value === '') { alert("아이디을 입력하세요."); userIdRef.current.focus();  return false; }
         if(user_nmRef.current.value === '') { alert("이름을 입력하세요."); user_nmRef.current.focus(); return false; }
 
         const Pass = passwordRef.current.value;
@@ -155,7 +155,7 @@ const Signup = () => {
 
         let formData = new FormData();
 
-        formData.append("user_id", user_idRef.current.value);
+        formData.append("userId", userIdRef.current.value);
         formData.append("user_nm", user_nmRef.current.value);
         formData.append("password", passwordRef.current.value);
         formData.append("gender",genderValue);
@@ -199,8 +199,8 @@ const Signup = () => {
                             {imgFile ? <img src={imgFile} alt="회원 프로파일"
                                             style={{width: '350px', height: 'auto'}}/> : "클릭 후 탐색창에서 사진을 선택해 주세요."}
                         </div>
-                        <input type="text" className="input_field" ref={user_idRef} value={user_id}
-                               onChange={(e) => user_idChange(e)} placeholder="아이디"/><br/>
+                        <input type="text" className="input_field" ref={userIdRef} value={userId}
+                               onChange={(e) => userIdChange(e)} placeholder="아이디"/><br/>
                         <span style={{color: 'red'}}>{message}</span>
                         <input type="text" className="input_field" ref={user_nmRef} value={user_nm}
                                onChange={(e) => setUser_nm(e.target.value)} placeholder="이름"/>

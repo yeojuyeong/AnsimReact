@@ -11,7 +11,7 @@ import getCookie from './GetCookie';
 
 const Nav = ({handleMenuClick}) => {
 
-    const accessTokenCookie = getCookie('accessToken');
+    const ifCookie = getCookie('userid');
 
     return (
         
@@ -33,19 +33,33 @@ const Nav = ({handleMenuClick}) => {
                         <BiEdit/>
                     </Link>
                 </li>
-                {accessTokenCookie ? (
+                {/*{ifCookie ? (*/}
+                {/*    <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">*/}
+                {/*        <Link to="/mypage" style={{textDecoration: "none"}}>*/}
+                {/*            <FiUser/>*/}
+                {/*        </Link>*/}
+                {/*    </li>*/}
+                {/*) : (*/}
+                {/*    <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">*/}
+                {/*        <Link to="/Login" style={{textDecoration: "none"}}>*/}
+                {/*            <FiLogIn/>*/}
+                {/*        </Link>*/}
+                {/*    </li>*/}
+                {/*)}*/}
+                {ifCookie &&
                     <li onClick={() => handleMenuClick('마이페이지')} className="mypage_icon">
                         <Link to="/mypage" style={{textDecoration: "none"}}>
                             <FiUser/>
                         </Link>
                     </li>
-                ) : (
+                }
+                {!ifCookie &&
                     <li onClick={() => handleMenuClick('로그인')} className="mypage_icon">
                         <Link to="/Login" style={{textDecoration: "none"}}>
                             <FiLogIn/>
                         </Link>
                     </li>
-                )}
+                }
             </ul>
         </div>
     );

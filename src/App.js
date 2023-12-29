@@ -10,6 +10,8 @@ import MyPage from "./page/MyPage/MyPage";
 import Login from "./page/LoginPage/LoginPage";
 import Signup from "./page/SignupPage/Signup";
 import React, { createContext, useState, useEffect } from 'react';
+import MyPageModify from "./page/MyPage/MyPageModify";
+import PasswordModify from "./page/MyPage/PasswordModify";
 
 function App() {
     const [selectedMenu, setSelectedMenu] = useState(null);
@@ -37,6 +39,8 @@ function App() {
                   <Route path="/mypage" element={<MyPage />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route path="/myPageModify" element={<MyPageModify />} />
+                  <Route path="/passwordModify" element={<PasswordModify />} />
               </Routes>
           </Layout>
         </>

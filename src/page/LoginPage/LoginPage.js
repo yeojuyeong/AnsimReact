@@ -20,7 +20,7 @@ const LoginPage = () =>{
     const cookieManage = (accessToken, refreshToken, user_nm, role) => {
         //user_id 쿠키 등록
         // document.cookie = 'user_id=' + user_id + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'user_id=' + user_id + ';path=/; max-age=3600';
+        document.cookie = 'userid=' + user_id + ';path=/; max-age=3600';
 
         //password 쿠키 등록
         // document.cookie = 'password=' + password + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
@@ -30,14 +30,14 @@ const LoginPage = () =>{
         // document.cookie = 'accessToken=' + accessToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
         document.cookie = 'accessToken=' + accessToken + ';path=/; max-age=3600';
         // document.cookie = 'refreshToken=' + refreshToken + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'refreshToken=' + refreshToken + ';path=/; max-age=18000';
+        // document.cookie = 'refreshToken=' + refreshToken + ';path=/; max-age=18000';
         // } else {
         //     document.cookie = 'accessToken=' + accessToken + ';path=/; max-age=0';
         //     document.cookie = 'refreshToken=' + refreshToken + ';path=/; max-age=0';
         // }
 
-        // document.cookie = 'user_nm=' + decodeURIComponent(user_nm) + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
-        document.cookie = 'user_nm=' + decodeURIComponent(user_nm) + ';path=/; max-age=3600';
+        // document.cookie = 'userName=' + decodeURIComponent(userName) + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
+        document.cookie = 'username=' + decodeURIComponent(user_nm) + ';path=/; max-age=3600';
         // document.cookie = 'role=' + role + ';path=/; expires=Sun, 31 Dec 2023 23:59:59 GMT';
         document.cookie = 'role=' + role + ';path=/; max-age=3600';
     }
