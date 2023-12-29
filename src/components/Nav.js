@@ -44,29 +44,28 @@ const Nav = () => {
                     </Link>
                 </li>
 
-                {useridCookie &&
-                    <li className="mypage_icon">
-                        <Link to="/mypage" style={{textDecoration: "none"}}>
-                            <FiUser/>
-                        </Link>
-                    </li>
+                {useridCookie && (
+                    <>
+                        <li className="mypage_icon">
+                            <Link to="/mypage" style={{ textDecoration: "none" }}>
+                                <FiUser />
+                            </Link>
+                        </li>
+                        <li className="logout_icon">
+                            <Link onClick={logout} style={{ textDecoration: "none" }}>
+                                <FiLogOut />
+                            </Link>
+                        </li>
+                    </>
+                )}
 
-                }
-                {useridCookie &&
-                <li className="logout_icon">
-                    <Link onClick={logout} style={{textDecoration: "none"}}>
-                        <FiLogOut/>
-                    </Link>
-                </li>
-                }
-                {!useridCookie &&
+                {!useridCookie && (
                     <li className="login_icon">
-                        <Link to="/Login" style={{textDecoration: "none"}}>
-                            <FiLogIn/>
+                        <Link to="/Login" style={{ textDecoration: "none" }}>
+                            <FiLogIn />
                         </Link>
                     </li>
-
-                }
+                )}
                 <li className="notification_div">
                     <div className="notification_icon">
                         <IoNotificationsCircle/></div>
