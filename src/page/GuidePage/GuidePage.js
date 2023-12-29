@@ -1,6 +1,6 @@
 import GuideSidebar from "../../components/GuideSidebar";
 import GuideMap from '../../components/GuideMap';
-import './GuidePage.css';
+import '../../css/GuidePage.css';
 import {useState, useRef, useEffect} from "react";
 import cctv_c_icon from "../../images/cctv_c_icon.png";
 import delivery_c_icon from "../../images/delivery_c_icon.png";
@@ -17,7 +17,7 @@ const GuidePage = (props) => {
 
     //console.log("GuidePage 랜더링");
 
-    //Map 사용 변수
+    //InfoMap 사용 변수
     const { Tmapv2 } = window;
     var drawInfoArr = [];
     var resultdrawArr = [];
@@ -304,8 +304,6 @@ const GuidePage = (props) => {
         ,'drawMarker' : drawMarker
         ,'callPedestrianAPI' : callPedestrianAPI
         ,'callOrderListFacInBoundary' : callOrderListFacInBoundary
-        , 'selectedMenu' : props.selectedMenu
-        , 'menuVisible' : props.menuVisible
         , 'selectedMarkerInMap' : selectedMarkerInMap
     }
 

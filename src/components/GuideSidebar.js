@@ -12,9 +12,6 @@ const GuideSidebar =(props)=> {
 
     const [selectedFacOptions, setSelectedFacOptions] = useState([]); // 선택된 안심객체 옵션들을 저장할 상태
 
-    const selectedMenu = props.param.selectedMenu;
-    const menuVisible = props.param.menuVisible;
-
     const guideMap = props.param.guideMap;
     const setGuideBasePoint = props.param.setGuideBasePoint;
     const guideBasePoint = props.param.guideBasePoint;
@@ -182,7 +179,7 @@ const GuideSidebar =(props)=> {
     };
 
     return (
-            <div id="sidebar_menu" className={menuVisible ? 'open' : 'closed'}>
+            <div id="sidebar_menu" className='open'>
                     <div>
                         <h2><FaRoute/> 안심 귀갓길 찾기</h2>
 

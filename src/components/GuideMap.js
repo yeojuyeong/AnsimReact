@@ -34,7 +34,7 @@ const GuideMap =(props)=>{
                     center: currentLocation,
                     //width: "1750px",
                     width: mapWidth,
-                    height: "89vh",
+                    height: "100vh",
                     //height: mapHeight+'px',
                     zoom: 16,
                     zoomControl : true,
