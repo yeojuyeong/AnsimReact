@@ -71,7 +71,7 @@ const BoardView = () => {
             setPre_seqno(data.pre_seqno);
             setNext_seqno(data.next_seqno);
 
-            if (!user_id) {
+            if (!cookie_user_id) {
                 alert('서비스 이용을 위해 로그인해주세요.');
                 window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
             }
