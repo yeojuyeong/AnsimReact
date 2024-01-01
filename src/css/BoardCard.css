@@ -1,3 +1,8 @@
+.btn-primary {
+    color: black;
+    text-decoration: none;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -6,8 +11,12 @@
 }
 
 .grid-item {
-    border: 1px solid black;
+    /*border: 2px solid black;*/
+    border: 2px solid dodgerblue;
+    border-radius: 2px;
     padding: 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .point {

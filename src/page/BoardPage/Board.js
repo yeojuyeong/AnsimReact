@@ -1,6 +1,6 @@
 import BoardList from '../../components/BoardList';
 import BoardWrite from '../../components/BoardWrite';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import React from "react";
 import BoardView from "../../components/BoardView";
 import BoardModify from "../../components/BoardModify";
@@ -13,6 +13,7 @@ const Board = () => {
             <Route path="/write" element={<BoardWrite />} />
             <Route path="/view/*" element={<BoardView />} />
             <Route path="/modify/*" element={<BoardModify />} />
+            <Route path="/" element={<Navigate to="/board/list" />} />
         </Routes>
     )
 

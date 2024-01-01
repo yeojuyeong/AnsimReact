@@ -4,14 +4,17 @@ import dayjs from "dayjs";
 import {Link, useSearchParams} from "react-router-dom";
 
 import '../css/BoardView.css';
+import getCookie from '../components/GetCookie';
 
 const BoardView = () => {
 
     //날짜 기준을 한국으로 지정
     dayjs.locale('ko');
 
-    const [token_user_id, setToken_user_id] = useState('');
-    const [token_stored_file_nm, setToken_stored_file_nm] = useState('');
+    //쿠키 가져 오기
+    const cookie_user_id = getCookie('userid');
+
+    const [cookie_stored_file_nm, setCookie_stored_file_nm] = useState('');
     const [role, setRole] = useState('');
     const [param] = useSearchParams(); // page, keyword, seqno 상태가 들어감.
     const seqno = param.get('seqno');
@@ -43,15 +46,14 @@ const BoardView = () => {
         const fetchData = async() => {
 
             //게시물 상세 보기
-            const response = await axios.get(`http://localhost:8080/restapi/view?seqno=${seqno}&page=${page}&keyword=${keyword}`);
+            const response = await axios.get(`http://localhost:8080/restapi/view?seqno=${seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`);
             const data = response.data;
 
-            setToken_user_id(data.token_user_id);
-            setToken_stored_file_nm(data.token_stored_file_nm);
+            setUser_id(data.view.user_id);
+            setCookie_stored_file_nm(data.cookie_stored_file_nm);
             setRole(data.role);
             setTitle(data.view.title);
             // setMap(view.data.map);
-            setTitle(data.view.title);
             setDeparture(data.view.departure);
             setDestination(data.view.destination);
             setMeeting_time(data.view.meeting_time);
@@ -69,9 +71,14 @@ const BoardView = () => {
             setPre_seqno(data.pre_seqno);
             setNext_seqno(data.next_seqno);
 
-            if (!data.token_stored_file_nm || data.token_stored_file_nm === 'null' || data.token_stored_file_nm === '') {
+            if (!user_id) {
+                alert('서비스 이용을 위해 로그인해주세요.');
+                window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
+            }
+
+            if (!data.cookie_stored_file_nm || data.cookie_stored_file_nm === 'null' || data.cookie_stored_file_nm === '') {
                 alert('프로필 사진을 먼저 등록해주세요.');
-                window.location.href = '#';  // 회원 정보 변경 페이지로
+                window.location.href = 'http://localhost:3000/Mypage';  // 회원 정보 변경 페이지로
             }
 
             // //이전 보기
@@ -108,7 +115,7 @@ const BoardView = () => {
     };
 
     return (
-        <div className="main">
+        <div className="board_main">
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
             <div className="container">
                 <div className="top">
@@ -116,19 +123,24 @@ const BoardView = () => {
                         <div className="map">지도</div>
                     </div>
                     <div className="bigRight">
+                        <br/><br/>
                         <div className="sub-detail-title">{title}</div>
+                        <br/><br/>
                         <div className="sub-detail">
                             <div className="left">{departure}</div>
                             <div className="right">{destination}</div>
                         </div>
+                        <br/><br/>
                         <div className="sub-detail">
                             <div className="left">{meeting_time}</div>
                             <div className="right">인원수 : {mem_cnt}</div>
                         </div>
+                        <br/><br/>
                         <div className="sub-detail">
                             <div className="left">성별 : {gender}</div>
                             <div className="right">대화 : {sound}</div>
                         </div>
+                        <br/><br/>
                     </div>
                 </div>
                 <div className="middle">
@@ -170,20 +182,20 @@ const BoardView = () => {
 
                 <div className="bottom_menu">
                     {
-                        pre_seqno !== '0' && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}`}>이전글▼</Link>
+                        pre_seqno !== '0' && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
                     }
                     &nbsp;&nbsp;
                     <Link to={`/board/list?page=${page}&keyword=${keyword}`}>목록보기</Link>
                     &nbsp;&nbsp;
                     {
-                        next_seqno !== '0' && <Link to={`/board/view?seqno=${next_seqno}&page=${page}&keyword=${keyword}`}>다음글▲</Link>
+                        next_seqno !== '0' && <Link to={`/board/view?seqno=${next_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>다음글▲</Link>
                     }
                     &nbsp;&nbsp;
                     <a href="/board/write">글 작성</a>
                     &nbsp;&nbsp;
-                    {(token_user_id === user_id || role === 'MASTER') && (
+                    {(cookie_user_id === user_id || role === 'MASTER') && (
                         <>
-                            <Link to={`/board/modify?seqno=${seqno}&page=${page}&keyword=${keyword}`}>글 수정</Link>
+                            <Link to={`/board/modify?seqno=${seqno}&page=${page}&keyword=${keyword}&user_id=${user_id}`}>글 수정</Link>
                             &nbsp;&nbsp;
                             <a href='javascript:void(0)' onClick={boardDelete}>글 삭제</a>
                         </>

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-// import getCookie from './GetCookie';
+import React, {useEffect, useState} from "react";
 import {useSearchParams, Link} from 'react-router-dom';
 import dayjs from 'dayjs';
 // import axios from 'axios'; // HTTP 요청을 보내는 라이브러리인 axios를 import합니다.
 import '../css/BoardList.css';
 import BoardCard from "./BoardCard";
+
+import getCookie from '../components/GetCookie';
 
 const BoardList = () => {
     // const [params, setParams] = useSearchParams(); // page, keyword 상태가 들어감.
@@ -12,6 +13,9 @@ const BoardList = () => {
     // const [keyword, setKeyword] = useState(params.get('keyword') === null ? '': params.get('keyword')); // 검색 키워드를 저장할 상태와 그 상태를 변경하는 함수를 선언. 초기값은 빈 문자열.
     // const [list, setList] = useState([]); // 게시물 목록을 저장할 상태와 그 상태를 변경하는 함수를 선언합니다. 초기값은 빈 배열입니다.
     // const [pageList, setPageList] = useState(''); // 화면 하단에 보여지는 페이지리스트의 페이지 갯수
+
+    //쿠키 가져 오기
+    const user_id = getCookie('userid');
 
     const [params, setParams] = useSearchParams(); // page, keyword 상태가 들어감.
     const [list, setList] = useState([]);
@@ -92,13 +96,23 @@ const BoardList = () => {
         //     .then((data) => setList(data.content))
         //     .catch((error)=> { console.log("error = " + error);} );
 
-        const response = await fetch(`http://localhost:8080/restapi/list?page=${page}&keyword=${keyword}`); //API 호출
+        // const response = await fetch(`http://localhost:8080/restapi/list?page=${page}&keyword=${keyword}`, {credentials: 'include'}); //API 호출
+
+        const response = await fetch(`http://localhost:8080/restapi/list?page=${page}&keyword=${keyword}&user_id=${user_id}`); //API 호출
+
+        if (!user_id) {
+            alert('서비스 이용을 위해 로그인해주세요.');
+            window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
+        }
+
         const data = await response.json(); // response.json()을 통해 응답 객체를 JSON 형식의 데이터로 변환
         setList(data.list);
         setPage(data.page);
         setKeyword(data.keyword);
         setPageList(data.pageList);
         // setTotalElement(data.totalElement);
+
+
     };
 
     useEffect(()=> {
@@ -137,17 +151,17 @@ const BoardList = () => {
 
     // 컴포넌트가 렌더링할 JSX를 반환합니다.
     return (
-        <div className="main">
+        <div className="board_main">
             <div className="content">
 
                 <h1 style={{ textAlign: 'center' }}>게시물 목록</h1>
 
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '35px'}}>
-                <input style={{width:'40%',height:'30px',border:'2px solid #168',fontSize: '16px'}}
+                <input className="board_search" style={{width:'40%',height:'30px',border:'2px solid #168',fontSize: '16px'}}
                        type="text" value={keyword} onChange={(e)=> { setPage('1'); setKeyword(e.target.value); }}
                        placeholder="검색할 제목,작성자이름 및 내용을 입력해 주세요"
                        onKeyDown={(e)=> onKeyDown(e)}/>
-                <input style={{width:'5%',height:'30px',background:'#158',color:'white',fontWeight:'bold',
+                <input className="board_search_btn" style={{width:'5%',height:'30px',background:'#158',color:'white',fontWeight:'bold',
                     cursor:'pointer', marginLeft: '10px'}} type="button" value="검색" onClick={Search} />
                 </div>
 
