@@ -43,11 +43,11 @@ const SafetyFacilityReportForm = () => {
                 <label>
                     Facility Type:
                     <input type="text" name="facilityType"
-                           value={ dataOfBreakdownReport &&
+                           value={ dataOfBreakdownReport && dataOfBreakdownReport.type ?
                                     dataOfBreakdownReport.type === 'C' ? 'CCTV' :
                                         dataOfBreakdownReport.type === 'E' ? '비상벨' :
                                             dataOfBreakdownReport.type === 'D' ? '안심 택배함' :
-                                                dataOfBreakdownReport.type === 'S' ? '편의점' : '경찰서'
+                                                dataOfBreakdownReport.type === 'S' ? '편의점' : '경찰서' : ''
                                 }
                            onChange={handleChange} disabled />
                 </label>
