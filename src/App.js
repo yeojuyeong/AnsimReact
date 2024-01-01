@@ -14,7 +14,6 @@ import WebSocket from "./components/WebSocket";
 import React, { createContext, useState, useEffect } from 'react';
 import MyPageModify from "./page/MyPage/MyPageModify";
 import PasswordModify from "./page/MyPage/PasswordModify";
-import SafetyFacilityReportForm from "./components/SafetyFacilityReportForm";
 
 function App() {
 
@@ -33,7 +32,6 @@ function App() {
                   <Route path="/myPageModify" element={<MyPageModify />} />
                   <Route path="/passwordModify" element={<PasswordModify />} />
                   <Route path="/ws" element={<WebSocket />} />
-                  <Route path="/reportForm" element={<SafetyFacilityReportForm />} />
               </Routes>
           </Layout>
         </>

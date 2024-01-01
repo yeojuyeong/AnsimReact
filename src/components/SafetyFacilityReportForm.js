@@ -4,7 +4,12 @@ import {DataContext} from "./DataProvider";
 
 const SafetyFacilityReportForm = () => {
 
-    const { breakdownReportVisible, setBreakdownReportVisible } = useContext(DataContext);
+    const {
+        breakdownReportVisible, setBreakdownReportVisible
+        ,dataOfBreakdownReport, setDataOfBreakdownReport
+    } = useContext(DataContext);
+
+    console.log("SafetyFacilityReportForm > dataOfBreakdownReport ",dataOfBreakdownReport);
 
     const [formData, setFormData] = useState({
         facilityType: '',
@@ -37,40 +42,19 @@ const SafetyFacilityReportForm = () => {
             <form className="facilityReportForm" onSubmit={handleSubmit}>
                 <label>
                     Facility Type:
-                    <input type="text" name="facilityType" value={formData.facilityType} onChange={handleChange} />
+                    <input type="text" name="facilityType"
+                           value={ dataOfBreakdownReport &&
+                                    dataOfBreakdownReport.type === 'C' ? 'CCTV' :
+                                        dataOfBreakdownReport.type === 'E' ? '비상벨' :
+                                            dataOfBreakdownReport.type === 'D' ? '안심 택배함' :
+                                                dataOfBreakdownReport.type === 'S' ? '편의점' : '경찰서'
+                                }
+                           onChange={handleChange} disabled />
                 </label>
-                <br />
-
                 <label>
-                    Location Description:
-                    <textarea name="locationDescription" value={formData.locationDescription} onChange={handleChange} />
+                    Location:
+                    <input name="locationDescription" value={dataOfBreakdownReport && dataOfBreakdownReport.addr} onChange={handleChange} disabled />
                 </label>
-                <br />
-
-                <label>
-                    Issue Details:
-                    <textarea name="issueDetails" value={formData.issueDetails} onChange={handleChange} />
-                </label>
-                <br />
-
-                <label>
-                    Reporter Name:
-                    <input type="text" name="reporterName" value={formData.reporterName} onChange={handleChange} />
-                </label>
-                <br />
-
-                <label>
-                    Contact Info:
-                    <input type="text" name="contactInfo" value={formData.contactInfo} onChange={handleChange} />
-                </label>
-                <br />
-
-                <label>
-                    Photo:
-                    <input type="file" name="photo" onChange={handleChange} />
-                </label>
-                <br />
-
                 <label>
                     Priority:
                     <select name="priority" value={formData.priority} onChange={handleChange}>
@@ -80,14 +64,14 @@ const SafetyFacilityReportForm = () => {
                         <option value="low">Low</option>
                     </select>
                 </label>
-                <br />
-
                 <label>
-                    Agree to Terms:
-                    <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} />
+                    Issue Details:
+                    <textarea name="issueDetails" value={formData.issueDetails} onChange={handleChange}/>
                 </label>
-                <br />
-
+                <label>
+                    Photo:
+                    <input type="file" name="photo" onChange={handleChange}/>
+                </label>
                 <button type="submit">Submit</button>
             </form>
         </div>

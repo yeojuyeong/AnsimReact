@@ -15,8 +15,8 @@ const DataProvider = ({ children }) => {
 
     const [drawedInfoWindow, setDrawedInfoWindow] = useState(null);
     const [map, setMap] = useState(null);
-    const [dataOfDrawedInfoWindow, setDataOfDrawedInfoWindow] = useState('테스트');
     const [breakdownReportVisible, setBreakdownReportVisible] = useState(false);
+    const [dataOfBreakdownReport, setDataOfBreakdownReport] = useState(null);
 
     // 선택한 옵션에 따라 데이터 필터링
     const handleOptionChange = (event) => {
@@ -37,14 +37,14 @@ const DataProvider = ({ children }) => {
     }
 
     const handleBreakdownButtonInCard = (index) => {
-        console.log("고장신고 버튼 눌렀다");
+        //console.log("고장신고 버튼 눌렀다");
         setBreakdownReportVisible(true);
     }
 
     return (
         <DataContext.Provider
             value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, currentPage, dataIndex
-                , handleOptionChange, handleCardClick, drawedInfoWindow, setDrawedInfoWindow, map, setMap, dataOfDrawedInfoWindow, setDataOfDrawedInfoWindow, handleBreakdownButtonInCard
+                , handleOptionChange, handleCardClick, drawedInfoWindow, setDrawedInfoWindow, map, setMap, dataOfBreakdownReport, setDataOfBreakdownReport, handleBreakdownButtonInCard
                 ,breakdownReportVisible, setBreakdownReportVisible
             }}>
             {children}

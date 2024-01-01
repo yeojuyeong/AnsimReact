@@ -24,7 +24,7 @@ const InfoMap = () => {
         ,handleCardClick
         ,drawedInfoWindow,setDrawedInfoWindow
         ,map, setMap
-        ,dataOfDrawedInfoWindow, setDataOfDrawedInfoWindow
+        ,dataOfBreakdownReport, setDataOfBreakdownReport
     } = useContext(DataContext);
     const minZoom = 16;
     const maxZoom = 18;
@@ -320,9 +320,8 @@ const InfoMap = () => {
             //새로운 InfoWindow 넣고
             await setDrawedInfoWindow(infoWindow);
 
-            //리포트 컴포넌트에서 쓸 데이터 셋팅
-            //새로운 InfoWindow 넣고
-            //await setDataOfDrawedInfoWindow(data);
+            //고장신고 Report 컴포넌트에서 사용할 데이터
+            await setDataOfBreakdownReport(data);
 
         }
     }

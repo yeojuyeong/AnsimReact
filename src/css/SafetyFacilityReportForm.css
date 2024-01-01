@@ -1,10 +1,15 @@
 .facilityReportForm {
+    height: auto;
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f0f0f0;
 }
 
 .facilityReportForm label {
@@ -49,5 +54,5 @@
     display: none;
 }
 #SafetyFacilityReportForm.open {
-    display: flex; /* 열릴 때 보이도록 */
+    display: inline-block; /* 열릴 때 보이도록 */
 }
