@@ -8,7 +8,7 @@ import Board from "./page/BoardPage/Board";
 import GuidePage from "./page/GuidePage/GuidePage";
 import MyPage from "./page/MyPage/MyPage";
 import Login from "./page/LoginPage/LoginPage";
-import Signup from "./page/SignupPage/Signup";
+import SignupPage from "./page/SignupPage/SignupPage";
 import Footer from "./components/Footer";
 import WebSocket from "./components/WebSocket";
 import React, { createContext, useState, useEffect } from 'react';
@@ -28,7 +28,7 @@ function App() {
                   <Route path="/board/*" element={<Board />} />
                   <Route path="/mypage" element={<MyPage />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/signup" element={<SignupPage />} />
                   <Route path="/myPageModify" element={<MyPageModify />} />
                   <Route path="/passwordModify" element={<PasswordModify />} />
                   <Route path="/ws" element={<WebSocket />} />

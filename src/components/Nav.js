@@ -44,7 +44,7 @@ const Nav = () => {
                     </Link>
                 </li>
 
-                {useridCookie && (
+                {jwtCookie && (
                     <>
                         <li className="mypage_icon">
                             <Link to="/mypage" style={{ textDecoration: "none" }}>
@@ -59,7 +59,7 @@ const Nav = () => {
                     </>
                 )}
 
-                {!useridCookie && (
+                {!jwtCookie && (
                     <li className="login_icon">
                         <Link to="/Login" style={{ textDecoration: "none" }}>
                             <FiLogIn />
