@@ -6,13 +6,22 @@ import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
-import {FiLogIn, FiUser} from "react-icons/fi";
+import {FiLogIn, FiLogOut, FiUser} from "react-icons/fi";
 import getCookie from './GetCookie';
 import { IoNotificationsCircle } from "react-icons/io5";
 
 const Nav = () => {
 
-    const ifCookie = getCookie('userid');
+    const useridCookie = getCookie('userid');
+    const jwtCookie = getCookie('jwt');
+
+    const logout = () => {
+
+        document.cookie = 'userid=' + useridCookie  + ';path=/; max-age=0';
+        document.cookie = 'jwt=' + jwtCookie + ';path=/; max-age=0';
+        document.location.href="/guide";
+
+    }
 
     return (
         
@@ -35,24 +44,31 @@ const Nav = () => {
                     </Link>
                 </li>
 
-                {ifCookie &&
-                    <li className="mypage_icon">
-                        <Link to="/mypage" style={{textDecoration: "none"}}>
-                            <FiUser/>
-                        </Link>
-                    </li>
-                }
-                {!ifCookie &&
-                    <li className="mypage_icon">
-                        <Link to="/Login" style={{textDecoration: "none"}}>
-                            <FiLogIn/>
-                        </Link>
-                    </li>
+                {useridCookie && (
+                    <>
+                        <li className="mypage_icon">
+                            <Link to="/mypage" style={{ textDecoration: "none" }}>
+                                <FiUser />
+                            </Link>
+                        </li>
+                        <li className="logout_icon">
+                            <Link onClick={logout} style={{ textDecoration: "none" }}>
+                                <FiLogOut />
+                            </Link>
+                        </li>
+                    </>
+                )}
 
-                }
+                {!useridCookie && (
+                    <li className="login_icon">
+                        <Link to="/Login" style={{ textDecoration: "none" }}>
+                            <FiLogIn />
+                        </Link>
+                    </li>
+                )}
                 <li className="notification_div">
                     <div className="notification_icon">
-                    <IoNotificationsCircle /> </div>
+                        <IoNotificationsCircle/></div>
                     <div className="counter">2</div>
                 </li>
             </ul>
