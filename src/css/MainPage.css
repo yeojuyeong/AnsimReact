@@ -68,7 +68,7 @@ display: none;
     margin-bottom: 3px;
     /*margin-right:10px;*/
 }
-.direction_icon, .facility_icon, .board_icon , .mypage_icon {
+.direction_icon, .facility_icon, .board_icon , .mypage_icon, .login_icon,.logout_icon {
     font-size: 30px;
     padding-left: 15px;
 }

@@ -2,8 +2,14 @@ import React, {useState, useEffect, useRef} from 'react';
 import axios from "axios";
 
 import '../css/BoardWrite.css';
+import getCookie from '../components/GetCookie';
 
 const BoardWrite = () => {
+
+    //쿠키 가져 오기
+    const user_id = getCookie('userid');
+    console.log(user_id);
+
     const [title, setTitle] = useState('');
     const [departure, setDeparture] = useState('');
     const [destination, setDestination] = useState('');
@@ -14,7 +20,17 @@ const BoardWrite = () => {
     const [gender, setGender] = useState('');
     const [sound, setSound] = useState('');
     const [content, setContent] = useState('');
-    const [user_id, setUser_id] = useState('');
+    // const [user_id, setUser_id] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleTitleChange = (e) => {
+        if (e.target.value.length > 20) {
+            setErrorMessage('제목은 20자 이내로 써주세요.');
+        } else {
+            setErrorMessage('');
+            setTitle(e.target.value);
+        }
+    };
 
     // 교수님 코드 보고 따라 하긴 했는데 왜 굳이 Ref가 필요한지 모르겠다...
     const titleRef = useRef();
@@ -34,13 +50,19 @@ const BoardWrite = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get('/restapi/write'); //API 호출
+            const response = await axios.get(`/restapi/write?user_id=${user_id}`); //API 호출
             // response.data로 데이터에 직접 접근
             const data = response.data;
-            setUser_id(data.user_id);
+            // setUser_id(data.user_id);
+
+            if (!user_id) {
+                alert('서비스 이용을 위해 로그인해주세요.');
+                window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
+            }
+
             if (!data.stored_file_nm || data.stored_file_nm === 'null' || data.stored_file_nm === '') {
                 alert('프로필 사진을 먼저 등록해주세요.');
-                window.location.href = '#';  // 회원 정보 변경 페이지로
+                window.location.href = 'http://localhost:3000/Mypage';  // 회원 정보 변경 페이지로
             }
         }
         fetchData();
@@ -91,12 +113,13 @@ const BoardWrite = () => {
     };
 
     return (
-        <div className="main">
+        <div className="board_main">
             <h1>게시물 등록</h1>
             <br />
             <div id="formZone">
                 <form className="WriteForm" id="WriteForm" name="WriteForm" method="post">
-                    <input type="text" id="title" className="items" value={title} ref={titleRef} onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력하세요."></input><br /><br />
+                    <input type="text" id="title" className="items" value={title} ref={titleRef} onChange={handleTitleChange} placeholder="제목을 입력하세요."></input><br />{errorMessage &&
+                    <p>{errorMessage}</p>}<br/>
                         <div className="writeContainer">
                             <div className="left-section">
                                 {/*<input type="text" id="departure" class="items" name="departure" th:value='${session.departure}' disabled>*/}

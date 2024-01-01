@@ -1,4 +1,4 @@
-.main{
+.board_main{
     text-align: center;
 }
 
@@ -14,15 +14,15 @@
 
 .top {
     display: flex;
-    flex: 3; /* 상단 영역의 비율을 3으로 설정 */
+    flex: 1.5; /* 상단 영역의 비율을 3으로 설정 */
 }
 
 .middle {
-    flex: 1; /* 중단 영역의 비율을 1로 설정 */
+    flex: .5; /* 중단 영역의 비율을 1로 설정 */
 }
 
 .bottom {
-    flex: 2; /* 하단 영역의 비율을 2로 설정 */
+    flex: 1.5; /* 하단 영역의 비율을 2로 설정 */
 }
 
 .bigLeft {
@@ -49,16 +49,16 @@
     gap: 1rem;
 }
 
-.sub-detail-title {
-    display: flex;
-    flex: 1;
-    gap: 1rem;
-    border-bottom: 2px solid #adadad;
+.title-input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .sub-detail {
     display: flex;
     flex: 1;
+    width: 100%;
     gap: 1rem;
 }
 
@@ -86,19 +86,26 @@
 .bottom_menu{
     margin-top: 20px;
 }
-.bottom_menu > a:link, .bottom_menu .a:visited{
-    background-color: #FFA500;
-    color: maroon;
-    padding: 15px 25px;
-    text-align: center;
+.bottom_menu > a:link, .bottom_menu > a:visited{
     display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
     text-decoration: none;
+    background-color: white;
+    color: dodgerblue;
+    border: 2px solid dodgerblue; /* 기본 테두리 색상 */
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 .bottom_menu > a:hover, .bottom_menu > a:active{
-    background-color: #1E90FF;
-    text-decoration: none;
+    background-color: dodgerblue;
+    border-color: dodgerblue; /* 호버 시 테두리 색상 */
+    color: white;
 }
-
 
 .detail-col {
     display: flex;
