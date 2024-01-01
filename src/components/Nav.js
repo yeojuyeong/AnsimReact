@@ -66,11 +66,11 @@ const Nav = () => {
                         </Link>
                     </li>
                 )}
-                <li className="notification_div">
-                    <div className="notification_icon">
-                        <IoNotificationsCircle/></div>
-                    <div className="counter">2</div>
-                </li>
+                {/*<li className="notification_div">*/}
+                {/*    <div className="notification_icon">*/}
+                {/*        <IoNotificationsCircle/></div>*/}
+                {/*    <div className="counter">2</div>*/}
+                {/*</li>*/}
             </ul>
         </div>
     );
