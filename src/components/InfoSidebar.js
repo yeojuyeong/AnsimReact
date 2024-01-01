@@ -10,6 +10,9 @@ const InfoSidebar = () => {
     const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 상태
     const itemsPerPage = 10; // 한 번에 보여줄 항목 수
 
+    //const { dataOfDrawedInfoWindow, setDataOfDrawedInfoWindow } = useContext(DataContext);
+    //console.log("인포 사이드 랜더링:",dataOfDrawedInfoWindow);
+
     useEffect(() => {
         let data = [];
         switch (selectedOption) {

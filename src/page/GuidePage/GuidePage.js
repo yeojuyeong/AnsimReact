@@ -251,7 +251,7 @@ const GuidePage = (props) => {
 
         //await guideMap.panTo(new Tmapv2.LatLng(guideBasePoint.midLat, guideBasePoint.midLon));
         guideMap.setCenter(new Tmapv2.LatLng(guideBasePoint.midLat, guideBasePoint.midLon));
-        guideMap.zoomOut();
+        //guideMap.zoomOut();
 
     } //callPedestrianAPI() END
 
