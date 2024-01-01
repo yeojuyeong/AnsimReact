@@ -27,6 +27,9 @@ const MyPageModify = () => {
             setGender(memberData.gender || '');
             setMbti(memberData.mbti || '');
             setTel_no(memberData.tel_no || '');
+            setOrg_file_nm(memberData.org_file_nm || '')
+            setStored_file_nm(memberData.stored_file_nm || '')
+            setFile_size(memberData.file_size || '')
 
             // const fileFromPath = (filePath) => {
             //     return new File([new Blob()], filePath);
@@ -79,6 +82,11 @@ const MyPageModify = () => {
     const mbtiRef = useRef();
     const [tel_no, setTel_no] = useState('');
     const tel_noRef = useRef();
+
+    const [org_file_nm, setOrg_file_nm] = useState('');
+    const [stored_file_nm, setStored_file_nm] = useState('');
+    const [file_size, setFile_size] = useState('');
+
 
     //이미지 저장용 state
     const [imgProfile, setImgProfile] = useState('');
@@ -134,6 +142,7 @@ const MyPageModify = () => {
         // 기존 이미지가 없거나, 새로운 이미지를 선택한 경우에만 추가
         console.log("imgProfile: "+imgProfile);
         formData.append('imgProfile', imgProfile);
+        formData.append('stored_file_nm', stored_file_nm);
 
 
         await fetch('http://localhost:8080/member/mypageModify', {
