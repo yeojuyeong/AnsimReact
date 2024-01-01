@@ -1,5 +1,5 @@
 import { useState, useRef} from 'react';
-const Signup = () => {
+const SignupPage = () => {
     const imageZone = {
         border: '2px solid #92AAB0',
         width: '70%',
@@ -12,27 +12,14 @@ const Signup = () => {
         fontSize: '200%'
     }
 
-    // const addrSearchStyle = {
-    //     width: '80%',
-    //     border: 'none',
-    //     borderBottom: '2px solid #adadad',
-    //     margin: '5px',
-    //     padding: '10px 10px',
-    //     outline: 'none',
-    //     color: '#636e72',
-    //     fontSize: '16px',
-    //     height: '25px',
-    //     background: 'none'
-    // }
-
     //회원 등록 정보 - state 등록
-    const [userId, setUserId] = useState('');
-    const userIdRef = useRef();
+    const [user_id, setUser_id] = useState('');
+    const user_idRef = useRef();
     const [message, setMessage] = useState('');
-    const userIdChange = async (e) =>{
-        setUserId(e.target.value);
+    const user_idChange = async (e) =>{
+        setUser_id(e.target.value);
         let formData = new FormData();
-        formData.append("userId",userIdRef.current.value);
+        formData.append("user_id",user_idRef.current.value);
         await fetch('http://localhost:8080/member/idCheck',{method : 'POST', body: formData})
             .then((response) => response.json())
             .then((data) => {
@@ -53,49 +40,12 @@ const Signup = () => {
     const [gender, setGender] = useState('');
     const genderValue = gender;
 
-    // //직업 체크박스
-    // const [disabled, setDisabled] = useState(false);
-    // const data = [
-    //     {id: 0, title: '음악감상'},
-    //     {id: 1, title: '영화보기'},
-    //     {id: 2, title: '스포츠'},
-    // ];
-    // // 체크된 취미 아이템을 담을 배열 --> 취미값이 담기는 배열
-    // const [checkItems, setCheckItems] = useState([]);
-    //
-    // // 체크박스 단일 선택
-    // const handleSingleCheck = (checked, title) => {
-    //     if (checked) {
-    //         // 단일 선택 시 체크된 아이템을 배열에 추가
-    //         setCheckItems(prev => [...prev, title]);
-    //     } else {
-    //         // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
-    //         setCheckItems(checkItems.filter((el) => el !== title));
-    //     }
-    // };
-    // // 체크박스 전체 선택
-    // const handleAllCheck = (checked) => {
-    //     if(checked) {
-    //         // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-    //         const idArray = [];
-    //         data.forEach((el) => idArray.push(el.title));
-    //         setCheckItems(idArray);
-    //     }
-    //     else {
-    //         // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
-    //         setCheckItems([]);
-    //     }
-    // }
 
     const [mbti, setMbti] = useState('');
-    const mbtiRef = useState('');
+    const mbtiRef = useRef();
     const [tel_no, setTel_no] = useState('');
     const tel_noRef = useRef();
-    // const [nickname, setNickname] = useState('');
-    // const nicknameRef = useRef();
     const fromSocial = "N";
-    // const [description, setDescription] = useState('');
-    // const descriptionRef = useRef();
 
     //이미지 저장용 state
     const [imgProfile, setImgProfile] = useState('');
@@ -122,7 +72,7 @@ const Signup = () => {
 
         //유효성 검사
         if(imgCheck === 'N') { alert("프로필 이미지를 등록하세요"); return false; }
-        if(userIdRef.current.value === '') { alert("아이디을 입력하세요."); userIdRef.current.focus();  return false; }
+        if(user_idRef.current.value === '') { alert("아이디을 입력하세요."); user_idRef.current.focus();  return false; }
         if(user_nmRef.current.value === '') { alert("이름을 입력하세요."); user_nmRef.current.focus(); return false; }
 
         const Pass = passwordRef.current.value;
@@ -155,7 +105,7 @@ const Signup = () => {
 
         let formData = new FormData();
 
-        formData.append("userId", userIdRef.current.value);
+        formData.append("user_id", user_idRef.current.value);
         formData.append("user_nm", user_nmRef.current.value);
         formData.append("password", passwordRef.current.value);
         formData.append("gender",genderValue);
@@ -170,13 +120,12 @@ const Signup = () => {
         await fetch('http://localhost:8080/member/signup', {
             method: 'POST',
             body: formData,
-
         }).then((response) => response.json())
             .then((data) => {
                 console.log('회원가입 컨트롤러에 보낸다.')
                 if(data.message === 'GOOD'){
                     alert(decodeURIComponent(data.user_nm) + "님, 회원 가입을 축하 드립니다.");
-                    document.location.href="/guide/route";
+                    document.location.href="/login";
                 } else {
                     alert("서버 장애로 회원 가입에 실패했습니다.");
                 }
@@ -199,8 +148,8 @@ const Signup = () => {
                             {imgFile ? <img src={imgFile} alt="회원 프로파일"
                                             style={{width: '350px', height: 'auto'}}/> : "클릭 후 탐색창에서 사진을 선택해 주세요."}
                         </div>
-                        <input type="text" className="input_field" ref={userIdRef} value={userId}
-                               onChange={(e) => userIdChange(e)} placeholder="아이디"/><br/>
+                        <input type="text" className="input_field" ref={user_idRef} value={user_id}
+                               onChange={(e) => user_idChange(e)} placeholder="아이디"/><br/>
                         <span style={{color: 'red'}}>{message}</span>
                         <input type="text" className="input_field" ref={user_nmRef} value={user_nm}
                                onChange={(e) => setUser_nm(e.target.value)} placeholder="이름"/>
@@ -222,21 +171,7 @@ const Signup = () => {
                                    onChange={(e) => setGender(e.target.value)}/><label htmlFor="male">남성</label>
                             <input type="radio" id="female" name="gender" value="여성"
                                    onChange={(e) => setGender(e.target.value)}/><label htmlFor="female">여성</label><br/>
-                            {/*취미 :*/}
-                            {/*<input type='checkbox' name='select-all' id="all"*/}
-                            {/*       onChange={(e) => handleAllCheck(e.target.checked)}*/}
-                            {/*    // 데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)*/}
-                            {/*       checked={checkItems.length === data.length ? true : false}/><label*/}
-                            {/*htmlFor="all">전체선택</label>*/}
-                            {/*{data.map((data, key) => (*/}
-                            {/*    <span key={key}>*/}
-                            {/*        <input type='checkbox' id={`${data.id}`} name={`select-${data.title}`}*/}
-                            {/*               onChange={(e) => handleSingleCheck(e.target.checked, data.title)}*/}
-                            {/*            // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제*/}
-                            {/*               checked={checkItems.includes(data.title) ? true : false}/><label*/}
-                            {/*        htmlFor={`${data.id}`}>{data.title}</label>*/}
-                            {/*    </span>*/}
-                            {/*))}*/}
+
                             <br/>
                             MBTI :
                             <select onChange={(e) => setMbti(e.target.value)} value={mbti} ref={mbtiRef}>
@@ -262,15 +197,7 @@ const Signup = () => {
                         </div>
                         <input type="text" value={tel_no} ref={tel_noRef} onChange={(e) => setTel_no(e.target.value)}
                                className="input_field" placeholder="전화번호를 입력하세요."/>
-                        {/*<input type="text" value={nickname} ref={nicknameRef}*/}
-                        {/*       onChange={(e) => setNickname(e.target.value)} className="input_field"*/}
-                        {/*       placeholder="별명을 입력하세요."/>*/}
-                        {/*<p style={{color: 'red'}}>일반 사용자 권한으로 등록됩니다.</p>*/}
                         <br/>
-                        {/*<textarea className="input_content" value={description} ref={descriptionRef}*/}
-                        {/*          onChange={(e) => setDescription(e.target.value)}*/}
-                        {/*          cols="100" rows="500" name="description" placeholder="자기소개를 입력해 주세요.">*/}
-                        {/*</textarea><br/>*/}
                         <input type="button" className="btn_write" onClick={handleRegister} value="여기를 클릭하세요!!!"/>
 
                     </div>
@@ -280,4 +207,4 @@ const Signup = () => {
         </>
     )
 }
-export default Signup;
+export default SignupPage;

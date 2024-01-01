@@ -1,0 +1,76 @@
+.myPageMain{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin: 15% 25% 0 25%;
+    padding: 45px 60px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px 2px darkgray;
+}
+
+.imgView {
+    position: relative;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    padding: 20px;
+    border: none;
+}
+
+.imgView::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 부모 요소의 가로 너비에 비례하는 높이를 설정 */
+}
+
+.imgBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.field{
+    margin: 20px 0;
+}
+
+.myPageBtnDiv {
+    width: 300px; /* 원하는 크기로 설정 */
+    height: 40px;
+    border: 1px solid darkgray;
+    border-radius: 8px;
+    overflow: hidden; /* 내부 컨텐츠가 부모 크기를 벗어나지 않도록 함 */
+    text-align: center;
+    line-height: 40px;
+}
+
+.myPageBtn {
+    width: 100%; /* 부모 크기에 맞추어지도록 설정 */
+    height: 100%;
+    border: none;
+    color: black;
+    font-size: 100%;
+    text-decoration: none;
+    display: block; /* 인라인 요소가 블록 요소로 변환되도록 함 */
+}
+
+.myPageBtn:hover{
+    cursor: pointer;
+    background-color: lightsteelblue;
+    border: none;
+    color: white;
+}
+
+
+
+
+
+
+

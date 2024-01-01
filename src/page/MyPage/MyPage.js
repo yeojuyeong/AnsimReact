@@ -1,3 +1,4 @@
+import '../../css/MyPage.css';
 import { Link } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -21,47 +22,42 @@ const MyPage = () => {
 
     },[userCookie]);
 
-    if (userCookie == null) {
-        <Link to="http://localhost:3000/Login" />
+    if (!userCookie) {
+        document.location.href='/guide';
     }
 
     return (
         <>
             <div>
-
-                <div className='main'>
-                    <h1>회원 정보 보기</h1>
+                <div className='myPageMain'>
+                    <h1>마이페이지</h1>
                     <br/>
-                    <div className="boardView">
-                        <div className="imgView" style={{
-                            "width": "80%",
-                            "height": "auto",
-                            "margin": "auto",
-                            "padding": "20px",
-                            "border": "none"
-                        }}><img src={"http://localhost:8080/profile/" + member.stored_file_nm}
-                                style={{"display": "block", "width": "100%", "height": "auto", "margin": "auto"}}
-                                alt="사용자"/></div>
+                    <div className="myPageInfo">
+                        <div className="imgView">
+                            {member.stored_file_nm ? (
+                                <img className="imgBox" src={"http://localhost:8080/profile/" + member.stored_file_nm}
+                                     alt="사용자"/>
+                            ) : (
+                                <img className="imgBox" src="/images/steak1.png" alt="사용자"/>
+                            )}
+                        </div>
+                        <br/>
                         <div className="field">아이디 : {member.user_id}</div>
                         <div className="field">이름 : {member.user_nm}</div>
                         <div className="field">성별 : {member.gender}</div>
                         <div className="field">MBTI : {member.mbti}</div>
                         <div className="field">전화번호 : {member.tel_no}</div>
-                    </div>
-
-                    <br/>
-                    <div className="bottom_menu" align="center">
-                        &nbsp;&nbsp;
-                        <Link to="/myPageModify">기본정보 변경</Link> &nbsp;&nbsp;
+                    </div><br/>
+                    <div>
+                        <div className="myPageBtnDiv">
+                        <Link to="/myPageModify" className="myPageBtn">기본정보 변경</Link></div> &nbsp;&nbsp;
                         {/* fromSocial이 'Y'인 경우에만 링크를 보여줌 */}
                         {member.fromSocial !== 'Y' &&
-                            <Link to="/passwordModify">패스워드 변경</Link>}&nbsp;&nbsp;
+                         <div className="myPageBtnDiv"><Link to="/passwordModify" className="myPageBtn">패스워드 변경</Link></div>}&nbsp;&nbsp;
                     </div>
                     <br/><br/>
-                   
                 </div>
             </div>
-
         </>
     )
 }

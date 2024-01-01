@@ -51,7 +51,7 @@ display: none;
 }
 .card_layout {
     width: auto;
-    height: 115px;
+    height: auto;
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #EBF3FF;
