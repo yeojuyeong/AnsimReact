@@ -1,36 +1,46 @@
-.myPageMain{
+.myPageModifyMain{
     width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: auto;
-    margin: 15% 25% 0 25%;
+    margin: 5% 25% 0 25%;
     padding: 45px 60px;
     border-radius: 8px;
     box-shadow: 1px 1px 3px 2px darkgray;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.MyPageTitle{
+
+.myPageModifyTitle{
     color: dodgerblue;
 }
 
-.imgView {
+.myPageModifyImgView{
     position: relative;
-    width: 80%;
+    width: 50%;
     height: auto;
     margin: auto;
     padding: 20px;
-    border: none;
+    /*border: none;*/
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.imgView::before {
+.myPageModifyImgView::before {
     content: "";
     display: block;
     padding-top: 100%; /* 부모 요소의 가로 너비에 비례하는 높이를 설정 */
 }
 
-.imgBox {
+.MyPageModifyImgBox{
     position: absolute;
     top: 0;
     left: 0;
@@ -41,24 +51,30 @@
     overflow: hidden;
 }
 
-.field{
-    margin: 20px 0;
-}
-
-.myPageBtnDiv {
-    width: 300px; /* 원하는 크기로 설정 */
-    height: 40px;
-    border: 1px solid darkgray;
+.ModifyField{
+    margin-left: 15px;
+    border: 1px solid gainsboro;
+    width: 270px;
+    height: 30px;
     border-radius: 8px;
-    overflow: hidden; /* 내부 컨텐츠가 부모 크기를 벗어나지 않도록 함 */
-    text-align: center;
-    line-height: 40px;
+    padding-left: 10px;
 }
 
-.myPageBtn {
-    width: 50%;
-    height: 27px;
-    line-height: 27px;
+.optionField{
+    margin-left: 25px;
+    border: 1px solid gainsboro;
+    width: 285px;
+    height: 30px;
+    border-radius: 8px;
+    padding-left: 10px;
+}
+
+
+
+.myPageModifyBtn {
+    width: 90%;
+    display: inline-block;
+    margin: 10px 5px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -70,9 +86,10 @@
     border-radius: 2px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
 }
 
-.myPageBtn:hover{
+.myPageModifyBtn:hover{
     background-color: dodgerblue;
     border-color: dodgerblue; /* 호버 시 테두리 색상 */
     color: white;

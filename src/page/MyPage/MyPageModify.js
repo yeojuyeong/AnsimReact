@@ -1,3 +1,4 @@
+import '../../css/MyPageModify.css';
 import {useState, useRef, useEffect} from 'react';
 import getCookie from '../../components/GetCookie';
 import {useNavigate} from 'react-router-dom';
@@ -50,19 +51,6 @@ const MyPageModify = () => {
 
     const handleGenderChange = (e) => {
         setGender(e.target.value);
-    }
-
-
-    const imageZone = {
-        border: '2px solid #92AAB0',
-        width: '70%',
-        height: 'auto',
-        color: '#92AAB0',
-        textAlign: 'center',
-        verticalAlign: 'middle',
-        margin: 'auto',
-        padding: '10px 10px',
-        fontSize: '200%'
     }
 
 
@@ -159,8 +147,6 @@ const MyPageModify = () => {
                 }
             });
 
-
-
     }
     const goBack = () => {
         navigate(-1);
@@ -168,52 +154,37 @@ const MyPageModify = () => {
     return(
         <>
             <div>
-
-                <form className="WriteForm">
-                    <h1>수정</h1><br/>
-                    <div id="RegistryForm">
-                        <br/><br/>
-                        {/*<input type="file" name="fileUpload" ref={fileEventRef} onChange={(e) => fileEventChange(e)}*/}
-                        {/*       style={{display: 'none'}}/>*/}
-                        {/*<div className="imageZone" style={imageZone} ref={imgZoneRef} onClick={(e) => imgZoneClick(e)}>*/}
-                        {/*    {imgFile ? <img src={imgFile} alt="회원 프로파일"*/}
-                        {/*                    style={{width: '350px', height: 'auto'}}/> : "클릭 후 탐색창에서 사진을 선택해 주세요."}*/}
-                        {/*</div>*/}
+                <form className="myPageModifyMain">
+                    <h1 className="myPageModifyTitle">수정</h1><br/>
+                    <div>
                         <input
+                            className="myPageInputImage"
                             type="file"
                             name="fileUpload"
                             ref={fileEventRef}
                             onChange={(e) => fileEventChange(e)}
                             style={{display: 'none'}}
                         />
-                        <div className="imageZone" style={imageZone} ref={imgZoneRef} onClick={(e) => imgZoneClick(e)}>
+                        <div className="myPageModifyImgView" ref={imgZoneRef} onClick={(e) => imgZoneClick(e)}>
                             {imgFile ? (
-                                <img src={imgFile} alt="회원 프로파일" style={{width: '350px', height: 'auto'}}/>
+                                <img className="MyPageModifyImgBox" src={imgFile} alt="회원 프로파일" />
                             ) : member.stored_file_nm ? (
-                                <img
+                                <img className="MyPageModifyImgBox"
                                     src={`http://localhost:8080/profile/${member.stored_file_nm}`}
                                     alt="회원 프로파일"
-                                    style={{width: '350px', height: 'auto'}}
                                 />
                             ) : (
-                                "클릭 후 탐색창에서 사진을 선택해 주세요."
+                                "여기를 클릭 후 탐색창에서 사진을 선택해 주세요."
                             )}
-                        </div>
-                        <input type="hidden" className="input_field" ref={user_idRef} value={user_id}/><br/>
+                        </div><br />
+                        <input type="hidden" className="ModifyField" ref={user_idRef} value={user_id}/><br/>
                         <span style={{color: 'red'}}>{message}</span>
-                        <input type="text" className="input_field" ref={user_nmRef} value={user_nm}
+                        <div> Name :
+                        <input type="text" className="ModifyField" ref={user_nmRef} value={user_nm}
                                onChange={(e) => setUser_nm(e.target.value)}/>
-
-                        <div style={{
-                            width: '90%',
-                            textAlign: 'left',
-                            position: 'relative',
-                            left: '35px',
-                            borderBottom: '2px solid #adadad',
-                            margin: '10px',
-                            padding: '10px'
-                        }}>
-                            성별:
+                        </div><br />
+                        <div>
+                            Gender:
                             {["여성", "남성", "FTM(Female to male)", "MTF(Male to Female)"].map((option) => (
                                 <label key={option}>
                                     <input
@@ -225,28 +196,31 @@ const MyPageModify = () => {
                                     {option}
                                 </label>
                             ))}
-                            <br/>
-                            MBTI :
-                            <select onChange={(e) => setMbti(e.target.value)} value={mbti} ref={mbtiRef}>
-                                {["ISTJ", "ISTP", "ISFJ", "ISFP", "INFJ", "INTJ", "INFP", "INTP", "ESTJ", "ESFP", "ESFJ", "ESTP", "ENFP", "ENTP", "ENFJ", "ENTJ"]
-                                    .map((option) => (
-                                        <option key={option} value={option}>
-                                            {option}
-                                        </option>
-                                    ))}
-                            </select>
-                            <br/>
+                            <br/><br/>
+                            <div>
+                                MBTI :
+                                <select className="optionField" onChange={(e) => setMbti(e.target.value)} value={mbti} ref={mbtiRef}>
+                                    {["ISTJ", "ISTP", "ISFJ", "ISFP", "INFJ", "INTJ", "INFP", "INTP", "ESTJ", "ESFP", "ESFJ", "ESTP", "ENFP", "ENTP", "ENFJ", "ENTJ"]
+                                        .map((option) => (
+                                            <option  key={option} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                </select>
+                            </div><br />
                         </div>
+                        <div>Phone :
                         <input
                             type="text"
-                            className="input_field"
+                            className="ModifyField"
                             ref={tel_noRef}
                             value={tel_no}
                             onChange={(e) => setTel_no(e.target.value)}
                         />
+                        </div>
                         <br/>
-                        <input type="button" className="btn_write" onClick={handleRegister} value="여기를 클릭하세요!!!"/>
-                        <input type="button" id="btnCancel" className="btn_cancel" value="취소" onClick={goBack}/>
+                        <input type="button" className="myPageModifyBtn" onClick={handleRegister} value="수정"/>
+                        {/*<input type="button" id="btnCancel" className="myPageBtn" value="취소" onClick={goBack}/>*/}
                     </div>
                 </form>
                 <br/><br/>

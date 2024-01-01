@@ -30,8 +30,7 @@ const MyPage = () => {
         <>
             <div>
                 <div className='myPageMain'>
-                    <h1>마이페이지</h1>
-                    <br/>
+                    <h1 className="MyPageTitle">마이페이지</h1><br/>
                     <div className="myPageInfo">
                         <div className="imgView">
                             {member.stored_file_nm ? (
@@ -47,16 +46,17 @@ const MyPage = () => {
                         <div className="field">성별 : {member.gender}</div>
                         <div className="field">MBTI : {member.mbti}</div>
                         <div className="field">전화번호 : {member.tel_no}</div>
-                    </div><br/>
-                    <div>
-                        <div className="myPageBtnDiv">
-                        <Link to="/myPageModify" className="myPageBtn">기본정보 변경</Link></div> &nbsp;&nbsp;
-                        {/* fromSocial이 'Y'인 경우에만 링크를 보여줌 */}
-                        {member.fromSocial !== 'Y' &&
-                         <div className="myPageBtnDiv"><Link to="/passwordModify" className="myPageBtn">패스워드 변경</Link></div>}&nbsp;&nbsp;
                     </div>
+                    <br/>
+
+                        <Link to="/myPageModify" className="myPageBtn">기본정보 변경</Link></div>
+                        &nbsp;&nbsp;
+                        {/* fromSocial이 'Y'인 경우에만 링크를 보여줌 */}
+                        {/*{member.fromSocial !== 'Y' &&*/}
+                        {/* <div className="myPageBtnDiv"><Link to="/passwordModify" className="myPageBtn">패스워드 변경</Link></div>}&nbsp;&nbsp;*/}
+
                     <br/><br/>
-                </div>
+
             </div>
         </>
     )
