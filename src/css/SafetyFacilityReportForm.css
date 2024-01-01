@@ -1,0 +1,53 @@
+.facilityReportForm {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.facilityReportForm label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.facilityReportForm input,
+.facilityReportForm textarea,
+.facilityReportForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.facilityReportForm textarea {
+    resize: vertical;
+}
+
+.facilityReportForm button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.facilityReportForm button:hover {
+    background-color: #45a049;
+}
+
+/* Optional: Style for the terms checkbox */
+.facilityReportForm input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#SafetyFacilityReportForm {
+    display: none;
+}
+#SafetyFacilityReportForm.open {
+    display: flex; /* 열릴 때 보이도록 */
+}
