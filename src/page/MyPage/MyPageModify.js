@@ -183,10 +183,10 @@ const MyPageModify = () => {
                         <input type="text" className="ModifyField" ref={user_nmRef} value={user_nm}
                                onChange={(e) => setUser_nm(e.target.value)}/>
                         </div><br />
-                        <div>
-                            Gender:
+                        <div className="genderOptionDiv">
+                            Gender :
                             {["여성", "남성", "FTM(Female to male)", "MTF(Male to Female)"].map((option) => (
-                                <label key={option}>
+                                <label className="genderOptionLabel" key={option}>
                                     <input
                                         type="radio"
                                         value={option}

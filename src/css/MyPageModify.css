@@ -69,6 +69,13 @@
     padding-left: 10px;
 }
 
+.genderOptionDiv{
+    margin: 0 4%;
+}
+
+.genderOptionLabel{
+    margin-left: 20px;
+}
 
 
 .myPageModifyBtn {
