@@ -41,6 +41,9 @@ const BoardView = () => {
     const [pre_seqno, setPre_seqno] = useState(0);
     const [next_seqno, setNext_seqno] = useState(0);
 
+    // 동행 신청
+    const [list, setList] = useState([]);
+
     useEffect(()=> {
 
         const fetchData = async() => {
@@ -70,6 +73,8 @@ const BoardView = () => {
 
             setPre_seqno(data.pre_seqno);
             setNext_seqno(data.next_seqno);
+
+            setList(data.applicant_list);
 
             if (!cookie_user_id) {
                 alert('서비스 이용을 위해 로그인해주세요.');
@@ -112,6 +117,27 @@ const BoardView = () => {
                 console.log("error = " + error);
             });
         }
+    };
+
+    // 동행 신청
+    const application = () => {
+        const seqno = param.get('seqno');
+
+        fetch(`http://localhost:8080/restapi/view?post_no=${seqno}&applicant=${cookie_user_id}&writer=${user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                console.log(data.message);
+                if(data.message === 'GOOD') {
+                    alert('동행 신청이 완료되었습니다.')
+                    document.location.href = `http://localhost:3000/board/view?seqno=${seqno}&page=${page}&keyword=${keyword}`;
+                } else if(data.message === 'EXISTED') {
+                    alert('이미 동행을 신청하였습니다.');
+                    document.location.href = `http://localhost:3000/board/view?seqno=${seqno}&page=${page}&keyword=${keyword}`;
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
     };
 
     return (
@@ -173,6 +199,54 @@ const BoardView = () => {
                 <div className="bottom">
                     <div className="info">{content}</div>
                 </div>
+                {(cookie_user_id !== user_id) && (
+                    // <div className="bottom_menu">
+                    //     <a href="#">동행 신청</a>
+                    // </div>
+                    <input type="button" className="bottom_menu" value="동행 신청" onClick={application}/>
+                )}
+                {(cookie_user_id === user_id && list.length > 0) && (
+                    list.map((item, index) => (
+                        <React.Fragment>
+                            <div className="applicant_list">
+                                <div className="listLeft">
+                                    <div className="detail-col"><img src={`/profile/${item.stored_file_nm}`} style={{
+                                        display: 'block',
+                                        width: '80%',
+                                        height: 'auto',
+                                        margin: 'auto'
+                                    }}/></div>
+                                </div>
+                                <div className="listMiddle">
+                                    <div className="detailTop">
+                                        <div className="detail-col">
+                                            <div>이름 : {item.user_nm}</div>
+                                        </div>
+                                        <div className="detail-col">
+                                            <div>나이 : {item.age}</div>
+                                        </div>
+                                        <div className="detail-col">
+                                            <div>MBTI : {item.mbti}</div>
+                                        </div>
+                                    </div>
+                                    <div className="detailBottom">
+                                        <div className="detail-col">
+                                            <div>성별 : {item.gender}</div>
+                                        </div>
+                                        <div className="detail-col-full">
+                                            <div>동행 포인트 : {item.ansim_cnt}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="listRight">
+                                    <input type="button" className="accept" value="수락"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="button" className="deny" value="거절"
+                                           onClick={() => window.history.back()}/>
+                                </div>
+                            </div> <br/>
+                        </React.Fragment>
+                    ))
+                )}
             </div>
             <br />
 
