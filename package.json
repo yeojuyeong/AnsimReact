@@ -22,7 +22,8 @@
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
     "styles": "^0.2.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.21"
   },
   "proxy": "http://localhost:8080",
   "scripts": {
