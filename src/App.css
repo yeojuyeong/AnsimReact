@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'TheJamsil5Light';
+  src: url('./fonts/The-Jamsil-OTF-2-Light.woff') format('woff2');
+}
+@font-face {
+  font-family: 'TheJamsil5Bold';
+  src: url('./fonts/The-Jamsil-OTF-4-Medium.woff') format('woff2');
+}

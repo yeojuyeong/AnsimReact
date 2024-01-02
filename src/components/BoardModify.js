@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {useSearchParams} from "react-router-dom";
-
+import '../css/BoardModify.css';
 import getCookie from '../components/GetCookie';
 
 
@@ -143,11 +143,11 @@ const BoardModify = () => {
     }
 
     return (
-        <div className="board_main">
+        <div className="board_modi_view">
             <form id="ModifyForm" className="ModifyForm" name="ModifyForm" method="post">
                 <h1 style={{textAlign: "center"}}>게시물 수정하기</h1>
                 <br/>
-                    <div className="container">
+                    <div className="modi_container">
                         {/*<input type="hidden" id="seqno" name="seqno" th:value="${view.seqno}">*/}
                         {/*    <input type="hidden" id="page" name="page" th:value="${page}">*/}
                         {/*        <input type="hidden" id="keyword" name="keyword" th:value="${keyword}">*/}
@@ -155,24 +155,24 @@ const BoardModify = () => {
                                         <div className="bigLeft">
                                             <div className="map">지도</div>
                                         </div>
-                                        <div className="bigRight">
+                                        <div className="modi_bigRight">
                                             <br/><br/>
-                                            <input type="text" id="title" style={{border: 'none', borderBottom: '2px solid #adadad', width: '96%'}} className="title-input" name="title"
+                                            <input type="text" id="title" className="title-input" name="title"
                                                    value={title} ref={titleRef}
                                                    onChange={(e) => setTitle(e.target.value)}/>
                                             <br/><br/>
                                             <div className="sub-detail">
-                                                <input type="text" style={{border: 'none', borderBottom: '2px solid #adadad'}} id="departure" className="left" name="departure"
+                                                <input type="text" id="departure" className="modi_left" name="departure"
                                                        value={departure} ref={departureRef}
                                                        onChange={(e) => setDeparture(e.target.value)}/>
-                                                <input type="text" style={{border: 'none', borderBottom: '2px solid #adadad'}} id="destination" className="right" name="destination"
+                                                <input type="text" id="destination" className="modi_right" name="destination"
                                                        value={destination} ref={destinationRef}
                                                        onChange={(e) => setDestination(e.target.value)}/>
                                             </div>
                                             <br/><br/>
                                             <div className="sub-detail">
                                                 <div className="left">
-                                                    <div className="date-time-selector">
+                                                    <div className="date_time_selector">
                                                         <label htmlFor="date">날짜:</label>
                                                         <input name="date" type="date" id="date" value={date}
                                                                onChange={(e) => setDate(e.target.value)}/>
@@ -185,7 +185,7 @@ const BoardModify = () => {
                                                                onChange={(e) => setMeeting_time(e.target.value)}/>
                                                     </div>
                                                 </div>
-                                                <div className="right">
+                                                <div className="modi_memcnt">
                                                     인원수 :
                                                     <select onChange={(e) => setMem_cnt(e.target.value)} value={mem_cnt}
                                                             ref={mem_cntRef}>
@@ -198,7 +198,7 @@ const BoardModify = () => {
                                             </div>
                                             <br/><br/>
                                             <div className="sub-detail">
-                                                <div className="left">
+                                                <div className="modi_left">
                                                     성별 :
 
                                                     {[
@@ -238,10 +238,12 @@ const BoardModify = () => {
                                             <br/><br/>
                                         </div>
                                     </div>
-                                    <div className="middle">
+                                    <div className="modi_middle">
                                         <div className="details">
                                             <div className="detailLeft">
-                                                <div className="detail-col"><img src={`/profile/${stored_file_nm}`} style={{ display: 'block', width: '80%', height: 'auto', margin: 'auto' }} /></div>
+                                                <div className="detail-col">
+                                                    <img src={`/profile/${stored_file_nm}`} />
+                                                </div>
                                             </div>
                                             <div className="detailRight">
                                                 <div className="detailTop">
@@ -249,25 +251,22 @@ const BoardModify = () => {
                                                         <div>이름 : {user_nm}</div>
                                                     </div>
                                                     <div className="detail-col">
-                                                        <div>나이 : {age}</div>
-                                                    </div>
-                                                    <div className="detail-col">
                                                         <div>MBTI : {mbti}</div>
                                                     </div>
                                                 </div>
                                                 <div className="detailBottom">
                                                     <div className="detail-col">
-                                                        <div>성별 : {mem_gender}</div>
+                                                        <div className="gender">성별 : {mem_gender}</div>
                                                     </div>
-                                                    <div className="detail-col-full">
-                                                        <div>동행 횟수 : {ansim_cnt}</div>
+                                                    <div className="detail-col">
+                                                        <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="bottom">
-                                        <textarea name="content" className="info" id="content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)}></textarea>
+                                    <div className="modi_bottom">
+                                        <textarea name="content" className="modi_info" id="content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)}></textarea>
                                         {/*<input type="hidden" name="user_id" th:value="${session.user_id}"></input>*/}
 
                                         {/*<input type="hidden" name="departure_LATITUDE" th:value="${departure_LATITUDE}"></input>*/}
@@ -278,9 +277,10 @@ const BoardModify = () => {
                                     </div>
                     </div>
                     <br />
-
-                        <input type="button" className="btn_write"  value="수정" onClick={modifyForm} />
-                        <input type="button" className="btn_cancel"  value="취소" onClick={() => window.history.back()} />
+                    <div style={{ textAlign: 'center' }}>
+                        <input type="button" className="btn_modi"  value="수정" onClick={modifyForm} />
+                        <input type="button" className="btn_modicancel"  value="취소" onClick={() => window.history.back()} />
+                     </div>
             </form>
         </div>
             )

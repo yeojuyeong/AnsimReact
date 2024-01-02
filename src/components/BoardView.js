@@ -115,15 +115,15 @@ const BoardView = () => {
     };
 
     return (
-        <div className="board_main">
+        <div className="board_view">
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
-            <div className="container">
+            <div className="view_container">
                 <div className="top">
                     <div className="bigLeft">
                         <div className="map">지도</div>
                     </div>
                     <div className="bigRight">
-                        <br/><br/>
+                        <br/>
                         <div className="sub-detail-title">{title}</div>
                         <br/><br/>
                         <div className="sub-detail">
@@ -146,7 +146,9 @@ const BoardView = () => {
                 <div className="middle">
                     <div className="details">
                         <div className="detailLeft">
-                            <div className="detail-col"><img src={`/profile/${stored_file_nm}`} style={{ display: 'block', width: '80%', height: 'auto', margin: 'auto' }} /></div>
+                            <div className="detail-col">
+                                <img src={`/profile/${stored_file_nm}`} />
+                            </div>
                         </div>
                         <div className="detailRight">
                             <div className="detailTop">
@@ -154,18 +156,15 @@ const BoardView = () => {
                                     <div>이름 : {user_nm}</div>
                                 </div>
                                 <div className="detail-col">
-                                    <div>나이 : {age}</div>
-                                </div>
-                                <div className="detail-col">
                                     <div>MBTI : {mbti}</div>
                                 </div>
                             </div>
                             <div className="detailBottom">
                                 <div className="detail-col">
-                                    <div>성별 : {mem_gender}</div>
+                                    <div className="gender">성별 : {mem_gender}</div>
                                 </div>
-                                <div className="detail-col-full">
-                                    <div>동행 횟수 : {ansim_cnt}</div>
+                                <div className="detail-col">
+                                    <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
                                 </div>
                             </div>
                         </div>
@@ -173,9 +172,6 @@ const BoardView = () => {
                 </div>
                 <div className="bottom">
                     <div className="info">{content}</div>
-                </div>
-                <div className="bottom_menu">
-                    <a href="#">채팅 하기</a>
                 </div>
             </div>
             <br />
@@ -201,7 +197,6 @@ const BoardView = () => {
                         </>
                     )}
                 </div>
-
         </div>
     )
 }

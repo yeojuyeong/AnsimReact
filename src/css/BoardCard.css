@@ -13,7 +13,7 @@
 .grid-item {
     /*border: 2px solid black;*/
     border: 2px solid dodgerblue;
-    border-radius: 2px;
+    border-radius: 10px;
     padding: 1rem;
     position: relative;
     overflow: hidden;
@@ -26,7 +26,11 @@
 
 .card-body {
     position: relative;
-    /* 기타 카드 스타일 */
+    font-family: 'TheJamsil5Light';
+}
+h3 {
+    font-family: 'TheJamsil5Bold';
+    letter-spacing: 1px;
 }
 
 .badge-container {
@@ -39,4 +43,190 @@
 .badge-container img {
     width: 100%;
     height: auto; /* 가로 크기에 맞춰서 세로 크기를 자동으로 설정 */
+}
+
+/*.card-header {*/
+/*    -webkit-transition: 0.5s; !*사파리 & 크롬*!*/
+/*    transition: 0.5s;*/
+/*    width: 100%;*/
+/*    height: 270px;*/
+/*    border-radius: 15px 15px 0 0;*/
+/*    background-image: url("/public/images/cardImage.jpeg");*/
+/*    background-size: 100% 280px;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+
+/*.card:hover .card-header {*/
+/*    opacity: 0.8;*/
+/*    height: 100px;*/
+/*}*/
+
+/*.card-header-is_closed{*/
+/*    background-color: #EF5A31 ;*/
+/*    color: #FFF ;*/
+/*    font-weight: bold ;*/
+/*    text-align: center ;*/
+/*    float: right;*/
+/*    margin: 15px 15px 0 0;*/
+/*    border-radius: 50%;*/
+/*    font-weight: bold;*/
+/*    padding: 10px 10px;*/
+/*    line-height: 20px;*/
+/*}*/
+blockquote, q {
+    quotes: none;
+}
+
+blockquote : before, blockquote : after, q : before, q : after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/*css 초기화*/
+
+.card {
+    height: 300px;
+    width: 400px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    user-select: none;
+}
+
+.card-header {
+    -webkit-transition: 0.5s; /*사파리 & 크롬*/
+    -moz-transition: 0.5s; /*파이어폭스*/
+    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
+    -o-transition: 0.5s; /*오페라*/
+    transition: 0.5s;
+    width: 100%;
+    height: 70px;
+    border-radius: 15px 15px 0 0;
+    background-image: url("/public/images/cardImage.jpg");
+    background-size: 100% 200px;
+    background-repeat: no-repeat;
+}
+
+.card:hover .card-header {
+    opacity: 0.8;
+    height: 70px;
+}
+.card-header-text, .card-header-number{
+    font-size: 10px;
+    margin-top: -3px;
+}
+
+.card-header-is_closed{
+    background-color: #EF5A31 ;
+    color: #FFF ;
+    text-align: center ;
+    float: right;
+    margin: 10px 10px 0 0;
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 10px 10px;
+    line-height: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.card-body {
+}
+
+.card-body-header{
+    line-height: 25px;
+    margin: 10px 20px 0px 20px;
+}
+.card-body-header h1 {
+    font-size: 20px;
+}
+
+.card-body-description {
+    opacity: 0;
+    color: #757B82;
+    line-height: 25px;
+    -webkit-transition: .2s ease-in-out; /*사파리&크롬*/
+    -moz-transition: .2s ease-in-out; /*파이어폭스*/
+    -ms-transition: .2s ease-in-out; /*익스플로러*/
+    -o-transition: .2s ease-in-out; /*오페라*/
+    transition : .2s ease-in-out;
+    overflow: hidden;
+    height: 100px;
+    margin: 5px 20px;
+}
+.card_nickname {
+    margin-top: -10px;
+    font-size: 13px;
+    color: #9FA5A8;
+}
+.card:hover .card-body-description {
+    opacity: 1;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition : .5s ease-in-out;
+}
+
+.card-body-hashtag {
+    color: #2478FF;
+    font-style: italic;
+    margin-top: -10px;
+}
+
+.card-body-footer {
+    position: absolute;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    bottom: 0;
+    width: 370px;
+    font-size: 14px;
+    color: #9FA5A8;
+    padding: 0 15px;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.icon-view_count {
+    width: 25px;
+    height: 17px;
+}
+
+.icon-comments_count {
+    margin-left: 5px;
+    width: 25px;
+    height: 17px;
+}
+
+.reg_date {
+    float: right;
+}
+hr {
+    margin-bottom: 8px;
+    opacity: 0.5;
+    border-color: #EF5A31;
+}
+.view_count {
+    margin-left: 5px;
+}
+.reg_date {
+    margin-right: 5px;
 }
