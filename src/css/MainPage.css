@@ -88,7 +88,12 @@
 }
 .introduce {
     font-size: 40px;
-    padding-top: 450px;
+    /*padding-top: 350%;*/
     margin-left: 10px;
-    /*color: grey;*/
+    /*margin-top: auto;*/
+    /*margin-top: 40%;*/
+    position: fixed;
+    bottom: 0;
+    left: 2.5%; /* 가운데 정렬을 위해 추가할 수 있습니다. */
+    transform: translateX(-50%);
 }
