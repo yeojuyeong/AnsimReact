@@ -86,18 +86,6 @@
 .notification_div {
     position: relative;
 }
-.apply_btn {
-    width: 100px;
-    height: 30px;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    color: bisque;
-    user-select: none;
-    cursor: pointer;
-}
 #dropdownMenu option {
     font-size: 14px;
     letter-spacing: 10px;

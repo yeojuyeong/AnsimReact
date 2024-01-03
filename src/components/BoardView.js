@@ -172,26 +172,26 @@ const BoardView = () => {
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
             <div className="view_container">
                 <div className="top">
-                    <div className="bigLeft">
-                        <div className="map">지도</div>
-                    </div>
+                    {/*<div className="bigLeft">*/}
+                    {/*    <div className="map">지도</div>*/}
+                    {/*</div>*/}
                     <div className="bigRight">
                         <br/>
                         <div className="sub-detail-title">{title}</div>
                         <br/><br/>
                         <div className="sub-detail">
-                            <div className="left">{departure}</div>
-                            <div className="right">{destination}</div>
+                            <div className="left">출발지: {departure} </div>
+                            <div className="right">도착지: {destination} </div>
                         </div>
                         <br/><br/>
                         <div className="sub-detail">
                             <div className="left">{meeting_time}</div>
-                            <div className="right">인원수 : {mem_cnt}</div>
+                            <div className="right">인원수: {mem_cnt}</div>
                         </div>
                         <br/><br/>
                         <div className="sub-detail">
-                            <div className="left">성별 : {gender}</div>
-                            <div className="right">대화 : {sound}</div>
+                            <div className="left">성별: {gender}</div>
+                            <div className="right">대화: {sound}</div>
                         </div>
                         <br/><br/>
                     </div>

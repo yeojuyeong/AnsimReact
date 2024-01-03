@@ -49,16 +49,16 @@
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
     font-family: 'TheJamsil5Light';
-    /*margin-bottom: 10px;*/
 }
 
 .title-input {
     display: flex;
     border: none;
     border-bottom: 2px solid #adadad;
-    font-size: 18px;
+    font-size: 20px;
     font-family: 'TheJamsil5Bold';
     margin-top: -20px;
+    padding-bottom: 10px;
 }
 .sub-detail input {
     flex: 1;
@@ -81,7 +81,7 @@
     flex: 1;
     border-bottom: 2px solid #adadad;
     font-size: 14px;
-    /*padding-bottom: 10px;*/
+    padding-bottom: 10px;
 }
 .details {
     display: flex;
@@ -96,21 +96,16 @@
 .modi_left {
     border-bottom: 2px solid #adadad;
     padding-bottom: 10px;
+    width: 49%;
 }
 .modi_right {
-    padding-bottom: 10px;
-}
-.title-input {
-    width: 100%;
-    box-sizing: border-box;
-    /*margin-bottom: 10px;*/
     padding-bottom: 10px;
 }
 
 .sub-detail {
     display: flex;
     flex: 1;
-    /*width: 100%;*/
+    width: 100%;
     gap: 1rem;
     margin-top: -10px;
     font-size: 14px;
@@ -161,7 +156,7 @@
     height: 50%;
 }
 .modi_bigRight {
-    width: 60%;
+    width: 90%;
     margin-left: 30px;
     font-size: 15px;
 }

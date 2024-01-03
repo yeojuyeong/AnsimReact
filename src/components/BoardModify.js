@@ -152,9 +152,9 @@ const BoardModify = () => {
                     {/*    <input type="hidden" id="page" name="page" th:value="${page}">*/}
                     {/*        <input type="hidden" id="keyword" name="keyword" th:value="${keyword}">*/}
                     <div className="top">
-                        <div className="bigLeft">
-                            <div className="map">지도</div>
-                        </div>
+                        {/*<div className="bigLeft">*/}
+                        {/*    <div className="map">지도</div>*/}
+                        {/*</div>*/}
                         <div className="modi_bigRight">
                             <br/><br/>
                             <input type="text" id="title" className="title-input" name="title"

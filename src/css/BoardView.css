@@ -5,7 +5,7 @@
     user-select: none;
     font-family: 'TheJamsil5Bold';
     letter-spacing: 1px;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .view_container {
@@ -50,9 +50,7 @@
 }
 
 .bigRight {
-    /*flex: 1; !* 상단 우측 영역의 비율을 1로 설정 *!*/
-    width: 60%;
-    /*height: 200px;*/
+    width: 100%;
     margin-left: 30px;
 }
 
@@ -66,8 +64,9 @@
 
 .sub-detail-title {
     display: flex;
-    border-bottom: 2px solid #adadad;
-    font-size: 20px;
+    /*border-bottom: 2px solid #adadad;*/
+    font-size: 30px;
+    width: 300px;
 }
 
 .sub-detail {
@@ -75,6 +74,7 @@
     /*flex: 1;*/
     gap: 1rem;
     height: auto;
+    width: 90%;
 }
 
 .left {
@@ -230,4 +230,17 @@
     font-family: 'TheJamsil5Light';
     color: white;
     width: 90px;
+}
+.apply_btn {
+    border-radius: 5px;
+    font-family: 'TheJamsil5Light';
+    color: white;
+    width: 90px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
 }
