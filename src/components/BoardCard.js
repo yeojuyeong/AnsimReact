@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/BoardCard.css';
-import level1 from "../images/level1.png";
-import level2 from "../images/level2.png";
+import levelLow from "../images/levellow.png";
+import levelHigh from "../images/levelhigh.png";
 
 const BoardCard = ({ list, page, keyword }) => {
     return (
@@ -19,10 +19,10 @@ const BoardCard = ({ list, page, keyword }) => {
                                 <div className="card-header-is_closed" >
                                     <div className="badge-container">
                                         {item.ansim_cnt >= 10 && item.ansim_cnt < 30 && (
-                                                <img src={level1} alt="Badge 1"/>
+                                                <img src={levelLow} alt="Badge 1"/>
                                             )}
                                             {item.ansim_cnt >= 30 && item.ansim_cnt < 50 && (
-                                                <img src={level2} alt="Badge 2"/>
+                                                <img src={levelHigh} alt="Badge 2"/>
                                         )}
                                      </div>
                                     <div className="card-header-text" > 모집중 </div >

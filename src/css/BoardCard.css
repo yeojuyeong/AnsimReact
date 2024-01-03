@@ -35,13 +35,13 @@ h3 {
 
 .badge-container {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 3%;
+    top: 5%;
 }
 
 .badge-container img {
-    width: 80px;
-    height: 70px; /* 가로 크기에 맞춰서 세로 크기를 자동으로 설정 */
+    width: 28px;
+    height: 30px; /* 가로 크기에 맞춰서 세로 크기를 자동으로 설정 */
 }
 
 /*.card-header {*/
