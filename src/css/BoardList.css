@@ -18,11 +18,13 @@ h1 {
 .board_search {
     width:30%;
     height:30px;
-    border:2px solid black;
+    /*border: 1px solid black;*/
+    border: none;
+    border-bottom: 2px solid dimgrey;
     font-size: 16px;
-    border-radius: 5px;
     letter-spacing: 1px;
     padding-inline: 5px;
+    margin-right: 10px;
 }
 
 .board_search_btn {
@@ -33,9 +35,14 @@ h1 {
     font-weight:bold;
     cursor:pointer;
     margin-left: 10px;
+    border: none;
     border-radius: 5px;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     letter-spacing: 1px;
+}
+
+.sub-datail span{
+
 }
 
 .bottom_menu{

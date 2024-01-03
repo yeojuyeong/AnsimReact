@@ -172,15 +172,15 @@ const BoardView = () => {
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
             <div className="view_container">
                 <div className="top">
-                    {/*<div className="bigLeft">*/}
-                    {/*    <div className="map">지도</div>*/}
-                    {/*</div>*/}
+                    <div className="bigLeft">
+                        <div className="map">지도</div>
+                    </div>
                     <div className="bigRight">
                         <br/>
                         <div className="sub-detail-title">{title}</div>
                         <br/><br/>
                         <div className="sub-detail">
-                            <div className="left">출발지: {departure} </div>
+                            <div className="left">출발지:{departure} </div>
                             <div className="right">도착지: {destination} </div>
                         </div>
                         <br/><br/>
@@ -200,6 +200,7 @@ const BoardView = () => {
                     <div className="details">
                         <div className="detailLeft">
                             <div className="detail-col">
+                                <div className="writer_profile">작성자 Profile</div>
                                 <img src={`/profile/${stored_file_nm}`} />
                             </div>
                         </div>
@@ -234,7 +235,8 @@ const BoardView = () => {
                 <div className="bottom">
                     <div className="view_info">{content}</div>
                 </div>
-                <div className="apply_list">
+                <div className="apply_list" >
+                    <div className="apply_listnm">신청자 목록</div>
                     {(cookie_user_id === user_id && list.length > 0) && (
                         list.map((item, index) => (
                             <React.Fragment>

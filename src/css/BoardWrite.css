@@ -137,9 +137,9 @@ select {
     font-family: 'TheJamsil5Light';
     height: 25px;
 }
-label {
-    font-family: 'TheJamsil5Bold';
-}
+/*label {*/
+/*    font-family: 'TheJamsil5Bold';*/
+/*}*/
 h1 {
     font-size: 30px;
 }

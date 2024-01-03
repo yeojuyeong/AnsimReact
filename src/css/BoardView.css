@@ -16,9 +16,10 @@
     width: 55%;
     margin-left: auto;
     margin-right: auto;
-    border: 6px solid black;
+    border: 1px solid #ddd;
     border-radius: 30px;
     padding-inline: 10px;
+    background-color: white;
 }
 
 .top {
@@ -28,8 +29,8 @@
 
 .middle {
     height: 100px;
-    width: 70%;
-    border: 3px solid black;
+    width: 95%;
+    border: 2px solid #ddd;
     border-radius: 10px;
     margin-left: 20px;
     display: flex;
@@ -79,12 +80,13 @@
 
 .left {
     flex: 1;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 1px solid #adadad;
+
 }
 
 .right {
     flex: 1;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 1px solid #adadad;
 }
 
 .map {
@@ -97,7 +99,8 @@
 
 .view_info {
     flex: 2;
-    border: 3px solid black;
+    border: 2px solid #ddd;
+    border-radius: 10px;
     width: 93%;
     height: 70%;
     padding: 10px;
@@ -145,27 +148,33 @@
 }
 .detail-col img {
     display: block;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
+    margin-left: 110px;
+    margin-top: -55px;
+}
+.writer_profile {
     margin-left: 10px;
+    margin-top: 35px;
+    width: 100px;
 }
 .gender {
     margin-left: -10px;
 }
 
 .detailLeft {
-    width: 20%;
+    width: 10%;
     height: 100%;
 }
 
 .detailRight {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin-left: 53px;
-    font-size: 13px;
+    margin-left: 180px;
+    font-size: 14px;
 }
 
 .detailTop {
@@ -180,7 +189,7 @@
 }
 .apply_list {
     overflow-y: auto;
-    margin-top: -20px;
+    margin-top: -50px;
 }
 .applicant_list {
     display: flex;
@@ -219,6 +228,10 @@
     background-color: black;
     color: white;
     border-radius: 5px;
+}
+.apply_listnm {
+    padding: 10px;
+    margin-left: 20px;
 }
 .apply_container {
     flex-grow: 1;

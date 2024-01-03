@@ -91,7 +91,8 @@ const SafetyFacilityReportForm = () => {
                 <label>
                     고장유형:
                     <select value={selectedBrokenOption}
-                            onChange={(e) => setSelectedBrokenOption(e.target.value)}>
+                            onChange={(e) => setSelectedBrokenOption(e.target.value)}
+                            style={{ width: '200px', height: '35px', fontSize: '12px' }}>
                         <option value="">선택하세요</option>
                         {brokenOption && brokenOption.map((option, index) => (
                             <option key={index} value={option.opt_cd}>
