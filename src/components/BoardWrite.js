@@ -113,35 +113,35 @@ const BoardWrite = () => {
     };
 
     return (
-        <div className="board_main">
-            <h1>게시물 등록</h1>
+        <div className="boardwrite_main">
+            <h1>게시물 작성</h1>
             <br />
             <div id="formZone">
                 <form className="WriteForm" id="WriteForm" name="WriteForm" method="post">
-                    <input type="text" id="title" className="items" value={title} ref={titleRef} onChange={handleTitleChange} placeholder="제목을 입력하세요."></input><br />{errorMessage &&
+                    <input type="text" id="title" className="items_title" value={title} ref={titleRef} onChange={handleTitleChange} placeholder="제목을 입력하세요."></input><br />{errorMessage &&
                     <p>{errorMessage}</p>}<br/>
                         <div className="writeContainer">
                             <div className="left-section">
                                 {/*<input type="text" id="departure" class="items" name="departure" th:value='${session.departure}' disabled>*/}
-                                <input type="text" id="departure" className="items" value={departure} ref={departureRef} onChange={(e) => setDeparture(e.target.value)} placeholder="출발지를 입력하세요."></input>
+                                <input type="text" id="departure" className="items_dep" value={departure} ref={departureRef} onChange={(e) => setDeparture(e.target.value)} placeholder="출발지를 입력하세요."></input>
                             </div>
                             <div className="right-section">
                                 {/*<input type="text" id="destination" class="items" name="destination" th:value='${session.destination}' disabled>*/}
-                                <input type="text" id="destination" className="items" value={destination} ref={destinationRef} onChange={(e) => setDestination(e.target.value)} placeholder="목적지를 입력하세요."></input>
+                                <input type="text" id="destination" className="items_des" value={destination} ref={destinationRef} onChange={(e) => setDestination(e.target.value)} placeholder="목적지를 입력하세요."></input>
                             </div>
                         </div>
-                        <div className="writeContainer">
-                            <div className="left-section">
+                        <div className="writeContainer_sec">
+                            <div className="left-section_sec">
                                 <div className="date-time-selector">
-                                    <label htmlFor="date">날짜:</label>
+                                    <label htmlFor="date">날짜:</label> &nbsp;
                                     <input name="date" type="date" id="date" value={date} ref={dateRef} onChange={(e) => setDate(e.target.value)} />
-                                    <label htmlFor="time">시간:</label>
+                                    &nbsp;<label htmlFor="time">시간:</label> &nbsp;
                                     <input name="time" type="time" id="time" value={time} ref={timeRef} onChange={(e) => setTime(e.target.value)} />
                                     <input type="hidden" id="meeting_time" name="meeting_time" value={`날짜 : ${date} | 시간 : ${time}`} ref={meeting_timeRef} onChange={(e) => setMeeting_time(e.target.value)}/>
                                 </div>
                             </div>
-                            <div className="right-section">
-                                인원수 :
+                            <div className="right-section_sec">
+                                인원수 : &nbsp;
                                 <select onChange={(e) => setMem_cnt(e.target.value)} value={mem_cnt} ref={mem_cntRef}>
                                     <option value = "all" disabled>-- 아래의 내용 중에서 선택 --</option>
                                     <option value='1'>1명</option>
@@ -151,8 +151,8 @@ const BoardWrite = () => {
                                 </select>
                             </div>
                         </div>
-                        <div className="writeContainer">
-                            <div className="left-section">
+                        <div className="writeContainer_th">
+                            <div className="left-section_sec">
                                 성별 :
                                 <label><input type="radio" name="gender" value="OPT_GENDER_2" ref={genderRef} onChange={(e)=>setGender(e.target.value)} />남성</label>
                                 <label><input type="radio" name="gender" value="OPT_GENDER_1" ref={genderRef} onChange={(e)=>setGender(e.target.value)} />여성</label>
@@ -160,13 +160,13 @@ const BoardWrite = () => {
                                 <label><input type="radio" name="gender" value="OPT_GENDER_4" ref={genderRef} onChange={(e)=>setGender(e.target.value)} />MTF</label>
                                 <label><input type="radio" name="gender" value="OPT_GENDER_5" ref={genderRef} onChange={(e)=>setGender(e.target.value)} />상관없음</label>
                             </div>
-                            <div className="right-section">
+                            <div className="right-section_sec">
                                 대화 :
                                 <label><input type="radio" name="sound" value="OPT_SOUND_1" ref={soundRef} onChange={(e)=>setSound(e.target.value)} />조용히</label>
                                 <label><input type="radio" name="sound" value="OPT_SOUND_2" ref={soundRef} onChange={(e)=>setSound(e.target.value)} />상관없음</label>
                             </div>
                         </div>
-                        <textarea name="content" id="content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)} cols="100" rows="500" placeholder="내용을 입력하세요"></textarea>
+                        <textarea name="content" id="content" className="board_content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)} cols="100" rows="500" placeholder="내용을 입력하세요."></textarea>
 
                         {/*<input type="hidden" name="departure_LATITUDE" th:value="${departure_LATITUDE}"></input>*/}
                         {/*<input type="hidden" name="departure_LONGITUDE" th:value="${departure_LONGITUDE}"></input>*/}

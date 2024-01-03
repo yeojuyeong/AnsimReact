@@ -1,43 +1,88 @@
-.board_main{
-    text-align: center;
+.board_modi_view {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    margin-top: 30px;
+    font-family: 'TheJamsil5Bold';
+    letter-spacing: 1px;
 }
 
-.container {
+.modi_container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 70vh;
     gap: 1rem;
-    width: 70%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
+    border: 6px solid black;
+    border-radius: 30px;
+    padding-inline: 10px;
 }
-
 .top {
     display: flex;
     flex: 1.5; /* 상단 영역의 비율을 3으로 설정 */
 }
 
-.middle {
+.modi_middle {
     flex: .5; /* 중단 영역의 비율을 1로 설정 */
+    height: 100px;
+    width: 500px;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: -40px;
 }
 
-.bottom {
+.modi_bottom {
     flex: 1.5; /* 하단 영역의 비율을 2로 설정 */
 }
-
-.bigLeft {
-    flex: 1; /* 상단 좌측 영역의 비율을 2로 설정 */
+.modi_info {
+    /*flex: 2;*/
+    border: 3px solid black;
+    width: 93%;
+    height: 85%;
+    padding: 10px;
+    text-align: left;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    font-family: 'TheJamsil5Light';
+    /*margin-bottom: 10px;*/
 }
 
-.bigRight {
-    flex: 2; /* 상단 우측 영역의 비율을 1로 설정 */
+.title-input {
+    display: flex;
+    border: none;
+    border-bottom: 2px solid #adadad;
+    font-size: 18px;
+    font-family: 'TheJamsil5Bold';
+    margin-top: -20px;
 }
-
+.sub-detail input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px solid #adadad;
+    font-size: 14px;
+    font-family: 'TheJamsil5Bold';
+}
+.date_time_selector label{
+    font-size: 14px;
+}
+.date_time_selector input{
+    border: none;
+}
 .image {
     flex: 1;
     border-bottom: 2px solid #adadad;
 }
-
+.modi_memcnt {
+    flex: 1;
+    border-bottom: 2px solid #adadad;
+    font-size: 14px;
+    /*padding-bottom: 10px;*/
+}
 .details {
     display: flex;
 }
@@ -48,28 +93,27 @@
     flex: 3;
     gap: 1rem;
 }
-
+.modi_left {
+    border-bottom: 2px solid #adadad;
+    padding-bottom: 10px;
+}
+.modi_right {
+    padding-bottom: 10px;
+}
 .title-input {
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
+    padding-bottom: 10px;
 }
 
 .sub-detail {
     display: flex;
     flex: 1;
-    width: 100%;
+    /*width: 100%;*/
     gap: 1rem;
-}
-
-.left {
-    flex: 1;
-    border-bottom: 2px solid #adadad;
-}
-
-.right {
-    flex: 1;
-    border-bottom: 2px solid #adadad;
+    margin-top: -10px;
+    font-size: 14px;
 }
 
 .map {
@@ -107,23 +151,6 @@
     color: white;
 }
 
-.detail-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex: 1;
-}
-
-.detailLeft {
-    width: 25%;
-}
-
-.detailRight {
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-}
-
 .detailTop {
     display: flex;
     height: 50%;
@@ -133,45 +160,40 @@
     display: flex;
     height: 50%;
 }
-
-.detail-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex: 1;
+.modi_bigRight {
+    width: 60%;
+    margin-left: 30px;
+    font-size: 15px;
 }
-
-.detail-col-full {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex: 2;
-}
-
-.btn_write{
+.btn_modi {
     position: relative;
     margin: 20px;
     margin-bottom: 10px;
     height: 40px;
-    width: 40%;
-    background: red;
+    width: 20%;
+    background: dodgerblue;
     color: white;
-    font-weight: bold;
+    font-family: 'TheJamsil5Light';
+    letter-spacing: 2px;
     border: none;
     cursor: pointer;
     display: inline;
+    border-radius: 10px;
+    display: inline;
 }
-.btn_cancel{
+.btn_modicancel {
     position: relative;
     margin: 20px;
     margin-bottom: 10px;
     height: 40px;
-    width: 40%;
-    background: pink;
+    width: 20%;
+    background: lightslategrey;
     background-size: 200%;
     color: white;
-    font-weight: bold;
+    font-family: 'TheJamsil5Light';
+    letter-spacing: 2px;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
     display: inline;
 }

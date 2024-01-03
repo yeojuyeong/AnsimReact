@@ -1,16 +1,6 @@
+import '../../css/SignupPage.css';
 import { useState, useRef} from 'react';
 const SignupPage = () => {
-    const imageZone = {
-        border: '2px solid #92AAB0',
-        width: '70%',
-        height: 'auto',
-        color: '#92AAB0',
-        textAlign: 'center',
-        verticalAlign: 'middle',
-        margin: 'auto',
-        padding: '10px 10px',
-        fontSize: '200%'
-    }
 
     //회원 등록 정보 - state 등록
     const [user_id, setUser_id] = useState('');
@@ -68,6 +58,10 @@ const SignupPage = () => {
         setImgCheck("Y");
     }
 
+    const handleGenderChange = (e) => {
+        setGender(e.target.value);
+    }
+
     const handleRegister = async () => {
 
         //유효성 검사
@@ -111,7 +105,7 @@ const SignupPage = () => {
         formData.append("gender",genderValue);
         // formData.append("hobby",checkItems.toString());
         formData.append("mbti",mbtiRef.current.value);
-        formData.append("telno",tel_noRef.current.value);
+        formData.append("tel_no",tel_noRef.current.value);
         // formData.append("description",descriptionRef.current.value);
         // formData.append("nickname",nicknameRef.current.value);
         formData.append("fromSocial",fromSocial);
@@ -135,70 +129,59 @@ const SignupPage = () => {
     return(
         <>
             <div>
-                <div>
-                    <img className="logo" src="/images/steak2.png" alt="안심"/>
-                </div>
-                <form className="WriteForm">
-                    <h1>회원 등록</h1><br/>
-                    <div id="RegistryForm">
-                        <br/><br/>
-                        <input type="file" name="fileUpload" ref={fileEventRef} onChange={(e) => fileEventChange(e)}
+                <form className="signupMain">
+                    <h1 className="signupTitle">Sign Up</h1>
+                    <div>
+                        <input type="file" name="fileUpload" className="signupInputImage" ref={fileEventRef}
+                               onChange={(e) => fileEventChange(e)}
                                style={{display: 'none'}}/>
-                        <div className="imageZone" style={imageZone} ref={imgZoneRef} onClick={(e) => imgZoneClick(e)}>
-                            {imgFile ? <img src={imgFile} alt="회원 프로파일"
-                                            style={{width: '350px', height: 'auto'}}/> : "클릭 후 탐색창에서 사진을 선택해 주세요."}
+                        <div className="signupImgView" ref={imgZoneRef} onClick={(e) => imgZoneClick(e)}>
+                            {imgFile ? <img className="signupImgBox" src={imgFile} alt="회원 프로파일"/> : <>
+                                클릭 후 탐색창에서<br/>
+                                사진을 선택해 주세요.
+                            </>}
                         </div>
-                        <input type="text" className="input_field" ref={user_idRef} value={user_id}
+                        <br/>
+                        <input type="text" className="signupField" ref={user_idRef} value={user_id}
                                onChange={(e) => user_idChange(e)} placeholder="아이디"/><br/>
                         <span style={{color: 'red'}}>{message}</span>
-                        <input type="text" className="input_field" ref={user_nmRef} value={user_nm}
+                        <input type="text" className="signupField" ref={user_nmRef} value={user_nm}
                                onChange={(e) => setUser_nm(e.target.value)} placeholder="이름"/>
-                        <input type="password" className="input_field" ref={passwordRef} value={password}
+                        <input type="password" className="signupField" ref={passwordRef} value={password}
                                onChange={(e) => setPassword(e.target.value)} placeholder="패스워드"/>
-                        <input type="password" className="input_field" ref={password1Ref} value={password1}
-                               onChange={(e) => setPassword1(e.target.value)} placeholder="패스워드 확인"/>
-                        <div style={{
-                            width: '90%',
-                            textAlign: 'left',
-                            position: 'relative',
-                            left: '35px',
-                            borderBottom: '2px solid #adadad',
-                            margin: '10px',
-                            padding: '10px'
-                        }}>
-                            성별 :
-                            <input type="radio" id="male" name="gender" value="남성"
-                                   onChange={(e) => setGender(e.target.value)}/><label htmlFor="male">남성</label>
-                            <input type="radio" id="female" name="gender" value="여성"
-                                   onChange={(e) => setGender(e.target.value)}/><label htmlFor="female">여성</label><br/>
+                        <input type="password" className="signupField" ref={password1Ref} value={password1}
+                               onChange={(e) => setPassword1(e.target.value)} placeholder="패스워드 확인"/><br /><br />
 
+                            <div className="genderDiv">Gender :
+                            {["여성", "남성", "FTM(Female to male)", "MTF(Male to Female)"].map((option) => (
+                                <label key={option}>
+                                    <input
+                                        type="radio"
+                                        value={option}
+                                        checked={gender === option}
+                                        onChange={handleGenderChange}
+                                    />
+                                    {option}
+                                </label>
+                            ))}
+                            </div>
                             <br/>
                             MBTI :
-                            <select onChange={(e) => setMbti(e.target.value)} value={mbti} ref={mbtiRef}>
-                                <option value="description">-- 아래의 내용 중에서 선택 --</option>
-                                <option value="ISTJ">ISTJ</option>
-                                <option value="ISTP">ISTP</option>
-                                <option value="ISFJ">ISFJ</option>
-                                <option value="ISFP">ISFP</option>
-                                <option value="INFJ">INFJ</option>
-                                <option value="INTJ">INTJ</option>
-                                <option value="INFP">INFP</option>
-                                <option value="INTP">INTP</option>
-                                <option value="ESTJ">ESTJ</option>
-                                <option value="ESFP">ESFP</option>
-                                <option value="ESFJ">ESFJ</option>
-                                <option value="ESTP">ESTP</option>
-                                <option value="ENFP">ENFP</option>
-                                <option value="ENTP">ENTP</option>
-                                <option value="ENFJ">ENFJ</option>
-                                <option value="ENTJ">ENTJ</option>
+                            <select className="signupOptionField" onChange={(e) => setMbti(e.target.value)} value={mbti}
+                                    ref={mbtiRef}>
+                                {["ISTJ", "ISTP", "ISFJ", "ISFP", "INFJ", "INTJ", "INFP", "INTP", "ESTJ", "ESFP", "ESFJ", "ESTP", "ENFP", "ENTP", "ENFJ", "ENTJ"]
+                                    .map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
                             </select>
                             <br/>
-                        </div>
+
                         <input type="text" value={tel_no} ref={tel_noRef} onChange={(e) => setTel_no(e.target.value)}
-                               className="input_field" placeholder="전화번호를 입력하세요."/>
-                        <br/>
-                        <input type="button" className="btn_write" onClick={handleRegister} value="여기를 클릭하세요!!!"/>
+                               className="signupField" placeholder="전화번호를 입력하세요."/>
+                        <br/><br/>
+                        <input type="button" className="signupPageBtn" onClick={handleRegister} value="등록"/>
 
                     </div>
                 </form>

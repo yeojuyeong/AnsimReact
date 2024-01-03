@@ -139,8 +139,8 @@ const LoginPage = () =>{
                     <img src="/images/naver.png" alt="Naver Login" style={{width: '100%', cursor: 'pointer'}}/>
                 </Link>
 
-                <Link to="/member/searchID" className="findIdBtn">Find ID</Link>
-                <Link to="/member/searchPassword" className="findPwBtn">Find Password</Link>
+                {/*<Link to="/member/searchID" className="findIdBtn">Find ID</Link>*/}
+                {/*<Link to="/member/searchPassword" className="findPwBtn">Find Password</Link>*/}
             </div>
         </div>
     );

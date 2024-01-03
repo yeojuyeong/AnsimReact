@@ -111,7 +111,7 @@ const BoardList = () => {
         setKeyword(data.keyword);
         setPageList(data.pageList);
         // setTotalElement(data.totalElement);
-
+        console.log(data);
 
     };
 
@@ -151,37 +151,36 @@ const BoardList = () => {
 
     // 컴포넌트가 렌더링할 JSX를 반환합니다.
     return (
-        <div className="board_main">
+        <div className="boardlist_main">
             <div className="content">
 
                 <h1 style={{ textAlign: 'center' }}>게시물 목록</h1>
 
-                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '35px'}}>
-                <input className="board_search" style={{width:'40%',height:'30px',border:'2px solid #168',fontSize: '16px'}}
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40px'}}>
+                <input className="board_search"
                        type="text" value={keyword} onChange={(e)=> { setPage('1'); setKeyword(e.target.value); }}
                        placeholder="검색할 제목,작성자이름 및 내용을 입력해 주세요"
                        onKeyDown={(e)=> onKeyDown(e)}/>
-                <input className="board_search_btn" style={{width:'5%',height:'30px',background:'#158',color:'white',fontWeight:'bold',
-                    cursor:'pointer', marginLeft: '10px'}} type="button" value="검색" onClick={Search} />
+                <input className="board_search_btn" type="button" value="검색" onClick={Search} />
                 </div>
 
-            <div className="main-content">
-                {/* <!-- 카드 형식의 게시물 리스트 --> */}
-                <BoardCard list={list} page={page} keyword={keyword} />
-                <br />
-                <div dangerouslySetInnerHTML={{ __html: pageList }} ></div>
-                <br />
-                <div className="bottom_menu">
-                    <a href="/board/list?page=1">처음으로</a>&nbsp;&nbsp;
-                    <Link to="/board/write">글쓰기</Link>&nbsp;&nbsp;
-                    <Link to="/member/memberInfo">사용자관리</Link>&nbsp;&nbsp;
-                    {/*{roleCookie === 'MASTER' &&*/}
-                    {/*    <Link to="/master/sysmanage">시스템관리</Link>*/}
-                    {/*}*/}
-                    &nbsp;&nbsp;
-                    <Link onClick={logout}>로그아웃</Link>
+                <div className="main-content">
+                    {/* <!-- 카드 형식의 게시물 리스트 --> */}
+                    <BoardCard list={list} page={page} keyword={keyword} />
+                    <br />
+                    <div dangerouslySetInnerHTML={{ __html: pageList }} className="pagelist"></div>
+                    <br />
+                    <div className="bottom_menu">
+                        <a href="/board/list?page=1">처음으로</a>&nbsp;&nbsp;
+                        <Link to="/board/write">글쓰기</Link>&nbsp;&nbsp;
+                        <Link to="/member/memberInfo">사용자관리</Link>&nbsp;&nbsp;
+                        {/*{roleCookie === 'MASTER' &&*/}
+                        {/*    <Link to="/master/sysmanage">시스템관리</Link>*/}
+                        {/*}*/}
+                        &nbsp;&nbsp;
+                        <Link onClick={logout}>로그아웃</Link>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     );

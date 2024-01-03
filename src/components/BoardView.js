@@ -20,7 +20,7 @@ const BoardView = () => {
     const seqno = param.get('seqno');
     const page = param.get('page');
     const keyword = param.get('keyword')===null?'':param.get('keyword');
-
+    const [list, setList] = useState([]);
     //게시판 상세 내용
     // const [map, setMap] = useState([]);
     const [title, setTitle] = useState('');
@@ -70,6 +70,7 @@ const BoardView = () => {
 
             setPre_seqno(data.pre_seqno);
             setNext_seqno(data.next_seqno);
+            setList(data.applicant_list);
 
             if (!cookie_user_id) {
                 alert('서비스 이용을 위해 로그인해주세요.');
@@ -93,7 +94,6 @@ const BoardView = () => {
 
         fetchData();
 
-
     },[page,seqno,keyword]);
 
     //게시물 삭제
@@ -114,16 +114,69 @@ const BoardView = () => {
         }
     };
 
+    // 동행 신청
+    const application = () => {
+        const seqno = param.get('seqno');
+
+        fetch(`http://localhost:8080/restapi/view?post_no=${seqno}&applicant=${cookie_user_id}&writer=${user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                console.log(data.message);
+                if(data.message === 'GOOD') {
+                    alert('동행 신청이 완료되었습니다.')
+                    document.location.href = `http://localhost:3000/board/view?seqno=${seqno}&page=${page}&keyword=${keyword}`;
+                } else if(data.message === 'EXISTED') {
+                    alert('이미 동행을 신청하였습니다.');
+                    document.location.href = `http://localhost:3000/board/view?seqno=${seqno}&page=${page}&keyword=${keyword}`;
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
+    };
+
+    // 동행 신청 수락
+    const accept = (user_id) => {
+        fetch(`http://localhost:8080/restapi/accept?post_no=${seqno}&applicant=${user_id}&writer=${cookie_user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                if(data.message === 'GOOD') {
+                    alert('동행 신청을 수락 하였습니다.')
+                } else if(data.message === 'CLICKED') {
+                    alert('이미 수락한 멤버입니다.');
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
+    };
+
+    // 동행 신청 거절
+    const deny = (user_id) => {
+        fetch(`http://localhost:8080/restapi/deny?post_no=${seqno}&applicant=${user_id}&writer=${cookie_user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                if(data.message === 'GOOD') {
+                    alert('동행 신청을 거절 하였습니다.')
+                } else if(data.message === 'CLICKED') {
+                    alert('이미 거절한 멤버입니다.');
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
+    };
+
     return (
-        <div className="board_main">
+        <div className="board_view">
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
-            <div className="container">
+            <div className="view_container">
                 <div className="top">
                     <div className="bigLeft">
                         <div className="map">지도</div>
                     </div>
                     <div className="bigRight">
-                        <br/><br/>
+                        <br/>
                         <div className="sub-detail-title">{title}</div>
                         <br/><br/>
                         <div className="sub-detail">
@@ -146,7 +199,9 @@ const BoardView = () => {
                 <div className="middle">
                     <div className="details">
                         <div className="detailLeft">
-                            <div className="detail-col"><img src={`/profile/${stored_file_nm}`} style={{ display: 'block', width: '80%', height: 'auto', margin: 'auto' }} /></div>
+                            <div className="detail-col">
+                                <img src={`/profile/${stored_file_nm}`} />
+                            </div>
                         </div>
                         <div className="detailRight">
                             <div className="detailTop">
@@ -154,33 +209,75 @@ const BoardView = () => {
                                     <div>이름 : {user_nm}</div>
                                 </div>
                                 <div className="detail-col">
-                                    <div>나이 : {age}</div>
-                                </div>
-                                <div className="detail-col">
                                     <div>MBTI : {mbti}</div>
                                 </div>
                             </div>
                             <div className="detailBottom">
                                 <div className="detail-col">
-                                    <div>성별 : {mem_gender}</div>
+                                    <div className="gender">성별 : {mem_gender}</div>
                                 </div>
-                                <div className="detail-col-full">
-                                    <div>동행 횟수 : {ansim_cnt}</div>
+                                <div className="detail-col">
+                                    <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="apply_container">
+                        {(cookie_user_id !== user_id) && (
+                            // <div className="bottom_menu">
+                            //     <a href="#">동행 신청</a>
+                            // </div>
+                            <input type="button" className="apply_btn" value="동행 신청😊" onClick={application}/>
+                        )}
+                    </div>
                 </div>
                 <div className="bottom">
-                    <div className="info">{content}</div>
+                    <div className="view_info">{content}</div>
                 </div>
-                <div className="bottom_menu">
-                    <a href="#">채팅 하기</a>
+                <div className="apply_list">
+                    {(cookie_user_id === user_id && list.length > 0) && (
+                        list.map((item, index) => (
+                            <React.Fragment>
+                                <div className="applicant_list" style={{ textAlign: "center" }}>
+                                    <div className="listLeft">
+                                        <div className="detail-col">
+                                            <img src={`/profile/${item.stored_file_nm}`} style={{
+                                            display: 'block',
+                                            width: '80%',
+                                            height: 'auto',
+                                            margin: 'auto'
+                                        }}/></div>
+                                    </div>
+                                    <div className="listMiddle">
+                                        <div className="detailTop">
+                                            <div className="detail-col">
+                                                <div style={{ marginLeft: "10px" }}>이름 : {item.user_nm}</div>
+                                            </div>
+                                            <div className="detail-col">
+                                                <div>MBTI : {item.mbti}</div>
+                                            </div>
+                                        </div>
+                                        <div className="detailBottom">
+                                            <div className="detail-col">
+                                                <div>성별 : {item.gender}</div>
+                                            </div>
+                                            <div className="detail-col">
+                                                <div>동행 포인트 : {item.ansim_cnt}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="listRight">
+                                        <input type="button" className="accept" value="수락" onClick={() => accept(item.user_id)}/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button" className="deny" value="거절" onClick={() => deny(item.user_id)}/>
+                                    </div>
+                                </div> <br/>
+                            </React.Fragment>
+                        ))
+                    )}
                 </div>
             </div>
             <br />
-
-                <div className="bottom_menu">
+                <div className="view_bottom_menu">
                     {
                         pre_seqno !== '0' && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
                     }
@@ -201,7 +298,6 @@ const BoardView = () => {
                         </>
                     )}
                 </div>
-
         </div>
     )
 }

@@ -48,7 +48,7 @@ const InfoSidebar = () => {
                     <h2><TbFileInfo/>&nbsp;안심 시설물</h2>
                     <select
                         id="dropdownMenu"
-                        style={{ width: '230px', height: '25px' }}
+                        style={{ width: '230px', height: '28px', fontSize: '15px' }}
                         value={selectedOption} // 선택된 옵션을 표시
                         onChange={handleOptionChange} // 옵션 변경 시 핸들러 호출
                     >
