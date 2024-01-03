@@ -217,7 +217,7 @@ const BoardView = () => {
                                     <div className="gender">성별 : {mem_gender}</div>
                                 </div>
                                 <div className="detail-col">
-                                    <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
+                                    <div className="ansim_cnt">동행 포인트 : {ansim_cnt}</div>
                                 </div>
                             </div>
                         </div>
@@ -235,10 +235,10 @@ const BoardView = () => {
                     <div className="view_info">{content}</div>
                 </div>
                 <div className="apply_list" >
-                    <div className="apply_listnm">신청자 목록</div>
                     {(cookie_user_id === user_id && list.length > 0) && (
                         list.map((item, index) => (
                             <React.Fragment>
+                                <div className="apply_listnm">신청자{index+1}</div>
                                 <div className="applicant_list" style={{ textAlign: "center" }}>
                                     <div className="listLeft">
                                         <div className="detail-col">

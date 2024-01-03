@@ -173,12 +173,9 @@ const BoardList = () => {
                     <div className="bottom_menu">
                         <a href="/board/list?page=1">처음으로</a>&nbsp;&nbsp;
                         <Link to="/board/write">글쓰기</Link>&nbsp;&nbsp;
-                        <Link to="/member/memberInfo">사용자관리</Link>&nbsp;&nbsp;
                         {/*{roleCookie === 'MASTER' &&*/}
                         {/*    <Link to="/master/sysmanage">시스템관리</Link>*/}
                         {/*}*/}
-                        &nbsp;&nbsp;
-                        <Link onClick={logout}>로그아웃</Link>
                     </div>
                 </div>
             </div>

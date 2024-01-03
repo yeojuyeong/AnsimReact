@@ -46,6 +46,7 @@ const MyPage = () => {
                         <div className="field">성별 : {member.gender}</div>
                         <div className="field">MBTI : {member.mbti}</div>
                         <div className="field">전화번호 : {member.tel_no}</div>
+                        <div className="field">동행 포인트 : {member.ansim_cnt}</div>
                     </div>
                     <br/>
 
