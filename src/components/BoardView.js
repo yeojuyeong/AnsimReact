@@ -195,7 +195,7 @@ const BoardView = () => {
                             // <div className="bottom_menu">
                             //     <a href="#">동행 신청</a>
                             // </div>
-                            <input type="button" className="apply_btn" value="동행 신청" onClick={application}/>
+                            <input type="button" className="apply_btn" value="동행 신청😊" onClick={application}/>
                         )}
                     </div>
                 </div>

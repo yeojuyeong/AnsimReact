@@ -130,9 +130,9 @@
 .date-time-selector input {
     height: 20px;
 }
-input {
-    font-family: 'TheJamsil5Light';
-}
+/*input {*/
+/*    font-family: 'TheJamsil5Light';*/
+/*}*/
 select {
     font-family: 'TheJamsil5Light';
     height: 25px;

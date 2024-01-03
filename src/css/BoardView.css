@@ -193,7 +193,7 @@
 .listLeft {
     width:  7%;
     height: 100%;
-    padding: 10px;
+    padding: 5px;
 }
 
 .listMiddle {
@@ -229,5 +229,5 @@
     border-radius: 5px;
     font-family: 'TheJamsil5Light';
     color: white;
-    width: 70px;
+    width: 90px;
 }

@@ -14,7 +14,6 @@ const BoardCard = ({ list, page, keyword }) => {
                            className="btn-primary">
 
                         <div className="card">
-
                             <div className="card-header" >
                                 <div className="card-header-is_closed" >
                                     <div className="badge-container">

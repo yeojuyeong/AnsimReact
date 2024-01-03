@@ -98,3 +98,7 @@
     user-select: none;
     cursor: pointer;
 }
+#dropdownMenu option {
+    font-size: 14px;
+    letter-spacing: 10px;
+}

@@ -23,7 +23,6 @@ const Nav = () => {
     const activeStyle = {
         color: "#6392ff",
     };
-
     return (
         
         <div id="sidebar">
