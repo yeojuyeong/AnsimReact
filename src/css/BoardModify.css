@@ -127,9 +127,9 @@
     border-bottom: 2px solid #adadad;
 }
 
-/*.bottom_menu{*/
-/*    margin-top: 20px;*/
-/*}*/
+.bottom_menu{
+    margin-top: 20px;
+}
 .bottom_menu > a:link, .bottom_menu > a:visited{
     display: inline-block;
     margin: 10px 5px;

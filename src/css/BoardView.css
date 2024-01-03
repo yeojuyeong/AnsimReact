@@ -105,13 +105,13 @@
     margin: 0 auto;
 }
 
-.bottom_menu {
+.view_bottom_menu {
     margin-top: -10px;
     /*margin-bottom: 20px;*/
     text-align: center;
     font-family: 'TheJamsil5Light';
 }
-.bottom_menu > a:link, .bottom_menu > a:visited{
+.view_bottom_menu> a:link, .view_bottom_menu > a:visited{
     display: inline-block;
     margin: 10px 5px;
     padding: 10px 20px;
@@ -126,7 +126,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.bottom_menu > a:hover, .bottom_menu > a:active{
+.view_bottom_menu > a:hover, .view_bottom_menu > a:active{
     background-color: dodgerblue;
     border-color: dodgerblue; /* 호버 시 테두리 색상 */
     color: white;

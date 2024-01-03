@@ -246,7 +246,7 @@ const BoardView = () => {
                 </div>
             </div>
             <br />
-                <div className="bottom_menu">
+                <div className="view_bottom_menu">
                     {
                         pre_seqno !== '0' && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
                     }
