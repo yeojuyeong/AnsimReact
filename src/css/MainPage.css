@@ -65,10 +65,6 @@
     font-size: 30px;
     padding-left: 15px;
 }
-.notification_icon {
-    font-size: 40px;
-    margin-top: 500px;
-}
 .counter {
     width: 18px;
     height: 18px;
@@ -89,4 +85,10 @@
 #dropdownMenu option {
     font-size: 14px;
     letter-spacing: 10px;
+}
+.introduce {
+    font-size: 40px;
+    padding-top: 500px;
+    margin-left: 10px;
+    /*color: grey;*/
 }

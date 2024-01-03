@@ -8,7 +8,7 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
 import {FiLogIn, FiLogOut, FiUser} from "react-icons/fi";
 import getCookie from './GetCookie';
-import { IoNotificationsCircle } from "react-icons/io5";
+import { IoIosPeople } from "react-icons/io";
 
 const Nav = () => {
 
@@ -65,6 +65,11 @@ const Nav = () => {
                         </NavLink>
                     </li>
                 )}
+                <li className="introduce">
+                    <NavLink to="/introduce"  style={({ isActive }) => (isActive ? activeStyle : {})}>
+                        <IoIosPeople />
+                    </NavLink>
+                </li>
             </ul>
         </div>
     );
