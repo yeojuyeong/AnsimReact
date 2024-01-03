@@ -149,7 +149,6 @@ const BoardList = () => {
         }
     };
 
-
     // 컴포넌트가 렌더링할 JSX를 반환합니다.
     return (
         <div className="boardlist_main">
