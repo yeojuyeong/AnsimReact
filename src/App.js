@@ -13,6 +13,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import MyPageModify from "./page/MyPage/MyPageModify";
 import PasswordModify from "./page/MyPage/PasswordModify";
 import Introduce from "./components/Introduce";
+import Master from "./page/MasterPage/Master";
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
                   <Route path="/myPageModify" element={<MyPageModify />} />
                   <Route path="/passwordModify" element={<PasswordModify />} />
                   <Route path="/introduce" element={<Introduce />} />
+                  <Route path="/master" element={<Master />} />
               </Routes>
           </Layout>
         </>

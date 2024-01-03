@@ -29,17 +29,17 @@ const Nav = () => {
             <h2>Ansim</h2>
             <ul>
                 <li className="direction_icon">
-                    <NavLink to="/guide"  style={({ isActive }) => (isActive ? activeStyle : {})}>
+                    <NavLink to="/guide" style={({isActive}) => (isActive ? activeStyle : {})}>
                         <TbMapSearch/>
                     </NavLink>
                 </li>
                 <li className="facility_icon">
-                    <NavLink to="/info"  style={({ isActive }) => (isActive ? activeStyle : {})}>
+                    <NavLink to="/info" style={({isActive}) => (isActive ? activeStyle : {})}>
                         <PiMapPinLineBold/>
                     </NavLink>
                 </li>
                 <li className="board_icon">
-                    <NavLink to="/board"  style={({ isActive }) => (isActive ? activeStyle : {})}>
+                    <NavLink to="/board" style={({isActive}) => (isActive ? activeStyle : {})}>
                         <BiEdit/>
                     </NavLink>
                 </li>
@@ -47,27 +47,32 @@ const Nav = () => {
                 {jwtCookie && (
                     <>
                         <li className="mypage_icon">
-                            <NavLink to="/mypage"  style={({ isActive }) => (isActive ? activeStyle : {})}>
-                                <FiUser />
+                            <NavLink to="/mypage" style={({isActive}) => (isActive ? activeStyle : {})}>
+                                <FiUser/>
                             </NavLink>
                         </li>
                         <li className="logout_icon">
-                            <NavLink onClick={logout} >
-                                <FiLogOut />
+                            <NavLink onClick={logout}>
+                                <FiLogOut/>
                             </NavLink>
                         </li>
                     </>
                 )}
                 {!jwtCookie && (
                     <li className="login_icon">
-                        <NavLink to="/Login"  style={({ isActive }) => (isActive ? activeStyle : {})}>
-                            <FiLogIn />
+                        <NavLink to="/Login" style={({isActive}) => (isActive ? activeStyle : {})}>
+                            <FiLogIn/>
                         </NavLink>
                     </li>
                 )}
                 <li className="introduce">
-                    <NavLink to="/introduce"  style={({ isActive }) => (isActive ? activeStyle : {})}>
-                        <IoIosPeople />
+                    <NavLink to="/introduce" style={({isActive}) => (isActive ? activeStyle : {})}>
+                        <IoIosPeople/>
+                    </NavLink>
+                </li>
+                <li className="mypage_icon">
+                    <NavLink to="/master" style={({isActive}) => (isActive ? activeStyle : {})}>
+                        <FiUser/>
                     </NavLink>
                 </li>
             </ul>
