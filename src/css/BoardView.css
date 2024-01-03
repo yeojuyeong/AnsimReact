@@ -213,6 +213,7 @@
     justify-content: center;
     text-align: center;
     height: 50%;
+    margin-left: 100px;
 }
 .listRight input {
     background-color: black;
@@ -222,7 +223,7 @@
 .apply_container {
     flex-grow: 1;
     margin-top: 35px;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 .apply_btn {
     border-radius: 5px;
