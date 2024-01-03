@@ -9,6 +9,7 @@ import { BiEdit } from "react-icons/bi";
 import {FiLogIn, FiLogOut, FiUser} from "react-icons/fi";
 import getCookie from './GetCookie';
 import { IoIosPeople } from "react-icons/io";
+import { VscGraph } from "react-icons/vsc";
 
 const Nav = () => {
 
@@ -65,16 +66,17 @@ const Nav = () => {
                         </NavLink>
                     </li>
                 )}
+                <li className="mypage_icon">
+                    <NavLink to="/master" style={({isActive}) => (isActive ? activeStyle : {})}>
+                        <VscGraph />
+                    </NavLink>
+                </li>
                 <li className="introduce">
                     <NavLink to="/introduce" style={({isActive}) => (isActive ? activeStyle : {})}>
                         <IoIosPeople/>
                     </NavLink>
                 </li>
-                <li className="mypage_icon">
-                    <NavLink to="/master" style={({isActive}) => (isActive ? activeStyle : {})}>
-                        <FiUser/>
-                    </NavLink>
-                </li>
+
             </ul>
         </div>
     );
