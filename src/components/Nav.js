@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {DataContext} from "./DataProvider";
 import '../css/MainPage.css';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { TbMapSearch } from "react-icons/tb";
 import { PiMapPinLineBold } from "react-icons/pi";
 import { LiaUserFriendsSolid } from "react-icons/lia";
@@ -14,14 +14,15 @@ const Nav = () => {
 
     const useridCookie = getCookie('userid');
     const jwtCookie = getCookie('jwt');
-
     const logout = () => {
 
         document.cookie = 'userid=' + useridCookie  + ';path=/; max-age=0';
         document.cookie = 'jwt=' + jwtCookie + ';path=/; max-age=0';
         document.location.href="/guide";
-
     }
+    const activeStyle = {
+        color: "#6392ff",
+    };
 
     return (
         
@@ -29,48 +30,42 @@ const Nav = () => {
             <h2>Ansim</h2>
             <ul>
                 <li className="direction_icon">
-                    <Link to="/guide" style={{textDecoration: "none"}}>
+                    <NavLink to="/guide"  style={({ isActive }) => (isActive ? activeStyle : {})}>
                         <TbMapSearch/>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li className="facility_icon">
-                    <Link to="/info" style={{textDecoration: "none"}}>
+                    <NavLink to="/info"  style={({ isActive }) => (isActive ? activeStyle : {})}>
                         <PiMapPinLineBold/>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li className="board_icon">
-                    <Link to="/board" style={{textDecoration: "none"}}>
+                    <NavLink to="/board"  style={({ isActive }) => (isActive ? activeStyle : {})}>
                         <BiEdit/>
-                    </Link>
+                    </NavLink>
                 </li>
 
                 {jwtCookie && (
                     <>
                         <li className="mypage_icon">
-                            <Link to="/mypage" style={{ textDecoration: "none" }}>
+                            <NavLink to="/mypage"  style={({ isActive }) => (isActive ? activeStyle : {})}>
                                 <FiUser />
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="logout_icon">
-                            <Link onClick={logout} style={{ textDecoration: "none" }}>
+                            <NavLink onClick={logout} >
                                 <FiLogOut />
-                            </Link>
+                            </NavLink>
                         </li>
                     </>
                 )}
-
                 {!jwtCookie && (
                     <li className="login_icon">
-                        <Link to="/Login" style={{ textDecoration: "none" }}>
+                        <NavLink to="/Login"  style={({ isActive }) => (isActive ? activeStyle : {})}>
                             <FiLogIn />
-                        </Link>
+                        </NavLink>
                     </li>
                 )}
-                {/*<li className="notification_div">*/}
-                {/*    <div className="notification_icon">*/}
-                {/*        <IoNotificationsCircle/></div>*/}
-                {/*    <div className="counter">2</div>*/}
-                {/*</li>*/}
             </ul>
         </div>
     );

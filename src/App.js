@@ -10,8 +10,6 @@ import MyPage from "./page/MyPage/MyPage";
 import Login from "./page/LoginPage/LoginPage";
 import SignupPage from "./page/SignupPage/SignupPage";
 import Footer from "./components/Footer";
-import WebSocket from "./components/WebSocket";
-// import Socket from "./components/Socket";
 import React, { createContext, useState, useEffect } from 'react';
 import MyPageModify from "./page/MyPage/MyPageModify";
 import PasswordModify from "./page/MyPage/PasswordModify";
@@ -32,8 +30,6 @@ function App() {
                   <Route path="/signup" element={<SignupPage />} />
                   <Route path="/myPageModify" element={<MyPageModify />} />
                   <Route path="/passwordModify" element={<PasswordModify />} />
-                  <Route path="/ws" element={<WebSocket />} />
-                  {/*<Route path="/ws" element={<Socket />} />*/}
               </Routes>
           </Layout>
         </>

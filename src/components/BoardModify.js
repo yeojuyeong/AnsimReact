@@ -147,143 +147,143 @@ const BoardModify = () => {
             <form id="ModifyForm" className="ModifyForm" name="ModifyForm" method="post">
                 <h1 style={{textAlign: "center"}}>게시물 수정하기</h1>
                 <br/>
-                    <div className="modi_container">
-                        {/*<input type="hidden" id="seqno" name="seqno" th:value="${view.seqno}">*/}
-                        {/*    <input type="hidden" id="page" name="page" th:value="${page}">*/}
-                        {/*        <input type="hidden" id="keyword" name="keyword" th:value="${keyword}">*/}
-                                    <div className="top">
-                                        <div className="bigLeft">
-                                            <div className="map">지도</div>
-                                        </div>
-                                        <div className="modi_bigRight">
-                                            <br/><br/>
-                                            <input type="text" id="title" className="title-input" name="title"
-                                                   value={title} ref={titleRef}
-                                                   onChange={(e) => setTitle(e.target.value)}/>
-                                            <br/><br/>
-                                            <div className="sub-detail">
-                                                <input type="text" id="departure" className="modi_left" name="departure"
-                                                       value={departure} ref={departureRef}
-                                                       onChange={(e) => setDeparture(e.target.value)}/>
-                                                <input type="text" id="destination" className="modi_right" name="destination"
-                                                       value={destination} ref={destinationRef}
-                                                       onChange={(e) => setDestination(e.target.value)}/>
-                                            </div>
-                                            <br/><br/>
-                                            <div className="sub-detail">
-                                                <div className="left">
-                                                    <div className="date_time_selector">
-                                                        <label htmlFor="date">날짜:</label>
-                                                        <input name="date" type="date" id="date" value={date}
-                                                               onChange={(e) => setDate(e.target.value)}/>
-                                                        <label htmlFor="time">시간:</label>
-                                                        <input name="time" type="time" id="time" value={time}
-                                                               onChange={(e) => setTime(e.target.value)}/>
-                                                        <input type="hidden" id="meeting_time" name="meeting_time"
-                                                               value={`날짜 : ${date} | 시간 : ${time}`}
-                                                               ref={meeting_timeRef}
-                                                               onChange={(e) => setMeeting_time(e.target.value)}/>
-                                                    </div>
-                                                </div>
-                                                <div className="modi_memcnt">
-                                                    인원수 :
-                                                    <select onChange={(e) => setMem_cnt(e.target.value)} value={mem_cnt}
-                                                            ref={mem_cntRef}>
-                                                        <option value='1'>1명</option>
-                                                        <option value="2">2명</option>
-                                                        <option value="3">3명</option>
-                                                        <option value="4">4명</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <br/><br/>
-                                            <div className="sub-detail">
-                                                <div className="modi_left">
-                                                    성별 :
+                <div className="modi_container">
+                    {/*<input type="hidden" id="seqno" name="seqno" th:value="${view.seqno}">*/}
+                    {/*    <input type="hidden" id="page" name="page" th:value="${page}">*/}
+                    {/*        <input type="hidden" id="keyword" name="keyword" th:value="${keyword}">*/}
+                    <div className="top">
+                        <div className="bigLeft">
+                            <div className="map">지도</div>
+                        </div>
+                        <div className="modi_bigRight">
+                            <br/><br/>
+                            <input type="text" id="title" className="title-input" name="title"
+                                   value={title} ref={titleRef}
+                                   onChange={(e) => setTitle(e.target.value)}/>
+                            <br/><br/>
+                            <div className="sub-detail">
+                                <input type="text" id="departure" className="modi_left" name="departure"
+                                       value={departure} ref={departureRef}
+                                       onChange={(e) => setDeparture(e.target.value)}/>
+                                <input type="text" id="destination" className="modi_right" name="destination"
+                                       value={destination} ref={destinationRef}
+                                       onChange={(e) => setDestination(e.target.value)}/>
+                            </div>
+                            <br/><br/>
+                            <div className="sub-detail">
+                                <div className="left">
+                                    <div className="date_time_selector">
+                                        <label htmlFor="date">날짜:</label>
+                                        <input name="date" type="date" id="date" value={date}
+                                               onChange={(e) => setDate(e.target.value)}/>
+                                        <label htmlFor="time">시간:</label>
+                                        <input name="time" type="time" id="time" value={time}
+                                               onChange={(e) => setTime(e.target.value)}/>
+                                        <input type="hidden" id="meeting_time" name="meeting_time"
+                                               value={`날짜 : ${date} | 시간 : ${time}`}
+                                               ref={meeting_timeRef}
+                                               onChange={(e) => setMeeting_time(e.target.value)}/>
+                                    </div>
+                                </div>
+                                <div className="modi_memcnt">
+                                    인원수 :
+                                    <select onChange={(e) => setMem_cnt(e.target.value)} value={mem_cnt}
+                                            ref={mem_cntRef}>
+                                        <option value='1'>1명</option>
+                                        <option value="2">2명</option>
+                                        <option value="3">3명</option>
+                                        <option value="4">4명</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div className="sub-detail">
+                                <div className="modi_left">
+                                    성별 :
 
-                                                    {[
-                                                        {value: 'OPT_GENDER_2', label: '남성'},
-                                                        {value: 'OPT_GENDER_1', label: '여성'},
-                                                        {value: 'OPT_GENDER_3', label: 'FTM'},
-                                                        {value: 'OPT_GENDER_4', label: 'MTF'},
-                                                        {value: 'OPT_GENDER_5', label: '상관없음'},
-                                                    ].map((option) => (
-                                                        <label key={option.value}>
-                                                            <input
-                                                                type="radio"
-                                                                name="gender"
-                                                                value={option.value}
-                                                                checked={gender === option.label || gender === option.value}
-                                                                onChange={(e) => setGender(option.value)}
-                                                            />
-                                                            {option.label}
-                                                        </label>
-                                                    ))}
-                                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_2" checked={gender === '남성'} onChange={(e)=>setGender(e.target.value)} />남성</label>*/}
-                                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_1" checked={gender === '여성'} onChange={(e)=>setGender(e.target.value)} />여성</label>*/}
-                                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_3" checked={gender === 'FTM'} onChange={(e)=>setGender(e.target.value)} />FTM</label>*/}
-                                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_4" checked={gender === 'MTF'} onChange={(e)=>setGender(e.target.value)} />MTF</label>*/}
-                                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_5" checked={gender === '상관없음'} onChange={(e)=>setGender(e.target.value)} />상관없음</label>*/}
-                                                </div>
-                                                <div className="right">
-                                                    대화 :
-                                                    <label><input type="radio" name="sound" value="OPT_SOUND_1"
-                                                                  checked={sound === '조용히' || sound === 'OPT_SOUND_1'}
-                                                                  onChange={(e) => setSound(e.target.value)}/>조용히</label>
-                                                    <label><input type="radio" name="sound" value="OPT_SOUND_2"
-                                                                  checked={sound === '상관없음' || sound === 'OPT_SOUND_2'}
-                                                                  onChange={(e) => setSound(e.target.value)}/>상관없음</label>
-                                                </div>
-                                            </div>
-                                            <br/><br/>
-                                        </div>
-                                    </div>
-                                    <div className="modi_middle">
-                                        <div className="details">
-                                            <div className="detailLeft">
-                                                <div className="detail-col">
-                                                    <img src={`/profile/${stored_file_nm}`} />
-                                                </div>
-                                            </div>
-                                            <div className="detailRight">
-                                                <div className="detailTop">
-                                                    <div className="detail-col">
-                                                        <div>이름 : {user_nm}</div>
-                                                    </div>
-                                                    <div className="detail-col">
-                                                        <div>MBTI : {mbti}</div>
-                                                    </div>
-                                                </div>
-                                                <div className="detailBottom">
-                                                    <div className="detail-col">
-                                                        <div className="gender">성별 : {mem_gender}</div>
-                                                    </div>
-                                                    <div className="detail-col">
-                                                        <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="modi_bottom">
-                                        <textarea name="content" className="modi_info" id="content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)}></textarea>
-                                        {/*<input type="hidden" name="user_id" th:value="${session.user_id}"></input>*/}
-
-                                        {/*<input type="hidden" name="departure_LATITUDE" th:value="${departure_LATITUDE}"></input>*/}
-                                        {/*<input type="hidden" name="departure_LONGITUDE" th:value="${departure_LONGITUDE}"></input>*/}
-                                        {/*<input type="hidden" name="destination_LATITUDE" th:value="${destination_LATITUDE}"></input>*/}
-                                        {/*<input type="hidden" name="destination_LONGITUDE" th:value="${destination_LONGITUDE}"></input>*/}
-                                        <br /><br />
-                                    </div>
+                                    {[
+                                        {value: 'OPT_GENDER_2', label: '남성'},
+                                        {value: 'OPT_GENDER_1', label: '여성'},
+                                        {value: 'OPT_GENDER_3', label: 'FTM'},
+                                        {value: 'OPT_GENDER_4', label: 'MTF'},
+                                        {value: 'OPT_GENDER_5', label: '상관없음'},
+                                    ].map((option) => (
+                                        <label key={option.value}>
+                                            <input
+                                                type="radio"
+                                                name="gender"
+                                                value={option.value}
+                                                checked={gender === option.label || gender === option.value}
+                                                onChange={(e) => setGender(option.value)}
+                                            />
+                                            {option.label}
+                                        </label>
+                                    ))}
+                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_2" checked={gender === '남성'} onChange={(e)=>setGender(e.target.value)} />남성</label>*/}
+                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_1" checked={gender === '여성'} onChange={(e)=>setGender(e.target.value)} />여성</label>*/}
+                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_3" checked={gender === 'FTM'} onChange={(e)=>setGender(e.target.value)} />FTM</label>*/}
+                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_4" checked={gender === 'MTF'} onChange={(e)=>setGender(e.target.value)} />MTF</label>*/}
+                                    {/*<label><input type="radio" name="gender" value="OPT_GENDER_5" checked={gender === '상관없음'} onChange={(e)=>setGender(e.target.value)} />상관없음</label>*/}
+                                </div>
+                                <div className="right">
+                                    대화 :
+                                    <label><input type="radio" name="sound" value="OPT_SOUND_1"
+                                                  checked={sound === '조용히' || sound === 'OPT_SOUND_1'}
+                                                  onChange={(e) => setSound(e.target.value)}/>조용히</label>
+                                    <label><input type="radio" name="sound" value="OPT_SOUND_2"
+                                                  checked={sound === '상관없음' || sound === 'OPT_SOUND_2'}
+                                                  onChange={(e) => setSound(e.target.value)}/>상관없음</label>
+                                </div>
+                            </div>
+                            <br/><br/>
+                        </div>
                     </div>
-                    <br />
-                    <div style={{ textAlign: 'center' }}>
-                        <input type="button" className="btn_modi"  value="수정" onClick={modifyForm} />
-                        <input type="button" className="btn_modicancel"  value="취소" onClick={() => window.history.back()} />
-                     </div>
-            </form>
-        </div>
-            )
+                    <div className="modi_middle">
+                        <div className="details">
+                            <div className="detailLeft">
+                                <div className="detail-col">
+                                    <img src={`/profile/${stored_file_nm}`} />
+                                </div>
+                            </div>
+                            <div className="detailRight">
+                                <div className="detailTop">
+                                    <div className="detail-col">
+                                        <div>이름 : {user_nm}</div>
+                                    </div>
+                                    <div className="detail-col">
+                                        <div>MBTI : {mbti}</div>
+                                    </div>
+                                </div>
+                                <div className="detailBottom">
+                                    <div className="detail-col">
+                                        <div className="gender">성별 : {mem_gender}</div>
+                                    </div>
+                                    <div className="detail-col">
+                                        <div className="ansim_cnt">동행 횟수 : {ansim_cnt}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="modi_bottom">
+                        <textarea name="content" className="modi_info" id="content" value={content} ref={contentRef} onChange={(e) => setContent(e.target.value)}></textarea>
+                        {/*<input type="hidden" name="user_id" th:value="${session.user_id}"></input>*/}
+
+                        {/*<input type="hidden" name="departure_LATITUDE" th:value="${departure_LATITUDE}"></input>*/}
+                        {/*<input type="hidden" name="departure_LONGITUDE" th:value="${departure_LONGITUDE}"></input>*/}
+                        {/*<input type="hidden" name="destination_LATITUDE" th:value="${destination_LATITUDE}"></input>*/}
+                        {/*<input type="hidden" name="destination_LONGITUDE" th:value="${destination_LONGITUDE}"></input>*/}
+                        <br /><br />
+                    </div>
+                </div>
+                <br />
+                <div style={{ textAlign: 'center' }}>
+                    <input type="button" className="btn_modi"  value="수정" onClick={modifyForm} ></input>
+                    <input type="button" className="btn_modicancel"  value="취소" onClick={() => window.history.back()} ></input>
+                </div>
+</form>
+</div>
+)
 }
 
 export default BoardModify;

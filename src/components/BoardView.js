@@ -20,7 +20,7 @@ const BoardView = () => {
     const seqno = param.get('seqno');
     const page = param.get('page');
     const keyword = param.get('keyword')===null?'':param.get('keyword');
-
+    const [list, setList] = useState([]);
     //게시판 상세 내용
     // const [map, setMap] = useState([]);
     const [title, setTitle] = useState('');
@@ -40,9 +40,6 @@ const BoardView = () => {
     const [content, setContent] = useState('');
     const [pre_seqno, setPre_seqno] = useState(0);
     const [next_seqno, setNext_seqno] = useState(0);
-
-    // 동행 신청
-    const [list, setList] = useState([]);
 
     useEffect(()=> {
 
@@ -73,7 +70,6 @@ const BoardView = () => {
 
             setPre_seqno(data.pre_seqno);
             setNext_seqno(data.next_seqno);
-
             setList(data.applicant_list);
 
             if (!cookie_user_id) {
@@ -97,7 +93,6 @@ const BoardView = () => {
         }
 
         fetchData();
-
 
     },[page,seqno,keyword]);
 
@@ -195,61 +190,62 @@ const BoardView = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="apply_container">
+                        {(cookie_user_id !== user_id) && (
+                            // <div className="bottom_menu">
+                            //     <a href="#">동행 신청</a>
+                            // </div>
+                            <input type="button" className="apply_btn" value="동행 신청" onClick={application}/>
+                        )}
+                    </div>
                 </div>
                 <div className="bottom">
-                    <div className="info">{content}</div>
+                    <div className="view_info">{content}</div>
                 </div>
-                {(cookie_user_id !== user_id) && (
-                    // <div className="bottom_menu">
-                    //     <a href="#">동행 신청</a>
-                    // </div>
-                    <input type="button" className="bottom_menu" value="동행 신청" onClick={application}/>
-                )}
-                {(cookie_user_id === user_id && list.length > 0) && (
-                    list.map((item, index) => (
-                        <React.Fragment>
-                            <div className="applicant_list">
-                                <div className="listLeft">
-                                    <div className="detail-col"><img src={`/profile/${item.stored_file_nm}`} style={{
-                                        display: 'block',
-                                        width: '80%',
-                                        height: 'auto',
-                                        margin: 'auto'
-                                    }}/></div>
-                                </div>
-                                <div className="listMiddle">
-                                    <div className="detailTop">
+                <div className="apply_list">
+                    {(cookie_user_id === user_id && list.length > 0) && (
+                        list.map((item, index) => (
+                            <React.Fragment>
+                                <div className="applicant_list" style={{ textAlign: "center" }}>
+                                    <div className="listLeft">
                                         <div className="detail-col">
-                                            <div>이름 : {item.user_nm}</div>
+                                            <img src={`/profile/${item.stored_file_nm}`} style={{
+                                            display: 'block',
+                                            width: '80%',
+                                            height: 'auto',
+                                            margin: 'auto'
+                                        }}/></div>
+                                    </div>
+                                    <div className="listMiddle">
+                                        <div className="detailTop">
+                                            <div className="detail-col">
+                                                <div style={{ marginLeft: "10px" }}>이름 : {item.user_nm}</div>
+                                            </div>
+                                            <div className="detail-col">
+                                                <div>MBTI : {item.mbti}</div>
+                                            </div>
                                         </div>
-                                        <div className="detail-col">
-                                            <div>나이 : {item.age}</div>
-                                        </div>
-                                        <div className="detail-col">
-                                            <div>MBTI : {item.mbti}</div>
+                                        <div className="detailBottom">
+                                            <div className="detail-col">
+                                                <div>성별 : {item.gender}</div>
+                                            </div>
+                                            <div className="detail-col">
+                                                <div>동행 포인트 : {item.ansim_cnt}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="detailBottom">
-                                        <div className="detail-col">
-                                            <div>성별 : {item.gender}</div>
-                                        </div>
-                                        <div className="detail-col-full">
-                                            <div>동행 포인트 : {item.ansim_cnt}</div>
-                                        </div>
+                                    <div className="listRight">
+                                        <input type="button" className="accept" value="수락"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button" className="deny" value="거절"
+                                               onClick={() => window.history.back()}/>
                                     </div>
-                                </div>
-                                <div className="listRight">
-                                    <input type="button" className="accept" value="수락"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="button" className="deny" value="거절"
-                                           onClick={() => window.history.back()}/>
-                                </div>
-                            </div> <br/>
-                        </React.Fragment>
-                    ))
-                )}
+                                </div> <br/>
+                            </React.Fragment>
+                        ))
+                    )}
+                </div>
             </div>
             <br />
-
                 <div className="bottom_menu">
                     {
                         pre_seqno !== '0' && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
