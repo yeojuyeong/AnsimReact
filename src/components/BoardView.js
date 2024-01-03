@@ -135,6 +135,38 @@ const BoardView = () => {
         });
     };
 
+    // 동행 신청 수락
+    const accept = (user_id) => {
+        fetch(`http://localhost:8080/restapi/accept?post_no=${seqno}&applicant=${user_id}&writer=${cookie_user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                if(data.message === 'GOOD') {
+                    alert('동행 신청을 수락 하였습니다.')
+                } else if(data.message === 'CLICKED') {
+                    alert('이미 수락한 멤버입니다.');
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
+    };
+
+    // 동행 신청 거절
+    const deny = (user_id) => {
+        fetch(`http://localhost:8080/restapi/deny?post_no=${seqno}&applicant=${user_id}&writer=${cookie_user_id}`, {
+            method: 'POST'
+        }).then((response) => response.json())
+            .then((data) => {
+                if(data.message === 'GOOD') {
+                    alert('동행 신청을 거절 하였습니다.')
+                } else if(data.message === 'CLICKED') {
+                    alert('이미 거절한 멤버입니다.');
+                }
+            }).catch((error)=> {
+            console.log("error = " + error);
+        });
+    };
+
     return (
         <div className="board_view">
             <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
@@ -235,9 +267,8 @@ const BoardView = () => {
                                         </div>
                                     </div>
                                     <div className="listRight">
-                                        <input type="button" className="accept" value="수락"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="button" className="deny" value="거절"
-                                               onClick={() => window.history.back()}/>
+                                        <input type="button" className="accept" value="수락" onClick={() => accept(item.user_id)}/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button" className="deny" value="거절" onClick={() => deny(item.user_id)}/>
                                     </div>
                                 </div> <br/>
                             </React.Fragment>
