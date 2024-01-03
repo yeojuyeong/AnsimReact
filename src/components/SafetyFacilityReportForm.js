@@ -1,78 +1,116 @@
 import {useState, useContext, useEffect} from 'react';
 import '../css/SafetyFacilityReportForm.css';
 import {DataContext} from "./DataProvider";
+import getCookie from './GetCookie';
 
 const SafetyFacilityReportForm = () => {
+
+    const [brokenOption, setBrokenOption] = useState(null);
+    const [selectedBrokenOption, setSelectedBrokenOption] = useState(null);
+    const [content, setContent] = useState(null);
 
     const {
         breakdownReportVisible, setBreakdownReportVisible
         ,dataOfBreakdownReport, setDataOfBreakdownReport
     } = useContext(DataContext);
 
-    console.log("SafetyFacilityReportForm > dataOfBreakdownReport ",dataOfBreakdownReport);
+    //시설type별 고장유형 가져오기
+    async function callBrokenType(type){
 
-    const [formData, setFormData] = useState({
-        facilityType: '',
-        locationDescription: '',
-        issueDetails: '',
-        reporterName: '',
-        contactInfo: '',
-        photo: null, // 파일 업로드를 위한 상태
-        priority: '',
-        agreeTerms: false,
-    });
+        await fetch(`http://localhost:8080/info/brokenType?type=${type}`,{
+            method:'GET'
+        }).then((response) => response.json())
+            .then((data)=>{
+                //console.log("callBrokenType > data",data);
+                setBrokenOption(data);
+            }).catch((error)=> {
+                console.log("error = " + error);
+            });
+    } //callBrokenType  END
 
-    const handleChange = (e) => {
-        const { name, value, type, checked, files } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: type === 'checkbox' ? checked : files ? files[0] : value,
-        }));
-    };
+    //고장신고 등록 API 호출
+    async function registerBrokenReport(){
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // 여기서 폼 제출 로직을 작성하면 됩니다.
-        console.log('Form Data:', formData);
-        // 실제로는 서버로 데이터를 전송하거나 상태를 업데이트하는 로직을 추가해야 합니다.
-    };
+        //로그인된 쿠키값 가져오기
+        const userid = getCookie('userid');
+        console.log(userid);
+
+        if(userid === undefined || userid === null){
+            alert("로그인 후 이용가능한 서비스입니다.");
+            return;
+        }
+
+        const data = {
+            fac_id: dataOfBreakdownReport.id,
+            fac_type: dataOfBreakdownReport.type,
+            broken_opt_cd: selectedBrokenOption,
+            content: content,
+            user_id: userid //쿠키에서 가져오기
+            //photo: null //사진 첨부 추후 작업 예정
+        }
+
+        console.log("data:",data);
+
+        //컨트롤러 호출
+        await fetch(`http://localhost:8080/info/brokenReportAdd`,{
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then((response) => response.json())
+            .then((data)=>{
+                //console.log("registerBrokenReport api 호출 결과값",data);
+                alert("고장신고가 등록되었습니다.");
+                window.location.reload();
+            }).catch((error)=> {
+                console.log("error = " + error);
+            });
+    } //registerBrokenReport  END
+
+
+    useEffect(() => {
+        if(dataOfBreakdownReport){callBrokenType(dataOfBreakdownReport.type);}
+    }, [dataOfBreakdownReport]);
 
     return (
         <div id='SafetyFacilityReportForm' className={breakdownReportVisible ? 'open' : 'closed'}>
-            <form className="facilityReportForm" onSubmit={handleSubmit}>
+            <form className="facilityReportForm" >
                 <label>
-                    Facility Type:
+                    시설유형:
                     <input type="text" name="facilityType"
-                           value={ dataOfBreakdownReport && dataOfBreakdownReport.type ?
-                                    dataOfBreakdownReport.type === 'C' ? 'CCTV' :
-                                        dataOfBreakdownReport.type === 'E' ? '비상벨' :
-                                            dataOfBreakdownReport.type === 'D' ? '안심 택배함' :
-                                                dataOfBreakdownReport.type === 'S' ? '편의점' : '경찰서' : ''
-                                }
-                           onChange={handleChange} disabled />
+                           value={dataOfBreakdownReport &&
+                               (dataOfBreakdownReport.type === 'C' ? 'CCTV' :
+                                   dataOfBreakdownReport.type === 'E' ? '비상벨' :
+                                       dataOfBreakdownReport.type === 'D' ? '안심 택배함' :
+                                           dataOfBreakdownReport.type === 'S' ? '편의점' : '경찰서')
+                           } disabled/>
                 </label>
                 <label>
-                    Location:
-                    <input name="locationDescription" value={dataOfBreakdownReport && dataOfBreakdownReport.addr} onChange={handleChange} disabled />
+                    시설위치:
+                    <input name="locationDescription" value={dataOfBreakdownReport && dataOfBreakdownReport.addr} disabled/>
                 </label>
                 <label>
-                    Priority:
-                    <select name="priority" value={formData.priority} onChange={handleChange}>
-                        <option value="">Select Priority</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
+                    고장유형:
+                    <select value={selectedBrokenOption}
+                            onChange={(e) => setSelectedBrokenOption(e.target.value)}>
+                        <option value="">선택하세요</option>
+                        {brokenOption && brokenOption.map((option, index) => (
+                            <option key={index} value={option.opt_cd}>
+                                {option.opt_nm}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <label>
-                    Issue Details:
-                    <textarea name="issueDetails" value={formData.issueDetails} onChange={handleChange}/>
+                    상세내용:
+                    <textarea name="issueDetails" value={content}
+                              onChange={(e) => setContent(e.target.value)}/>
                 </label>
                 <label>
-                    Photo:
-                    <input type="file" name="photo" onChange={handleChange}/>
+                    사진:
+                    <input type="file" name="photo" />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="button" onClick={()=>{registerBrokenReport()}}>Submit</button>
+                <button type="button" onClick={()=>{setBreakdownReportVisible(false)}}>Close</button>
             </form>
         </div>
     );
