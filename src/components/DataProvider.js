@@ -29,10 +29,16 @@ const DataProvider = ({ children }) => {
             drawedInfoWindow.setMap(null);
             setDrawedInfoWindow(null);
         }
+        if(dataOfBreakdownReport != null){
+            setDataOfBreakdownReport(null);
+        }
+        setBreakdownReportVisible(false);
+        setDataIndex(-1);
     };
 
     // Card 클릭 이벤트
     const handleCardClick = (index) => {
+        console.log("handleCardClick",index);
         setDataIndex(index);
     }
 
@@ -43,7 +49,7 @@ const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider
-            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, currentPage, dataIndex
+            value={{ cctvData, setCctvData, emergbellData, setEmergbellData, deliboxData, setDeliboxData, policeData, setPoliceData, storeData, setStoreData, selectedOption, setSelectedOption, currentPage, dataIndex
                 , handleOptionChange, handleCardClick, drawedInfoWindow, setDrawedInfoWindow, map, setMap, dataOfBreakdownReport, setDataOfBreakdownReport, handleBreakdownButtonInCard
                 ,breakdownReportVisible, setBreakdownReportVisible
             }}>

@@ -19,7 +19,7 @@ const InfoMap = () => {
         ,deliboxData,setDeliboxData
         ,policeData,setPoliceData
         ,storeData,setStoreData
-        ,selectedOption
+        ,selectedOption, setSelectedOption
         ,dataIndex
         ,handleCardClick
         ,drawedInfoWindow,setDrawedInfoWindow
@@ -49,7 +49,7 @@ const InfoMap = () => {
                 const currentLng = position.coords.longitude;
                 const currentLocation = new Tmapv2.LatLng(currentLat, currentLng);
 
-                console.log("현재 위치 - 위도: " + currentLat + ", 경도: " + currentLng);
+                //console.log("현재 위치 - 위도: " + currentLat + ", 경도: " + currentLng);
 
                 // 현재 위치로 지도를 생성.
                 const initialMap = new Tmapv2.Map("map_div", {
@@ -59,9 +59,7 @@ const InfoMap = () => {
                     height: "100vh",
                     zoom: 19,
                     zoomControl: true,
-                    scrollwheel: true,
-                    zIndexMarker : 1,
-                    zIndexInfoWindow :2
+                    scrollwheel: true
                 })
                 initialMap.setZoomLimit(minZoom, maxZoom);
 
@@ -75,7 +73,7 @@ const InfoMap = () => {
                 // 드래그 이벤트 등록
                 initialMap.addListener("dragend", (e) => {
                     const dragLocation = e.latLng;
-                    console.log('드래그가 끝난 위치의 중앙좌표는 ' + dragLocation + '입니다.');
+                    //console.log('드래그가 끝난 위치의 중앙좌표는 ' + dragLocation + '입니다.');
                     setSaveLocation(dragLocation);
                     if (currentMarker.current) {
                         currentMarker.current.setPosition(dragLocation);
@@ -92,6 +90,7 @@ const InfoMap = () => {
                 })
                 currentMarker.current = initialMarker;
                 setMap(initialMap);
+                setSelectedOption("cctv");
             }, (error) => {
                 console.error("Geolocation 오류 : " + error.message);
             });
@@ -284,21 +283,28 @@ const InfoMap = () => {
 
 
      const makeInfoWindow = async (data)=>{ //infoWindow를 생성한다.
-        //console.log("makeInfoWindow 실행");
 
-         let aa = 'aa';
+        let addr=null;
+        if(data.addr===""){ //지번이 없는 경우 도로명 셋팅
+            addr = data.road_addr;
+        }else{
+            addr = data.addr;
+        }
 
-         if(map != null && data != null){
+        //console.log("makeInfoWindow 실행>data.addr:",data.addr);
+        //console.log("addraddraddr:",addr);
+
+         if(map != null && addr != null){
             var content =
                 "<div style='position: relative; border-bottom: 1px solid #dcdcdc; line-height: 18px; padding: 0 2px 2px 0; '>"+
                 "<div style='font-size: 12px; line-height: 15px;'>"+
-                "<input type='button' onclick='alert(aa)' value='고장신고'/>"+
-                "<input type='button' onclick='alert(&apos;버튼이 클릭되었습니다!&apos;)' value='고장신고'/>"+
+                //"<input type='button' onclick='alert(aa)' value='고장신고'/>"+
+                //"<input type='button' onclick='alert(&apos;버튼이 클릭되었습니다!&apos;)' value='고장신고'/>"+
                 "</div>"+
                 "</div>"+
-                "<div style='position: relative; padding-top: 5px; display:inline-block'>"+
+                "<div style='width:100px; position: relative; padding-top: 5px; display:inline-block'>"+
                 "<div style='display:inline-block; margin-left:5px; vertical-align: top;'>"+
-                "<span style='font-size: 12px; margin-left:2px; margin-bottom:2px; display:block;'>"+data.addr+"</span>"+
+                "<span style='font-size: 12px; margin-left:2px; margin-bottom:2px; display:block;'>"+addr+"</span>"+
                 "</div>"+
                 "</div>";
 
@@ -328,15 +334,15 @@ const InfoMap = () => {
 
 
     useEffect(() => {
-
+        console.log("dataIndex change!!:",selectedOption, dataIndex);
         const data = selectedOption === 'cctv' ? cctvData[dataIndex]
             : selectedOption === 'emergbell' ? emergbellData[dataIndex]
                 : selectedOption === 'delibox' ? deliboxData[dataIndex]
                     : selectedOption === 'police' ? policeData[dataIndex]
                         : selectedOption === 'store' ? storeData[dataIndex]
                             : null;
-        if(data != null) {makeInfoWindow(data);}
-
+        console.log("selectedOption > data",data);
+        if(data) {makeInfoWindow(data);}
     }, [dataIndex]);
 
         return (

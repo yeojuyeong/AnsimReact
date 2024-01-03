@@ -29,7 +29,7 @@ const GuideSidebar =(props)=> {
         { label: '안심택배', value: 'D' },
         { label: '비상벨', value: 'E' },
         { label: '편의점', value: 'S' },
-        { label: '파출소', value: 'P' },
+        { label: '경찰서', value: 'P' },
     ];
 
     // useState
@@ -40,6 +40,12 @@ const GuideSidebar =(props)=> {
     const isMounted = useRef(false); //첫번째 랜더링에는 useEffect가 실행되지 않도록 하는 flag 값
 
     async function doMapGuide() {
+
+        if( !guideBasePoint.startPointLon || !guideBasePoint.startPointLat ||
+            !guideBasePoint.endPointLon || !guideBasePoint.endPointLat){
+            alert("출발지 또는 목적지의 POI 선택값이 필요합니다. 작성 후 [Enter]를 누른 후 선택하세요.");
+            return;
+        }
 
         //시작마커
         drawMarker(guideBasePoint.startPointLat, guideBasePoint.startPointLon, 38, 38, pinIcon);
@@ -186,7 +192,11 @@ const GuideSidebar =(props)=> {
                         <div id="div1">
                             <input type="text" className="text_custom" id="searchStartKeyword" value={startKeyword}
                                    placeholder="출발지"
-                                   onBlur={(e) => setStartKeyword(e.target.value)}/>
+                                   onKeyDown={(e) => {
+                                       if (e.key === "Enter") {
+                                           setStartKeyword(e.target.value);
+                                       }
+                                   }}/>
                             <br/>
                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                 <FaCaretDown/>
@@ -206,7 +216,11 @@ const GuideSidebar =(props)=> {
 
                             <input type="text" className="text_custom" id="searchEndKeyword" value={endKeyword}
                                    placeholder="목적지"
-                                   onBlur={(e) => setEndKeyword(e.target.value)}/>
+                                   onKeyDown={(e) => {
+                                       if (e.key === "Enter") {
+                                           setEndKeyword(e.target.value);
+                                       }
+                                   }}/>
                         </div>
 
                         <div style={{float: 'left', height: 'auto'}}>
@@ -267,7 +281,7 @@ const GuideSidebar =(props)=> {
                         </div>
 
                         <div>
-                            <button className="button"><CiRedo/></button>
+                            <button className="button" onClick={() => window.location.reload()} ><CiRedo/></button>
                             {selectedMarkerInMap.length === 0 ? (
                                 <button className="button" onClick={() => doMapGuide()}>길찾기</button>
                             ) : (

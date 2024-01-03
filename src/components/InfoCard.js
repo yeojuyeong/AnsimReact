@@ -55,7 +55,7 @@ const InfoCard = ({ data, index, handleCardClick, selectedOption }) => {
                         fontSize: '8px',
                         fontWeight: 'bold'
                     }}>
-                    지번</span>
+                    주소</span>
                 <span
                     style={{fontSize: '11px', marginLeft: '4px'}}>
                     {data.addr ? data.addr : data.road_addr} </span>
