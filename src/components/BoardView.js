@@ -5,6 +5,8 @@ import {Link, useSearchParams} from "react-router-dom";
 
 import '../css/BoardView.css';
 import getCookie from '../components/GetCookie';
+import locationIcon from "../images/location.png";
+import pinIcon from "../images/pin_icon.png";
 
 const BoardView = () => {
 
@@ -41,6 +43,10 @@ const BoardView = () => {
     const [pre_seqno, setPre_seqno] = useState(0);
     const [next_seqno, setNext_seqno] = useState(0);
 
+    const { Tmapv2 } = window;
+    let boardViewMap;
+
+
     useEffect(()=> {
         fetchData();
     },[page,seqno,keyword]);
@@ -50,6 +56,8 @@ const BoardView = () => {
         //게시물 상세 보기
         const response = await axios.get(`http://localhost:8080/restapi/view?seqno=${seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`);
         const data = response.data;
+
+        //console.log("response.data",response.data);
 
         setUser_id(data.view.user_id);
         setCookie_stored_file_nm(data.cookie_stored_file_nm);
@@ -74,6 +82,13 @@ const BoardView = () => {
         setNext_seqno(data.next_seqno);
         setList(data.applicant_list);
 
+        const drawData = {
+            departure_latitude:data.view.departure_latitude,
+            departure_longitude:data.view.departure_longitude,
+            destination_latitude:data.view.destination_latitude,
+            destination_longitude:data.view.destination_longitude
+        };
+
         if (!cookie_user_id) {
             alert('서비스 이용을 위해 로그인해주세요.');
             window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
@@ -84,14 +99,7 @@ const BoardView = () => {
             window.location.href = 'http://localhost:3000/Mypage';  // 회원 정보 변경 페이지로
         }
 
-        // //이전 보기
-        // (이거... 굳이 필요한가? 맨 처음,끝에서 다음, 이전 보기
-        // 안 보이게 하려면 필요할 것 같기도 하고... 시간 없으니 일단 패스)
-        // const preseqno = await axios.get(`http://localhost:8080/restapi/preseqno?seqno=${seqno}&keyword=${keyword}`);
-        // setPre_seqno(data.pre_seqno);
-        // //다음 보기
-        // const nextseqno = await axios.get(`http://localhost:8080/restapi/nextseqno?seqno=${seqno}&keyword=${keyword}`);
-        // setNext_seqno(data.next_seqno);
+        makeMap(drawData);
     }
 
     //게시물 삭제
@@ -166,13 +174,175 @@ const BoardView = () => {
         });
     };
 
+    //------------------map start---------------------
+    const makeMap=(drawData)=>{
+        const initialMap = new Tmapv2.Map("map_div", {
+            center: new Tmapv2.LatLng(37.56520450, 126.98702028),
+            width: "100%",
+            height: "100%",
+            zoom: 15,
+            zoomControl: false
+        });
+
+        boardViewMap = initialMap;
+
+        callPedestrianAPI(drawData);
+    }
+
+    // 보행자 경로 API 호출
+    async function callPedestrianAPI(drawData) {
+
+        if( !drawData.departure_longitude || !drawData.departure_latitude ||
+            !drawData.destination_longitude || !drawData.destination_latitude){
+            return;
+        }
+
+        var headers = {};
+        headers["appKey"]="FMHrfuOs4Z6qvFnNXfZsV2fiSbTQjiC241luv6PK";
+
+        console.log("drawData.departure_longitude",drawData.departure_longitude);
+
+        const data = { //(중요!!) 경도, 위도 순으로 넣어야 한다.
+            "startX" : drawData.departure_longitude,
+            "startY" : drawData.departure_latitude,
+            "endX" : drawData.destination_longitude,
+            "endY" : drawData.destination_latitude,
+            "reqCoordType" : "WGS84GEO",
+            "resCoordType" : "EPSG3857",
+            "startName" : "출발지",
+            "endName" : "도착지"
+        }
+
+        await fetch('https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&format=json&callback=result',{
+            method:'POST',
+            headers: headers,
+            body: JSON.stringify(data)
+        }).then((response) => response.json())
+            .then((data)=>{ //API 호출 성공 시
+
+                var resultData = data.features;
+                var drawInfoArr = [];
+
+                //결과 출력
+                var tDistance = "총 거리 : "
+                    + ((resultData[0].properties.totalDistance) / 1000)
+                        .toFixed(1) + "km,";
+                var tTime = " 총 시간 : "
+                    + ((resultData[0].properties.totalTime) / 60)
+                        .toFixed(0) + "분";
+
+                //result.innerText=tDistance + tTime;
+
+                for ( var i in resultData) { //for문 [S]
+                    var geometry = resultData[i].geometry;
+                    var properties = resultData[i].properties;
+                    var polyline_;
+
+                    if (geometry.type == "LineString") {
+                        for ( var j in geometry.coordinates) {
+                            // 경로들의 결과값(구간)들을 포인트 객체로 변환
+                            var latlng = new Tmapv2.Point(
+                                geometry.coordinates[j][0],
+                                geometry.coordinates[j][1]);
+                            // 포인트 객체를 받아 좌표값으로 변환
+                            var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                                latlng);
+                            // 포인트객체의 정보로 좌표값 변환 객체로 저장
+                            var convertChange = new Tmapv2.LatLng(
+                                convertPoint._lat,
+                                convertPoint._lng);
+                            // 배열에 담기
+                            drawInfoArr.push(convertChange);
+                        }
+                    } else {
+                        var markerImg = "";
+                        var pType = "";
+                        var size;
+
+                        if (properties.pointType == "S") { //출발지 마커
+                        } else if (properties.pointType == "E") { //도착지 마커
+                        } else { //각 포인트 마커
+                            markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                            pType = "P";
+                            size = new Tmapv2.Size(8, 8);
+                        }
+
+                        new Tmapv2.Marker( //생성과 동시에 화면에 찍어짐
+                            {
+                                position : new Tmapv2.LatLng(drawData.departure_latitude, drawData.departure_longitude),
+                                icon : pinIcon,
+                                iconSize : new Tmapv2.Size(32, 32),
+                                map : boardViewMap
+                            });
+
+                        new Tmapv2.Marker( //생성과 동시에 화면에 찍어짐
+                            {
+                                position : new Tmapv2.LatLng(drawData.destination_latitude, drawData.destination_longitude),
+                                icon : pinIcon,
+                                iconSize : new Tmapv2.Size(32, 32),
+                                map : boardViewMap
+                            });
+
+                        // 경로들의 결과값들을 포인트 객체로 변환
+                        var latlon = new Tmapv2.Point(
+                            geometry.coordinates[0],
+                            geometry.coordinates[1]);
+
+                        // 포인트 객체를 받아 좌표값으로 다시 변환
+                        var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                            latlon);
+
+                        var routeInfoObj = {
+                            markerImage : markerImg,
+                            lng : convertPoint._lng,
+                            lat : convertPoint._lat,
+                            pointType : pType
+                        };
+
+                        // Marker 추가
+                        new Tmapv2.Marker(
+                            {
+                                position : new Tmapv2.LatLng(
+                                    routeInfoObj.lat,
+                                    routeInfoObj.lng),
+                                icon : routeInfoObj.markerImage,
+                                iconSize : size,
+                                map : boardViewMap
+                            });
+                    }
+                }//for문 [E]
+                drawLine(drawInfoArr);
+            }).catch((error)=> {
+                console.log("error = " + error);
+            });
+
+        //출발지 목적지 직선의 중심점 구하기
+        const midLat = (drawData.departure_latitude + drawData.destination_latitude) / 2.0;
+        const midLon = (drawData.departure_longitude + drawData.destination_longitude) / 2.0;
+
+        boardViewMap.setCenter(new Tmapv2.LatLng(midLat, midLon));
+
+    } //callPedestrianAPI() END
+
+    function drawLine(arrPoint) {
+        var polyline_;
+        polyline_ = new Tmapv2.Polyline({
+            path : arrPoint,
+            strokeColor : '#FF0000',
+            strokeWeight : 6,
+            map : boardViewMap
+        });
+    }
+
+    //------------------map end---------------------
+
     return (
         <div className="board_view">
-            <h1 style={{ textAlign: "center" }}>게시물 상세보기</h1>
+            <h1 style={{textAlign: "center"}}>게시물 상세보기</h1>
             <div className="view_container">
                 <div className="top">
                     <div className="bigLeft">
-                        <div className="map">지도</div>
+                        <div id ="map_div" className="map_div"></div>
                     </div>
                     <div className="bigRight">
                         <br/>
@@ -200,7 +370,7 @@ const BoardView = () => {
                         <div className="detailLeft">
                             <div className="detail-col">
                                 <div className="writer_profile">작성자 Profile</div>
-                                <img src={`/profile/${stored_file_nm}`} />
+                                <img src={`/profile/${stored_file_nm}`}/>
                             </div>
                         </div>
                         <div className="detailRight">
@@ -234,25 +404,25 @@ const BoardView = () => {
                 <div className="bottom">
                     <div className="view_info">{content}</div>
                 </div>
-                <div className="apply_list" >
+                <div className="apply_list">
                     {(cookie_user_id === user_id && list.length > 0) && (
                         list.map((item, index) => (
                             <React.Fragment>
-                                <div className="apply_listnm">신청자{index+1}</div>
-                                <div className="applicant_list" style={{ textAlign: "center" }}>
+                                <div className="apply_listnm">신청자{index + 1}</div>
+                                <div className="applicant_list" style={{textAlign: "center"}}>
                                     <div className="listLeft">
                                         <div className="detail-col">
                                             <img src={`/profile/${item.stored_file_nm}`} style={{
-                                            display: 'block',
-                                            width: '80%',
-                                            height: 'auto',
-                                            margin: 'auto'
-                                        }}/></div>
+                                                display: 'block',
+                                                width: '80%',
+                                                height: 'auto',
+                                                margin: 'auto'
+                                            }}/></div>
                                     </div>
                                     <div className="listMiddle">
                                         <div className="detailTop">
                                             <div className="detail-col">
-                                                <div style={{ marginLeft: "10px" }}>이름 : {item.user_nm}</div>
+                                                <div style={{marginLeft: "10px"}}>이름 : {item.user_nm}</div>
                                             </div>
                                             <div className="detail-col">
                                                 <div>MBTI : {item.mbti}</div>
@@ -268,37 +438,43 @@ const BoardView = () => {
                                         </div>
                                     </div>
                                     <div className="listRight">
-                                        <input type="button" className="accept" value="수락" onClick={() => accept(item.user_id)}/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="button" className="deny" value="거절" onClick={() => deny(item.user_id)}/>
+                                        <input type="button" className="accept" value="수락"
+                                               onClick={() => accept(item.user_id)}/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button" className="deny" value="거절"
+                                               onClick={() => deny(item.user_id)}/>
                                     </div>
-                                </div> <br/>
+                                </div>
+                                <br/>
                             </React.Fragment>
                         ))
                     )}
                 </div>
             </div>
-            <br />
-                <div className="view_bottom_menu">
-                    {
-                        pre_seqno !== 0 && <Link to ={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
-                    }
-                    &nbsp;&nbsp;
-                    <Link to={`/board/list?page=${page}&keyword=${keyword}`}>목록보기</Link>
-                    &nbsp;&nbsp;
-                    {
-                        next_seqno !== 0 && <Link to={`/board/view?seqno=${next_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>다음글▲</Link>
-                    }
-                    &nbsp;&nbsp;
-                    <a href="/board/write">글 작성</a>
-                    &nbsp;&nbsp;
-                    {(cookie_user_id === user_id || role === 'MASTER') && (
-                        <>
-                            <Link to={`/board/modify?seqno=${seqno}&page=${page}&keyword=${keyword}&user_id=${user_id}`}>글 수정</Link>
-                            &nbsp;&nbsp;
-                            <a href='javascript:void(0)' onClick={boardDelete}>글 삭제</a>
-                        </>
-                    )}
-                </div>
+            <br/>
+            <div className="view_bottom_menu">
+                {
+                    pre_seqno !== 0 && <Link
+                        to={`/board/view?seqno=${pre_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>이전글▼</Link>
+                }
+                &nbsp;&nbsp;
+                <Link to={`/board/list?page=${page}&keyword=${keyword}`}>목록보기</Link>
+                &nbsp;&nbsp;
+                {
+                    next_seqno !== 0 && <Link
+                        to={`/board/view?seqno=${next_seqno}&page=${page}&keyword=${keyword}&user_id=${cookie_user_id}`}>다음글▲</Link>
+                }
+                &nbsp;&nbsp;
+                <a href="/board/write">글 작성</a>
+                &nbsp;&nbsp;
+                {(cookie_user_id === user_id || role === 'MASTER') && (
+                    <>
+                        <Link to={`/board/modify?seqno=${seqno}&page=${page}&keyword=${keyword}&user_id=${user_id}`}>글
+                            수정</Link>
+                        &nbsp;&nbsp;
+                        <a href='javascript:void(0)' onClick={boardDelete}>글 삭제</a>
+                    </>
+                )}
+            </div>
         </div>
     )
 }
