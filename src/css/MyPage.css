@@ -1,15 +1,28 @@
+#myPageWrap{
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
 .myPageMain{
+    /*
     width: 400px;
+    height: auto;*/
+    width: 60vh;
+    height: 98vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
-    margin: 17% 25% 0 120%;
-    padding: 45px 60px;
+    /*margin: 17% 25% 0 120%; */
+    /*padding: 45px 60px; */
     border-radius: 8px;
     box-shadow: 1px 1px 3px 2px darkgray;
     user-select: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .MyPageTitle{
     color: dodgerblue;
@@ -77,7 +90,6 @@
     border-color: dodgerblue; /* 호버 시 테두리 색상 */
     color: white;
 }
-
 
 
 

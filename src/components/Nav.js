@@ -19,7 +19,7 @@ const Nav = () => {
 
         document.cookie = 'userid=' + useridCookie  + ';path=/; max-age=0';
         document.cookie = 'jwt=' + jwtCookie + ';path=/; max-age=0';
-        document.location.href="/guide";
+        document.location.href="/";
     }
     const activeStyle = {
         color: "#6392ff",
@@ -44,7 +44,11 @@ const Nav = () => {
                         <BiEdit/>
                     </NavLink>
                 </li>
-
+                <li className="mypage_icon">
+                    <NavLink to="/master" style={({isActive}) => (isActive ? activeStyle : {})}>
+                        <VscGraph/>
+                    </NavLink>
+                </li>
                 {jwtCookie && (
                     <>
                         <li className="mypage_icon">
@@ -66,11 +70,6 @@ const Nav = () => {
                         </NavLink>
                     </li>
                 )}
-                <li className="mypage_icon">
-                    <NavLink to="/master" style={({isActive}) => (isActive ? activeStyle : {})}>
-                        <VscGraph />
-                    </NavLink>
-                </li>
                 <li className="introduce">
                     <NavLink to="/introduce" style={({isActive}) => (isActive ? activeStyle : {})}>
                         <IoIosPeople/>

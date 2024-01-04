@@ -108,39 +108,41 @@ const LoginPage = () =>{
     };
 
     return(
-        <div className='main'>
-            <div>
-                <img className="logo" src ="/images/steak2.png" alt="안심" />
-            </div>
-            <p className="ansimName">안심동행</p>
-            {/*<h2>Sign In</h2>*/}
-            <div className='login'>
-                {/* 아이디 */}
-                <input type="text" ref={user_idRef} value={user_id} className="user_id"
-                       onChange={(e) => setUser_id(e.target.value)} placeholder="ID을 입력하세요."/>
-                {/* 패스워드 */}
-                <input type="password" ref={passwordRef} value={password} className="password"
-                       onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호를 입력하세요." onKeyDown={onKeyDown}/>
-                <p style={{color: 'red', textAlign: 'center'}}>{message}</p>
-
-                {/* 체크박스[아이디 기억, 패스워드 기억, 자동 로그인, JWT 로그인 */}
-                <div className="checkboxContainer">
+        <div id='loginpageWrap'>
+            <div className='main'>
+                <div>
+                    <img className="logo" src ="/images/steak2.png" alt="안심" />
                 </div>
-                <Link to="/signup" className="signupBtn">Sign Up</Link><br/>
-                {/* 로그인 버튼 */}
-                <input type="button" className="login_btn" value="로그인" onClick={loginCheck}/>
-                <Link to="http://localhost:8080/oauth2/authorization/google" className="linkBtn">
-                    <img src="/images/google.png" alt="google Login" style={{width: '100%', cursor: 'pointer'}}/>
-                </Link>
-                <Link to="http://localhost:8080/oauth2/authorization/kakao" className="linkBtn">
-                    <img src="/images/kakao1.png" alt="Kakao Login" style={{width: '100%', cursor: 'pointer',}}/>
-                </Link>
-                <Link to="http://localhost:8080/oauth2/authorization/naver" className="linkBtn">
-                    <img src="/images/naver.png" alt="Naver Login" style={{width: '100%', cursor: 'pointer'}}/>
-                </Link>
+                <p className="ansimName">안심동행</p>
+                {/*<h2>Sign In</h2>*/}
+                <div className='login'>
+                    {/* 아이디 */}
+                    <input type="text" ref={user_idRef} value={user_id} className="user_id"
+                           onChange={(e) => setUser_id(e.target.value)} placeholder="ID을 입력하세요."/>
+                    {/* 패스워드 */}
+                    <input type="password" ref={passwordRef} value={password} className="password"
+                           onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호를 입력하세요." onKeyDown={onKeyDown}/>
+                    <p style={{color: 'red', textAlign: 'center'}}>{message}</p>
 
-                {/*<Link to="/member/searchID" className="findIdBtn">Find ID</Link>*/}
-                {/*<Link to="/member/searchPassword" className="findPwBtn">Find Password</Link>*/}
+                    {/* 체크박스[아이디 기억, 패스워드 기억, 자동 로그인, JWT 로그인 */}
+                    <div className="checkboxContainer">
+                    </div>
+                    <Link to="/signup" className="signupBtn">Sign Up</Link><br/>
+                    {/* 로그인 버튼 */}
+                    <input type="button" className="login_btn" value="로그인" onClick={loginCheck}/>
+                    <Link to="http://localhost:8080/oauth2/authorization/google" className="linkBtn">
+                        <img src="/images/google.png" alt="google Login" style={{width: '100%', cursor: 'pointer'}}/>
+                    </Link>
+                    <Link to="http://localhost:8080/oauth2/authorization/kakao" className="linkBtn">
+                        <img src="/images/kakao1.png" alt="Kakao Login" style={{width: '100%', cursor: 'pointer',}}/>
+                    </Link>
+                    <Link to="http://localhost:8080/oauth2/authorization/naver" className="linkBtn">
+                        <img src="/images/naver.png" alt="Naver Login" style={{width: '100%', cursor: 'pointer'}}/>
+                    </Link>
+
+                    {/*<Link to="/member/searchID" className="findIdBtn">Find ID</Link>*/}
+                    {/*<Link to="/member/searchPassword" className="findPwBtn">Find Password</Link>*/}
+                </div>
             </div>
         </div>
     );

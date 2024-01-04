@@ -186,109 +186,110 @@ const GuideSidebar =(props)=> {
 
     return (
             <div id="sidebar_menu" className='open'>
-                    <div>
-                        <h2><FaRoute/> 안심 귀갓길 찾기</h2>
+                <div>
+                    <h2><FaRoute/> 안심 귀갓길 찾기</h2>
 
-                        <div id="div1">
-                            <input type="text" className="text_custom" id="searchStartKeyword" value={startKeyword}
-                                   placeholder="출발지"
-                                   onKeyDown={(e) => {
-                                       if (e.key === "Enter") {
-                                           setStartKeyword(e.target.value);
-                                       }
-                                   }}/>
-                            <br/>
-                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                <FaCaretDown/>
-                            </div>
+                    <div id="div1">
+                        <input type="text" className="text_custom" id="searchStartKeyword" value={startKeyword}
+                               placeholder="출발지"
+                               onKeyDown={(e) => {
+                                   if (e.key === "Enter") {
+                                       setStartKeyword(e.target.value);
+                                   }
+                               }}/>
+                        <br/>
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <FaCaretDown/>
+                        </div>
 
-                            <div className="stopover_wrap" style={{position: "relative", zIndex: 1999}}>
-                                {selectedMarkerInMap.map((stopover,index) => (
-                                    <div key={stopover.key} >
-                                        <p>{stopover.type === 'C' ? 'CCTV' : stopover.type === 'D' ? '안심택배'
-                                            : stopover.type === 'E' ? '비상벨' : stopover.type === 'S' ? '편의점' :  '파출소'}, {stopover.addr}</p>
-                                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                            <FaCaretDown/>
-                                        </div>
+                        <div className="stopover_wrap" style={{position: "relative", zIndex: 1999}}>
+                            {selectedMarkerInMap.map((stopover, index) => (
+                                <div key={stopover.key}>
+                                    <p>{stopover.type === 'C' ? 'CCTV' : stopover.type === 'D' ? '안심택배'
+                                        : stopover.type === 'E' ? '비상벨' : stopover.type === 'S' ? '편의점' : '파출소'},
+                                        {stopover.addr !== '' ? stopover.addr : stopover.road_addr}</p>
+                                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        <FaCaretDown/>
                                     </div>
-                                ))}
-                            </div>
-
-                            <input type="text" className="text_custom" id="searchEndKeyword" value={endKeyword}
-                                   placeholder="목적지"
-                                   onKeyDown={(e) => {
-                                       if (e.key === "Enter") {
-                                           setEndKeyword(e.target.value);
-                                       }
-                                   }}/>
-                        </div>
-
-                        <div style={{float: 'left', height: 'auto'}}>
-                            <div className="rst_wrap" style={{position: "relative", zIndex: 1999}}>
-                                <div className="rst mCustomScrollbar">
-                                    <ul>
-                                        {resultPoisObj && resultPoisObj.map((value, index) => {
-
-                                            return <li key={index}>
-                                                <div>
-                                                    <div>
-                                                        <HiOutlineLocationMarker/>
-                                                        <span style={{fontWeight: 'bold'}}>{value.name}</span><br/>
-                                                        <span>{value.upperBizName}</span>&nbsp;
-                                                        <span>{value.middleBizName}</span>&nbsp;
-                                                        <span>{value.lowerBizName}</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>{value.upperAddrName}</span>&nbsp;
-                                                        <span>{value.middleAddrName}</span>&nbsp;
-                                                        <span>{value.lowerAddrName}</span>&nbsp;
-                                                        <span>{value.detailAddrName}</span>
-                                                    </div>
-                                                    <button type="button" name="sendBtn"
-                                                            onClick={() => selectPoi(value.id, value.arg, value.lat, value.lon)}>
-                                                        선택
-                                                    </button>
-                                                </div>
-
-                                            </li>
-
-                                        })}
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div style={{position: "relative", zIndex: 999}}>
-                            <label>
-                                <input className="checkbox" type="checkbox" id="all" name="all"
-                                       checked={selectedFacOptions.length === facOptions.length}
-                                       onChange={(e) => selectAll(e)}/>
-                                ALL <br/>
-                            </label>
-                            {facOptions.map(option => (
-                                <label key={option.value}>
-                                    <input
-                                        className="checkbox"
-                                        type="checkbox"
-                                        name="ansimFacOption"
-                                        value={option.value}
-                                        checked={selectedFacOptions.includes(option.value)}
-                                        onChange={() => handleOptionChange(option.value)}
-                                    />
-                                    {option.label}<br/>
-                                </label>
                             ))}
                         </div>
 
-                        <div>
-                            <button className="button" onClick={() => window.location.reload()} ><CiRedo/></button>
-                            {selectedMarkerInMap.length === 0 ? (
-                                <button className="button" onClick={() => doMapGuide()}>길찾기</button>
-                            ) : (
-                                <button className="button" onClick={() => callPedestrianAPI('Y')}>안심길찾기</button>
-                            )}
+                        <input type="text" className="text_custom" id="searchEndKeyword" value={endKeyword}
+                               placeholder="목적지"
+                               onKeyDown={(e) => {
+                                   if (e.key === "Enter") {
+                                       setEndKeyword(e.target.value);
+                                   }
+                               }}/>
+                    </div>
+
+                    <div style={{float: 'left', height: 'auto'}}>
+                        <div className="rst_wrap" style={{position: "relative", zIndex: 1999}}>
+                            <div className="rst mCustomScrollbar">
+                                <ul>
+                                    {resultPoisObj && resultPoisObj.map((value, index) => {
+
+                                        return <li key={index}>
+                                            <div>
+                                                <div>
+                                                    <HiOutlineLocationMarker/>
+                                                    <span style={{fontWeight: 'bold'}}>{value.name}</span><br/>
+                                                    <span>{value.upperBizName}</span>&nbsp;
+                                                    <span>{value.middleBizName}</span>&nbsp;
+                                                    <span>{value.lowerBizName}</span>
+                                                </div>
+                                                <div>
+                                                    <span>{value.upperAddrName}</span>&nbsp;
+                                                    <span>{value.middleAddrName}</span>&nbsp;
+                                                    <span>{value.lowerAddrName}</span>&nbsp;
+                                                    <span>{value.detailAddrName}</span>
+                                                </div>
+                                                <button type="button" name="sendBtn"
+                                                        onClick={() => selectPoi(value.id, value.arg, value.lat, value.lon)}>
+                                                    선택
+                                                </button>
+                                            </div>
+
+                                        </li>
+
+                                    })}
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <br/>
+                    <div style={{position: "relative", zIndex: 999}}>
+                        <label>
+                            <input className="checkbox" type="checkbox" id="all" name="all"
+                                   checked={selectedFacOptions.length === facOptions.length}
+                                   onChange={(e) => selectAll(e)}/>
+                            ALL <br/>
+                        </label>
+                        {facOptions.map(option => (
+                            <label key={option.value}>
+                                <input
+                                    className="checkbox"
+                                    type="checkbox"
+                                    name="ansimFacOption"
+                                    value={option.value}
+                                    checked={selectedFacOptions.includes(option.value)}
+                                    onChange={() => handleOptionChange(option.value)}
+                                />
+                                {option.label}<br/>
+                            </label>
+                        ))}
+                    </div>
+
+                    <div>
+                        <button className="button" onClick={() => window.location.reload()}><CiRedo/></button>
+                        {selectedMarkerInMap.length === 0 ? (
+                            <button className="button" onClick={() => doMapGuide()}>길찾기</button>
+                        ) : (
+                            <button className="button" onClick={() => callPedestrianAPI('Y')}>안심길찾기</button>
+                        )}
+                    </div>
+                </div>
             </div>
     );
 }

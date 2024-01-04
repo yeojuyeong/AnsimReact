@@ -86,7 +86,12 @@ const SafetyFacilityReportForm = () => {
                 </label>
                 <label>
                     시설위치:
-                    <input name="locationDescription" value={dataOfBreakdownReport && dataOfBreakdownReport.addr} disabled/>
+                    <input name="locationDescription"
+                           value={
+                                dataOfBreakdownReport &&
+                               (dataOfBreakdownReport.addr !== '' ? dataOfBreakdownReport.addr : dataOfBreakdownReport.road_addr)
+                            }
+                           disabled/>
                 </label>
                 <label>
                     고장유형:

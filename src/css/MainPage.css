@@ -10,9 +10,9 @@
     flex: 1;
 }
 #sidebar { /*Nav.js*/
-    width: 150px;
+    width: 120px;
     height: 100vh;
-     background-color: #f0f0f0;
+    background-color: #f0f0f0;
     user-select: none;
     text-align: center;
 }
@@ -65,6 +65,17 @@
     font-size: 30px;
     padding-left: 15px;
 }
+
+.introduce {
+    font-size: 30px;
+    /*margin-left: 10px;*/
+    position: fixed;
+    bottom: 0;
+    /*left: 2.5%; 가운데 정렬을 위해 추가할 수 있습니다. */
+    /*transform: translateX(50%);*/
+    padding: 0 0 0 30px;
+}
+
 .counter {
     width: 18px;
     height: 18px;
@@ -86,14 +97,21 @@
     font-size: 14px;
     letter-spacing: 10px;
 }
-.introduce {
-    font-size: 40px;
-    /*padding-top: 350%;*/
-    margin-left: 10px;
-    /*margin-top: auto;*/
-    /*margin-top: 40%;*/
-    position: fixed;
-    bottom: 0;
-    left: 2.5%; /* 가운데 정렬을 위해 추가할 수 있습니다. */
-    transform: translateX(-50%);
+
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #E0E0E0;
+    color: dodgerblue;
+    border: none;
+    border-radius: 4px;
+    border-color: dodgerblue;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-link:hover {
+    background-color: white;
 }

@@ -44,11 +44,15 @@ const BoardView = () => {
     const [next_seqno, setNext_seqno] = useState(0);
 
     const { Tmapv2 } = window;
-    let boardViewMap;
-
+    //let boardViewMap;
+    const [boardViewMap, setBoardViewMap] = useState(null);
 
     useEffect(()=> {
         fetchData();
+        if(boardViewMap !== null){
+            boardViewMap.destroy();
+            setBoardViewMap(null);
+        };
     },[page,seqno,keyword]);
 
     const fetchData = async() => {
@@ -99,7 +103,7 @@ const BoardView = () => {
             window.location.href = 'http://localhost:3000/Mypage';  // 회원 정보 변경 페이지로
         }
 
-        makeMap(drawData);
+        callPedestrianAPI(drawData);
     }
 
     //게시물 삭제
@@ -175,19 +179,6 @@ const BoardView = () => {
     };
 
     //------------------map start---------------------
-    const makeMap=(drawData)=>{
-        const initialMap = new Tmapv2.Map("map_div", {
-            center: new Tmapv2.LatLng(37.56520450, 126.98702028),
-            width: "100%",
-            height: "100%",
-            zoom: 15,
-            zoomControl: false
-        });
-
-        boardViewMap = initialMap;
-
-        callPedestrianAPI(drawData);
-    }
 
     // 보행자 경로 API 호출
     async function callPedestrianAPI(drawData) {
@@ -196,6 +187,14 @@ const BoardView = () => {
             !drawData.destination_longitude || !drawData.destination_latitude){
             return;
         }
+
+        const boardViewMap = new Tmapv2.Map("map_div", {
+            center: new Tmapv2.LatLng(37.56520450, 126.98702028),
+            width: "100%",
+            height: "100%",
+            zoom: 15,
+            zoomControl: false
+        });
 
         var headers = {};
         headers["appKey"]="FMHrfuOs4Z6qvFnNXfZsV2fiSbTQjiC241luv6PK";
@@ -311,7 +310,7 @@ const BoardView = () => {
                             });
                     }
                 }//for문 [E]
-                drawLine(drawInfoArr);
+                drawLine(drawInfoArr,boardViewMap);
             }).catch((error)=> {
                 console.log("error = " + error);
             });
@@ -321,10 +320,11 @@ const BoardView = () => {
         const midLon = (drawData.departure_longitude + drawData.destination_longitude) / 2.0;
 
         boardViewMap.setCenter(new Tmapv2.LatLng(midLat, midLon));
+        setBoardViewMap(boardViewMap);
 
     } //callPedestrianAPI() END
 
-    function drawLine(arrPoint) {
+    function drawLine(arrPoint, boardViewMap) {
         var polyline_;
         polyline_ = new Tmapv2.Polyline({
             path : arrPoint,
@@ -438,10 +438,15 @@ const BoardView = () => {
                                         </div>
                                     </div>
                                     <div className="listRight">
-                                        <input type="button" className="accept" value="수락"
-                                               onClick={() => accept(item.user_id)}/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="button" className="deny" value="거절"
-                                               onClick={() => deny(item.user_id)}/>
+                                        {item.accepted === 'Y' ? (
+                                            <span>이미 수락된 멤버입니다.</span>
+                                        ) : (
+                                            <div>
+                                                <input type="button" className="accept" value="수락" onClick={() => accept(item.user_id)} />
+                                                 &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="button" className="deny" value="거절" onClick={() => deny(item.user_id)}/>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <br/>

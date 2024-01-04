@@ -118,6 +118,11 @@ const GuidePage = (props) => {
     // 보행자 경로 API 호출
     async function callPedestrianAPI(stopover) {
 
+        if(selectedMarkerInMap.length>5){
+            alert("경유지는 최대 5개까지 선택 가능합니다.");
+            return;
+        }
+
         var headers = {};
         headers["appKey"]="FMHrfuOs4Z6qvFnNXfZsV2fiSbTQjiC241luv6PK";
 

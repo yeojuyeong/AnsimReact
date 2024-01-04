@@ -153,9 +153,9 @@ const MyPageModify = () => {
     }
     return(
         <>
-            <div>
+            <div id="myPageModifyWrap">
                 <form className="myPageModifyMain">
-                    <h1 className="myPageModifyTitle">수정</h1><br/>
+                    <h1 className="myPageModifyTitle">회원정보 수정</h1><br/>
                     <div>
                         <input
                             className="myPageInputImage"

@@ -1,14 +1,28 @@
+#loginpageWrap{
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
 .main{
-    width: 340px;
+    /*width: 340px;
+    height: auto;
+    margin: 7% 25% 0 35%;
+    padding: 45px 60px;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
-    margin: 7% 25% 0 35%;
-    padding: 45px 60px;
     border-radius: 8px;
     box-shadow: 1px 1px 3px 2px darkgray;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60vh;
+    height: 98vh;
 }
 
 .logo{
@@ -77,3 +91,6 @@
     margin-top: 5px;
 }
 
+.login{
+    padding: 45px 60px;
+}

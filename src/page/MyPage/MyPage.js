@@ -28,7 +28,7 @@ const MyPage = () => {
 
     return (
         <>
-            <div>
+            <div id='myPageWrap'>
                 <div className='myPageMain'>
                     <h1 className="MyPageTitle">마이페이지</h1><br/>
                     <div className="myPageInfo">
@@ -55,9 +55,6 @@ const MyPage = () => {
                         {/* fromSocial이 'Y'인 경우에만 링크를 보여줌 */}
                         {/*{member.fromSocial !== 'Y' &&*/}
                         {/* <div className="myPageBtnDiv"><Link to="/passwordModify" className="myPageBtn">패스워드 변경</Link></div>}&nbsp;&nbsp;*/}
-
-                    <br/><br/>
-
             </div>
         </>
     )

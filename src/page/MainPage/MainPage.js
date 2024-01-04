@@ -4,6 +4,7 @@ import {TbMapSearch} from "react-icons/tb";
 import {Link} from "react-router-dom";
 import React from "react";
 
+
 const MainPage = () => {
 
     const mainDiv={
@@ -37,10 +38,10 @@ const MainPage = () => {
                     <img style={logo} src="/images/steak2.png"/>
                 </div><br />
                 <div>
-                    안전한 귀갓길 동행으로 편안하게<br/><br/>
-                    <Link to="/guide" style={{textDecoration: "none"}}>
-                        <TbMapSearch style={iconStyle}/>시작하기
-                    </Link>
+                    안전한 귀갓길을 위한 경로 안내부터 동행 찾기,<br/> 안심 시설까지 한 곳에서 확인하세요!<br/>
+                    <br/><br/>
+                    <Link to="/guide" style={{textDecoration: "none"}} className="button-link">
+                        <TbMapSearch style={iconStyle}/>시작하기 </Link>
                 </div>
             </div>
 
