@@ -152,7 +152,10 @@ const BoardView = () => {
         }).then((response) => response.json())
             .then((data) => {
                 if(data.message === 'GOOD') {
-                    alert('동행 신청을 수락 하였습니다.')
+                    alert('동행 신청을 수락 하였습니다.');
+                    boardViewMap.destroy();
+                    setBoardViewMap(null);
+                    fetchData();
                 } else if(data.message === 'CLICKED') {
                     alert('이미 수락한 멤버입니다.');
                 }
@@ -168,7 +171,9 @@ const BoardView = () => {
         }).then((response) => response.json())
             .then((data) => {
                 if(data.message === 'GOOD') {
-                    alert('동행 신청을 거절 하였습니다.')
+                    alert('동행 신청을 거절 하였습니다.');
+                    boardViewMap.destroy();
+                    setBoardViewMap(null);
                     fetchData();
                 } else if(data.message === 'CLICKED') {
                     alert('이미 거절한 멤버입니다.');
