@@ -1,0 +1,7 @@
+.chart_title{
+    font-size: 24px; /* 제목의 크기 */
+    font-weight: bold; /* 제목의 굵기 */
+    color: #333; /* 제목의 색상 */
+    text-align: center; /* 제목의 정렬 */
+    margin-bottom: 20px; /* 제목과 차트 사이의 간격 */
+}
