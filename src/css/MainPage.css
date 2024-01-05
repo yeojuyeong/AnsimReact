@@ -67,7 +67,7 @@
 }
 
 .introduce {
-    font-size: 30px;
+    font-size: 40px;
     /*margin-left: 10px;*/
     position: fixed;
     bottom: 0;
@@ -97,7 +97,6 @@
     font-size: 14px;
     letter-spacing: 10px;
 }
-
 
 .button-link {
     display: inline-block;
