@@ -1,49 +1,60 @@
-# Getting Started with Create React App
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Ansim동행 프로젝트&fontSize=90" />
+# Ansim동행 프로젝트
+## 안심시설물들의 위치를 확인 후 안심 길찾기 및 안심동행을 신청하세요!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/8b40f1c1-2887-4f6d-8a36-99acab8a5fce)
 
-## Available Scripts
+### 개발기간 : 2023.12.07 ~ 2024.01.05
+### 배포주소 : 
 
-In the project directory, you can run:
+## 🥩About Ansim동행
+**Ansim동행지도는 근처에 있는 안심 시설물들을 찾을 수 있는 서비스입니다.**
 
-### `npm start`
+### Ansim동행 특징
+1. cctv, 비상벨, 안심택배함, 경찰서, 편의점과 같은 안심시설물들의 위치 및 정보 확인
+2. 최대 5개의 안심 옵션을 선택하여 최적의 길찾기 제공
+3. 커뮤니티를 통한 안심동행 찾기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 안심길찾기 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/c8152824-852e-496f-b221-ebc851965405)
+출발지와 목적지를 입력 후, 최대 5개의 경유지 안심 옵션을 선택가능하여 최적의 길찾기를 제공합니다.
+출발지와 목적지 내의 boundary를 계산하여 해당 영역 내 안심객체를 띄우고 선택 가능합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 안심시설물 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/b7531145-2084-46bd-861d-4a4db988a3de)
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/7b25b2f6-3531-4ca0-b013-8d7d822d71e9)
+현재 Map의 영역 내의 CCTV, 가로등 비상벨, 안심택배함, 경찰서, 편의점의 위치가 Marker로 표시되고 가까운 순으로 Card형식 List를 보여줍니다.
+Card Click 시 해당 Marker의 위치로 이동 후 InfoWindow로 정보 확인이 가능합니다.
+Card 고장신고 Click 시 각 옵션의 위치와 유형 데이터가 포함된 고장신고 작성 Form 생성되며 고장유형과 상세내용 기입 후 제출할 수 있습니다.
 
-### `npm test`
+## 안심동행 커뮤니티 게시글 목록 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/15d3884c-0612-4e70-88ef-9ae2fb0647e9)
+동행 포인트에 따른 뱃지와 모집인원수가 게시글List에 표시됩니다.
+Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네이션 및 제목 검색기능이 구현되어있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 안심동행 커뮤니티 게시글 작성 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/82e43b64-1460-4af1-8d5b-734a78cb29b5)
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/ef8b2745-0d2a-4ec9-be4b-bab08afdddad)
+글 작성페이지에서 출발지 목적지를 입력 시 게시글에 해당 루트가 표시됩니다.
 
-### `npm run build`
+## 안심동행 커뮤니티 게시글 상세보기 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/15671ed1-020f-4266-8788-d0113f4d747a)
+동행 신청버튼을 누르면 작성자에 신청자List가 표시되며, 수락할 경우 작성자와 신청자에게 동행포인트가 +1 부여됩니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 안심동행 시설물 고장신고 현황 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/8cd9338d-eb2b-4e2b-a5f5-8c44a9413838)
+7일간의 각 옵션 별 고장신고 갯수의 현황을 관리자 권한을 가진 User가 볼 수 있게 구현되어있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 안심동행 로그인 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/255e5f2e-71c3-484b-b812-94235675a9c3)
+일반 로그인 및 구글, 네이버, 카카오 소셜로그인이 가능합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 안심동행 마이페이지 화면
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/203c16df-7ada-4d14-9986-81db93141aec)
+안심동행 포인트를 확인할 수 있으며, 프로필사진과 mbti 등 정보를 업로드 및 변경할 수 있습니다.
 
-### `npm run eject`
+👨‍👩‍👧‍👦 Team Members
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
