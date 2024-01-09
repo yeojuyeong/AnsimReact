@@ -7,7 +7,8 @@
 
 ### 개발기간 : 2023.12.07 ~ 2024.01.05
 ### 배포주소 :
-### [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
+#### [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
+#### [Notion](https://www.notion.so/Ansim-Side-Project-7a78138f8e844e81ab86a6771b75d4cd)
 
 ---
 
@@ -78,10 +79,11 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 ---
 
 ### 📝 Documents
+<br>
 
-**[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)**<br><br><br>
-**[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)**<br><br><br>
-**[ERD문서](https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)**<br><br><br>
+**[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)**<br><br>
+**[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)**<br><br>
+**[ERD문서](https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)**<br><br>
 
 
 
