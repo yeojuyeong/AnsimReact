@@ -8,7 +8,7 @@
 ### 🎈 배포주소:
 #### [🖥️시연 영상](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
 #### [✨ Notion](https://www.notion.so/Ansim-Side-Project-7a78138f8e844e81ab86a6771b75d4cd)
-#### [👀 Spring Github](https://www.notion.so/Ansim-Side-Project-7a78138f8e844e81ab86a6771b75d4cd](https://github.com/yeojuyeong/AnsimSpring)
+#### [👀 Spring Github](https://github.com/yeojuyeong/AnsimSpring)
 ---
 
 ## 🥩About Ansim동행
