@@ -53,16 +53,16 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/203c16df-7ada-4d14-9986-81db93141aec)
 안심동행 포인트를 확인할 수 있으며, 프로필사진과 mbti 등 정보를 업로드 및 변경할 수 있습니다.
 
-#### 👨‍👩‍👧‍👦 Team Members
-![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/ad8878be-6068-4873-9324-b799df8657c8)
+### 👨‍👩‍👧‍👦 Team Members
+
 
 [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
 
-#### 👩‍💻 Tech Stack
+### 👩‍💻 Tech Stack
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/2598be93-dbc7-4f8c-93c6-83ae17216c8b)
 
-#### 📝 Documents
-[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)
-[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)
-[ERD문서]()
+### 📝 Documents
+**[화면정의서]**(https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)<br>
+**[기능정의서]**(https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)<br>
+**[ERD문서]**(https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)<br>
 
