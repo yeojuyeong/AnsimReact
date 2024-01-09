@@ -58,10 +58,10 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href=""><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/8d31af18-c8cf-43b7-9a76-4147d8aa690d" width="100px;" alt=""/><br /><sub><b>팀장 : 김수지</b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="https://drive.google.com/file/d/1h4Q9rMzEhHFlp_wX1RzSpGugdaDTE4kh/view?usp=drive_link" width="100px;" alt=""/><br /><sub><b>팀원 : 여주영</b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="https://drive.google.com/file/d/1AzkQtgtlzJXSqCz21Aa07qTnwDlQQJ89/view?usp=drive_link" width="100px;" alt=""/><br /><sub><b>팀원 : 이영진</b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="https://drive.google.com/file/d/1buw0b68sAZybWVieXXJsNWwVKzX8VU8R/view?usp=drive_link" width="100px;" alt=""/><br /><sub><b>팀원 : 최종현</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/sszzKim"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/8d31af18-c8cf-43b7-9a76-4147d8aa690d" width="100px;" alt=""/><br /><sub><b>팀장 : 김수지</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/yeojuyeong"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/25c008a0-65a6-459f-af88-267f3555d8f0" width="100px;" alt=""/><br /><sub><b>팀원 : 여주영</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/44b77798-332d-4ef8-ab17-96f7e5ab4b9a" width="100px;" alt=""/><br /><sub><b>팀원 : 이영진</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/f29047f4-bf7d-4d28-a1dd-641bc9dd4526" width="100px;" alt=""/><br /><sub><b>팀원 : 최종현</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
