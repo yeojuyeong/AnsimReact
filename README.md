@@ -4,10 +4,10 @@
 **안심시설물들의 위치를 확인 후 안심 길찾기 및 안심동행을 신청하세요!**
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/8b40f1c1-2887-4f6d-8a36-99acab8a5fce)
 
-### 개발기간 📅 : 2023.12.07 ~ 2024.01.05
-### 배포주소 🎈:
-#### [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
-#### [Notion](https://www.notion.so/Ansim-Side-Project-7a78138f8e844e81ab86a6771b75d4cd)
+### 📅 개발기간 : 2023.12.07 ~ 2024.01.05
+### 🎈 배포주소:
+#### [🖥️시연 영상](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
+#### [✨ Notion](https://www.notion.so/Ansim-Side-Project-7a78138f8e844e81ab86a6771b75d4cd)
 
 ---
 
