@@ -6,7 +6,8 @@
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/8b40f1c1-2887-4f6d-8a36-99acab8a5fce)
 
 ### 개발기간 : 2023.12.07 ~ 2024.01.05
-### 배포주소 : 
+### 배포주소 :
+### [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
 
 ## 🥩About Ansim동행
 **Ansim동행지도는 근처에 있는 안심 시설물들을 찾을 수 있는 서비스입니다.**
@@ -55,8 +56,16 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 
 ### 👨‍👩‍👧‍👦 Team Members
 
-
-[🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href=""><img src="width="100px;" alt=""/><br /><sub><b>팀장 : 김수지</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 여주영</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 이영진</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 최종현</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 👩‍💻 Tech Stack
 
