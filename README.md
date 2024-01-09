@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=wave&color=yellow&height=300&section=header&text=Ansim동행&fontSize=90)
+![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=Ansim동행&fontSize=90)
 
 # Ansim동행 프로젝트
 ## 안심시설물들의 위치를 확인 후 안심 길찾기 및 안심동행을 신청하세요!
