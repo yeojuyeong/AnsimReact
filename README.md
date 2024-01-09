@@ -59,10 +59,12 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
 
 ### 👩‍💻 Tech Stack
+
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/2598be93-dbc7-4f8c-93c6-83ae17216c8b)
 
 ### 📝 Documents
-**[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)**<br>
-**[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)**<br>
-**[ERD문서](https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)**<br>
+
+**[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)**<br><br>
+**[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)**<br><br>
+**[ERD문서](https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)**<br><br>
 
