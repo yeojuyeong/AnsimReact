@@ -54,25 +54,36 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/203c16df-7ada-4d14-9986-81db93141aec)
 안심동행 포인트를 확인할 수 있으며, 프로필사진과 mbti 등 정보를 업로드 및 변경할 수 있습니다.
 
+---
+
 ### 👨‍👩‍👧‍👦 Team Members
 <table>
   <tbody>
     <tr>
       <td align="center"><a href="https://github.com/sszzKim"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/8d31af18-c8cf-43b7-9a76-4147d8aa690d" width="100px;" alt=""/><br /><sub><b>팀장 : 김수지</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/yeojuyeong"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/25c008a0-65a6-459f-af88-267f3555d8f0" width="100px;" alt=""/><br /><sub><b>팀원 : 여주영</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/44b77798-332d-4ef8-ab17-96f7e5ab4b9a" width="100px;" alt=""/><br /><sub><b>팀원 : 이영진</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/f29047f4-bf7d-4d28-a1dd-641bc9dd4526" width="100px;" alt=""/><br /><sub><b>팀원 : 최종현</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/hiim207"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/44b77798-332d-4ef8-ab17-96f7e5ab4b9a" width="100px;" alt=""/><br /><sub><b>팀원 : 이영진</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/JongBell"><img src="https://github.com/yeojuyeong/AnsimReact/assets/115797321/f29047f4-bf7d-4d28-a1dd-641bc9dd4526" width="100px;" alt=""/><br /><sub><b>팀원 : 최종현</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
+---
 
 ### 👩‍💻 Tech Stack
-
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/2598be93-dbc7-4f8c-93c6-83ae17216c8b)
+
+---
 
 ### 📝 Documents
 
 **[화면정의서](https://www.figma.com/file/ncJco24Wt7Dak1EJ8SBWWu/Ansim?type=design&node-id=0-1&mode=design&t=IoPxbIRJdAZz0yM8-0)**<br><br>
 **[기능정의서](https://docs.google.com/spreadsheets/d/1w64dT5B8B7yvQfeYibCp4-_nueJtZFvDXKLu6ZiCfmo/edit?usp=sharing)**<br><br>
 **[ERD문서](https://www.erdcloud.com/d/pQMSZLRgB3fK6y2gP)**<br><br>
+
+
+
+
+
+
+
 
