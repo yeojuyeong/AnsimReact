@@ -1,4 +1,5 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Ansim동행 프로젝트&fontSize=90" />
+![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=Ansim동행%20render&fontSize=90)
+
 # Ansim동행 프로젝트
 ## 안심시설물들의 위치를 확인 후 안심 길찾기 및 안심동행을 신청하세요!
 
@@ -21,7 +22,6 @@
 출발지와 목적지 내의 boundary를 계산하여 해당 영역 내 안심객체를 띄우고 선택 가능합니다.
 
 ## 안심시설물 화면
-![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/b7531145-2084-46bd-861d-4a4db988a3de)
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/7b25b2f6-3531-4ca0-b013-8d7d822d71e9)
 현재 Map의 영역 내의 CCTV, 가로등 비상벨, 안심택배함, 경찰서, 편의점의 위치가 Marker로 표시되고 가까운 순으로 Card형식 List를 보여줍니다.
 Card Click 시 해당 Marker의 위치로 이동 후 InfoWindow로 정보 확인이 가능합니다.
@@ -53,29 +53,14 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/203c16df-7ada-4d14-9986-81db93141aec)
 안심동행 포인트를 확인할 수 있으며, 프로필사진과 mbti 등 정보를 업로드 및 변경할 수 있습니다.
 
-👨‍👩‍👧‍👦 Team Members
+####👨‍👩‍👧‍👦 Team Members
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/ad8878be-6068-4873-9324-b799df8657c8)
+
+[🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
+
+####👩‍💻Tech Stack
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/2598be93-dbc7-4f8c-93c6-83ae17216c8b)
+
+####📝 Documents
 
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
