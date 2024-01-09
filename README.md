@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=Ansim&fontSize=90)
+![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=Ansim동행&fontSize=90)
 
 # Ansim동행 프로젝트
 ## 안심시설물들의 위치를 확인 후 안심 길찾기 및 안심동행을 신청하세요!
@@ -53,14 +53,14 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/203c16df-7ada-4d14-9986-81db93141aec)
 안심동행 포인트를 확인할 수 있으며, 프로필사진과 mbti 등 정보를 업로드 및 변경할 수 있습니다.
 
-####👨‍👩‍👧‍👦 Team Members
+#### 👨‍👩‍👧‍👦 Team Members
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/ad8878be-6068-4873-9324-b799df8657c8)
 
 [🖥️시연 영상 👨‍👩‍👧‍👦](https://drive.google.com/file/d/19owUb0n8qzNAa03vPbDJpYwpt_NHgHNZ/view?usp=drive_link)
 
-####👩‍💻Tech Stack
+#### 👩‍💻 Tech Stack
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/2598be93-dbc7-4f8c-93c6-83ae17216c8b)
 
-####📝 Documents
+#### 📝 Documents
 
 
