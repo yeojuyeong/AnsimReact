@@ -34,7 +34,7 @@ Card방식 게시판으로 직관적인 UI가 구현되어있으며 페이지네
 
 ## 안심동행 커뮤니티 게시글 작성 화면
 ![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/82e43b64-1460-4af1-8d5b-734a78cb29b5)
-![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/ef8b2745-0d2a-4ec9-be4b-bab08afdddad)
+![image](https://github.com/yeojuyeong/AnsimReact/assets/115797321/8c4c9338-08d6-406f-8247-ca4bb4b67a75)
 글 작성페이지에서 출발지 목적지를 입력 시 게시글에 해당 루트가 표시됩니다.
 
 ## 안심동행 커뮤니티 게시글 상세보기 화면
