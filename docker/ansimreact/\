@@ -1,0 +1,4 @@
+FROM openjdk:17
+COPY AnsimSpring-0.0.1-SNAPSHOT.jar AnsimSpring.jar
+ENTRYPOINT ["java", "-jar", "AnsimSpring.jar"]
+EXPOSE 8080
