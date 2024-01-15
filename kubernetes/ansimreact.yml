@@ -31,7 +31,7 @@ spec:
   ports:
   - port: 3000
     targetPort: 3000
-    nodePort: 30002
+    nodePort: 30004
   selector:
     app: ansimreact
   type: NodePort
