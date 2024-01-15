@@ -28,9 +28,6 @@ module.exports = {
         "react"
     ],
     "rules": {
-    "jsx-a11y/alt-text": "off",
-    "no-console": "error",
-    "import/prefer-default-export": "off",
-    "react/jsx-filename-extension": "off"
+    	"ignorePatterns": ['*.js', '**.js']
  }
 }
