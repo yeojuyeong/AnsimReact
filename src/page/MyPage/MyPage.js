@@ -15,7 +15,7 @@ const MyPage = () => {
     useEffect(()=> {
 
         const fetchData = async () => {
-            const member = await axios.get(`http://localhost:8080/member/memberInfo?&user_id=${userCookie}`);
+            const member = await axios.get(`${process.env.REACT_APP_API_URL}/member/memberInfo?&user_id=${userCookie}`);
             setMember(member.data);
         }
         fetchData();
@@ -34,7 +34,7 @@ const MyPage = () => {
                     <div className="myPageInfo">
                         <div className="imgView">
                             {member.stored_file_nm ? (
-                                <img className="imgBox" src={"http://localhost:8080/profile/" + member.stored_file_nm}
+                                <img className="imgBox" src={`${process.env.REACT_APP_API_URL}/profile/` + member.stored_file_nm}
                                      alt="사용자"/>
                             ) : (
                                 <img className="imgBox" src="/images/steak1.png" alt="사용자"/>

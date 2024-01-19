@@ -47,7 +47,7 @@ const BoardModify = () => {
 
         const fetchData = async () => {
             //게시물 상세 가져오기
-            const response = await axios.get(`http://localhost:8080/restapi/modify?seqno=${seqno}&&page=${page}&keyword=${keyword}&user_id=${user_id}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/modify?seqno=${seqno}&&page=${page}&keyword=${keyword}&user_id=${user_id}`);
             const data = response.data;
 
             // setCookie_stored_file_nm(data.cookie_stored_file_nm);
@@ -120,7 +120,7 @@ const BoardModify = () => {
             console.log(entry);
         }
 
-        let uploadURL = "http://localhost:8080/restapi/modify";
+        let uploadURL = `${process.env.REACT_APP_API_URL}/modify`;
         //let uploadURL = "/restapi/write1111111";
 
 

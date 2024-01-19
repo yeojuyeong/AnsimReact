@@ -272,7 +272,7 @@ const GuidePage = (props) => {
         console.log('queryString',queryString);
 
         //컨트롤러 호출
-        await fetch('http://localhost:8080/guide/route',{
+        await fetch(`${process.env.REACT_APP_API_URL}/guide/route`,{
             method:'POST',
             headers: {"content-type":"application/json"},
             body: JSON.stringify(queryString)

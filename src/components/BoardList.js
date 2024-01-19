@@ -98,11 +98,11 @@ const BoardList = () => {
 
         // const response = await fetch(`http://localhost:8080/restapi/list?page=${page}&keyword=${keyword}`, {credentials: 'include'}); //API 호출
 
-        const response = await fetch(`http://localhost:8080/restapi/list?page=${page}&keyword=${keyword}&user_id=${user_id}`); //API 호출
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/list?page=${page}&keyword=${keyword}&user_id=${user_id}`); //API 호출
 
         if (!user_id) {
             alert('서비스 이용을 위해 로그인해주세요.');
-            window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
+            window.location.href = '/Login';  // 회원 정보 변경 페이지로
         }
 
         const data = await response.json(); // response.json()을 통해 응답 객체를 JSON 형식의 데이터로 변환

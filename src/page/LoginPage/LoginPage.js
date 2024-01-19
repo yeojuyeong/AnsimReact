@@ -1,11 +1,12 @@
 import '../../css/Login.css';
 import getCookie from '../../components/GetCookie';
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 //import CryptoJS from 'crypto-js'; //AES 암호화 알고리즘으로 패스워드 쿠키를 암호화/복호화
-
+/* eslint-disable */
 const LoginPage = () =>{
+    const navigate = useNavigate();
 
     //Ref 초기화
     const user_idRef = useRef();
@@ -51,8 +52,10 @@ const LoginPage = () =>{
         // document.cookie = 'role=' + role + ';path=/; max-age=3600';
     }
 
+
     //REST API 서버와의 비동기 통신으로 아이디/패스워드 검증
     const loginCheck = async () =>{
+
         if(user_id === null || user_id ===''){
             alert('아이디를 입력하세요.');
             user_idRef.current.focus();
@@ -70,7 +73,7 @@ const LoginPage = () =>{
 
         //JWT 로그인
         // await fetch('http://localhost:8080/restapi/loginCheck?autoLogin=JWTNew',{
-        await fetch('http://localhost:8080/member/loginCheck',{
+        await fetch(`${process.env.REACT_APP_API_URL}/member/loginCheck`,{
 
             method : 'POST',
             body : formData
@@ -85,7 +88,8 @@ const LoginPage = () =>{
                     console.log('user_nm: ' + decodeURIComponent(data.user_nm));
                     cookieManage(data.accessToken, data.refreshToken, data.user_nm, data.role);
                     // cookieManage(data.accessToken);
-                    document.location.href='/guide';
+                    // document.location.href='/guide';
+                    navigate('/guide');
                 } else if(data.message === 'ID_NOT_FOUND') {
                     setMessage('존재하지 않는 아이디입니다.');
                 } else if(data.message === 'PASSWORD_NOT_FOUND') {

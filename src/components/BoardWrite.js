@@ -62,19 +62,19 @@ const BoardWrite = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get(`/restapi/write?user_id=${user_id}`); //API 호출
+            const response = await axios.get(`/api/write?user_id=${user_id}`); //API 호출
             // response.data로 데이터에 직접 접근
             const data = response.data;
             // setUser_id(data.user_id);
 
             if (!user_id) {
                 alert('서비스 이용을 위해 로그인해주세요.');
-                window.location.href = 'http://localhost:3000/Login';  // 회원 정보 변경 페이지로
+                window.location.href = '/Login';  // 회원 정보 변경 페이지로
             }
 
             if (!data.stored_file_nm || data.stored_file_nm === 'null' || data.stored_file_nm === '') {
                 alert('프로필 사진을 먼저 등록해주세요.');
-                window.location.href = 'http://localhost:3000/Mypage';  // 회원 정보 변경 페이지로
+                window.location.href = '/Mypage';  // 회원 정보 변경 페이지로
             }
         }
         fetchData();
@@ -98,7 +98,7 @@ const BoardWrite = () => {
             return;
         }
 
-        const uploadURL = "/restapi/write";
+        const uploadURL = "/api/write";
         const formData = new FormData();
 
         formData.append('user_id', user_id);

@@ -9,7 +9,7 @@ function Master() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('/restapi/master')
+        fetch('/api/master')
             .then(response => response.json())
             .then(data => {
                 let newData = {};

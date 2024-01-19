@@ -19,7 +19,7 @@ const MyPageModify = () => {
     useEffect(()=> {
 
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:8080/member/memberInfo?&user_id=${userCookie}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/member/memberInfo?&user_id=${userCookie}`);
             const memberData = response.data; // 응답에서 data 속성에 액세스
             console.log(memberData);
             setMember(memberData);
@@ -133,7 +133,7 @@ const MyPageModify = () => {
         formData.append('stored_file_nm', stored_file_nm);
 
 
-        await fetch('http://localhost:8080/member/mypageModify', {
+        await fetch(`${process.env.REACT_APP_API_URL}/member/mypageModify`, {
             method: 'POST',
             body: formData,
         }).then((response) => response.json())
@@ -170,7 +170,7 @@ const MyPageModify = () => {
                                 <img className="MyPageModifyImgBox" src={imgFile} alt="회원 프로파일" />
                             ) : member.stored_file_nm ? (
                                 <img className="MyPageModifyImgBox"
-                                    src={`http://localhost:8080/profile/${member.stored_file_nm}`}
+                                    src={`${process.env.REACT_APP_API_URL}/profile/${member.stored_file_nm}`}
                                     alt="회원 프로파일"
                                 />
                             ) : (

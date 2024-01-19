@@ -17,7 +17,7 @@ const SafetyFacilityReportForm = () => {
     //시설type별 고장유형 가져오기
     async function callBrokenType(type){
 
-        await fetch(`http://localhost:8080/info/brokenType?type=${type}`,{
+        await fetch(`${process.env.REACT_APP_API_URL}/info/brokenType?type=${type}`,{
             method:'GET'
         }).then((response) => response.json())
             .then((data)=>{
@@ -52,7 +52,7 @@ const SafetyFacilityReportForm = () => {
         console.log("data:",data);
 
         //컨트롤러 호출
-        await fetch(`http://localhost:8080/info/brokenReportAdd`,{
+        await fetch(`${process.env.REACT_APP_API_URL}/info/brokenReportAdd`,{
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)

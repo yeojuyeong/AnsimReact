@@ -212,7 +212,7 @@ const InfoMap = () => {
         const queryString = createQueryStringFromBounds(bounds);
 
         axios
-            .post('http://localhost:8080/info/cctvList', queryString)
+            .post(`${process.env.REACT_APP_API_URL}/info/cctvList`, queryString)
             .then((cctvRes) => {
                 drawMarkers(cctvRes.data);
                 setCctvData(cctvRes.data);
@@ -224,7 +224,7 @@ const InfoMap = () => {
         const queryString = createQueryStringFromBounds(bounds);
 
         axios
-            .post('http://localhost:8080/info/emergbellList', queryString)
+            .post(`${process.env.REACT_APP_API_URL}/info/emergbellList`, queryString)
             .then((emergRes) => {
                 drawMarkers(emergRes.data);
                 setEmergbellData(emergRes.data);
@@ -236,7 +236,7 @@ const InfoMap = () => {
         const queryString = createQueryStringFromBounds(bounds);
 
         axios
-            .post('http://localhost:8080/info/deliboxList', queryString)
+            .post(`${process.env.REACT_APP_API_URL}/info/deliboxList`, queryString)
             .then((deliboxRes) => {
                 drawMarkers(deliboxRes.data);
                 setDeliboxData(deliboxRes.data);
@@ -248,7 +248,7 @@ const InfoMap = () => {
         const queryString = createQueryStringFromBounds(bounds);
 
         axios
-            .post('http://localhost:8080/info/policeList', queryString)
+            .post(`${process.env.REACT_APP_API_URL}/policeList`, queryString)
             .then((policeRes) => {
                 drawMarkers(policeRes.data);
                 setPoliceData(policeRes.data);
@@ -260,7 +260,7 @@ const InfoMap = () => {
         const queryString = createQueryStringFromBounds(bounds);
 
         axios
-            .post('http://localhost:8080/info/storeList', queryString)
+            .post(`${process.env.REACT_APP_API_URL}/info/storeList`, queryString)
             .then((storeRes) => {
                 drawMarkers(storeRes.data);
                 setStoreData(storeRes.data);
